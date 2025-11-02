@@ -42,11 +42,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: backGround
+  - name: BackGround
     uniqueID: 1509413481
     locked: 0
-  - name: middleGround
+  - name: MiddleGround
     uniqueID: 412402403
+    locked: 0
+  - name: Estructure
+    uniqueID: 17777041
+    locked: 0
+  - name: Signs
+    uniqueID: 2026548439
     locked: 0
   - name: Ground
     uniqueID: 3806222003
