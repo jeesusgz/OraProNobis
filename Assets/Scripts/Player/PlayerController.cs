@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveDirection;
 
+    [Header("Paso")]
+    public PasoController paso;           
+    public float distanciaPaso = 2f;
+
     private void OnEnable()
     {
         move.action.Enable();
@@ -67,6 +71,21 @@ public class PlayerController : MonoBehaviour
 
         // Detección de suelo
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        //detecta si esta de frente y cerca del paso
+        if (paso != null)
+        {
+            float distancia = Vector2.Distance(transform.position, paso.transform.position);
+
+            if (distancia <= distanciaPaso)
+            {
+                // Está de frente si mira hacia el paso
+                bool mirandoDerecha = !spriteRenderer.flipX;
+                bool pasoALaDerecha = paso.transform.position.x > transform.position.x;
+
+                bool mirandoFrente = (mirandoDerecha && pasoALaDerecha) || (!mirandoDerecha && !pasoALaDerecha);
+            }
+        }
     }
 
     private void FixedUpdate()

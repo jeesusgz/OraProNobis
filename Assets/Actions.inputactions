@@ -170,6 +170,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PasoActions",
+            "id": "595e3ed6-1d74-4169-88ce-9899291077f8",
+            "actions": [
+                {
+                    "name": "Levanta",
+                    "type": "Button",
+                    "id": "b0290f93-fc60-4209-a749-041e7d85dc03",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "961bc52c-2bce-4971-9dc0-ee44d52dfa93",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Levanta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
