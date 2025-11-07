@@ -6,16 +6,19 @@ public class PasoController : MonoBehaviour
     [Header("Configuración")]
     public float distanciaActivacion = 2f;
     public Transform jugador;
-    public bool jugadorCerca = false; // ✅ Añadido para que ZonaInteraccion funcione
+    public bool jugadorCerca = false;
     public InputActionReference levantarAction;
 
     private Animator animator;
     private bool animado = false;
     private bool levantado = false;
 
+    [Header("Movimiento hacia la capilla")]
     public float moveSpeed = 1f;
-    public Transform targetPoint; // la capilla
+    public Transform targetPoint; // La capilla (destino)
     private Rigidbody2D rb;
+
+    private bool puedeMoverse = false; // 🔹 Controla si el paso puede empezar a moverse
 
     private void OnEnable()
     {
@@ -45,43 +48,60 @@ public class PasoController : MonoBehaviour
     {
         Debug.Log("E pulsada");
 
-        // Solo permite levantar si el jugador está cerca
         if (!jugadorCerca)
         {
             Debug.Log("Jugador demasiado lejos del paso.");
             return;
         }
 
-        if (animado || jugador == null)
+        if (animado)
         {
-            Debug.Log("Bloqueado por animado o jugador nulo");
+            Debug.Log("Esperando a que termine animación.");
             return;
         }
 
+        animado = true;
+
         if (!levantado)
         {
-            Debug.Log("Activando Levanta");
+            Debug.Log("Activando animación de Levanta");
             animator.SetTrigger("Levanta");
             levantado = true;
+
+            // Espera 2 segundos para permitir movimiento tras la levantá
+            puedeMoverse = false;
+            Invoke(nameof(ActivarMovimiento), 2f);
         }
         else
         {
-            Debug.Log("Activando Bajar");
+            Debug.Log("Activando animación de Bajar");
             animator.SetTrigger("Arria");
             levantado = false;
+            puedeMoverse = false;
         }
 
-        animado = true;
-        Invoke(nameof(FinAnimacion), 2f); // tras 2s permite nueva acción
+        // Finaliza el estado de animación bloqueada tras 3 segundos
+        Invoke(nameof(FinAnimacion), 3f);
     }
 
     void FixedUpdate()
     {
-        if (targetPoint != null)
+        if (levantado && puedeMoverse && targetPoint != null)
         {
             Vector2 direction = (targetPoint.position - transform.position).normalized;
             rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+
+            animator.SetBool("Andando", true);
         }
+        else
+        {
+            animator.SetBool("Andando", false);
+        }
+    }
+
+    private void ActivarMovimiento()
+    {
+        puedeMoverse = true; // 🔹 El paso ya puede empezar a moverse tras unos segundos
     }
 
     public void FinAnimacion()
