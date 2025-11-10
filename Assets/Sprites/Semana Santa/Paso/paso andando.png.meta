@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: 0e44e889425b6cb41b195c94deaeba1e
+guid: 6252c7373de9df74bb2190deecf51ecb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2518236652557831174
-    second: Paso Idle (1)_0
+      213: 9031393280945382820
+    second: paso andando_0
   - first:
-      213: 8540024890045693550
-    second: Paso Idle (1)_1
+      213: -5935195544674865211
+    second: paso andando_1
   - first:
-      213: -6214562641549195210
-    second: Paso Idle (1)_2
+      213: -8574862542444761092
+    second: paso andando_2
+  - first:
+      213: 4948192506660534998
+    second: paso andando_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -53,7 +56,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 0
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -119,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Paso Idle (1)_0
+      name: paso andando_0
       rect:
         serializedVersion: 2
-        x: 366
-        y: 133
-        width: 603
-        height: 669
+        x: 45
+        y: 66
+        width: 664
+        height: 787
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 60c0410b4e292f220800000000000000
-      internalID: 2518236652557831174
+      spriteID: 4a56991b654f55d70800000000000000
+      internalID: 9031393280945382820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paso Idle (1)_1
+      name: paso andando_1
       rect:
         serializedVersion: 2
-        x: 1644
-        y: 135
-        width: 604
-        height: 718
+        x: 790
+        y: 64
+        width: 662
+        height: 789
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,30 +159,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e6efa28f363448670800000000000000
-      internalID: 8540024890045693550
+      spriteID: 5cf6c2f1913f1ada0800000000000000
+      internalID: -5935195544674865211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paso Idle (1)_2
+      name: paso andando_2
       rect:
         serializedVersion: 2
-        x: 2925
-        y: 90
-        width: 739
-        height: 720
+        x: 1530
+        y: 64
+        width: 661
+        height: 788
       alignment: 7
       pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 117, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6380c04243071c9a0800000000000000
-      internalID: -6214562641549195210
+      spriteID: cffe6cff2f7fff880800000000000000
+      internalID: -8574862542444761092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: paso andando_3
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 63
+        width: 662
+        height: 787
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6da30cf3ed28ba440800000000000000
+      internalID: 4948192506660534998
       vertices: []
       indices: 
       edges: []
@@ -188,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ded7e6e52037b444890e79b9f595cd3d
+    spriteID: fa2626ea4b7ce4f479ab1f03cc62e3b0
     internalID: 0
     vertices: []
     indices: 
@@ -198,11 +223,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":1.0},"gridSpriteSize":{"x":1280.0,"y":853.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":748.0,"y":853.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Paso Idle (1)_0: 2518236652557831174
-      Paso Idle (1)_1: 8540024890045693550
-      Paso Idle (1)_2: -6214562641549195210
+      paso andando_0: 9031393280945382820
+      paso andando_1: -5935195544674865211
+      paso andando_2: -8574862542444761092
+      paso andando_3: 4948192506660534998
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
