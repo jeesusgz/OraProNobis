@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Componentes")]
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     [Header("Movimiento")]
     public float speed = 5f;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius = 0.1f;
     public LayerMask groundAndPlatformLayer;
     private bool isGrounded;
+    private bool wasGrounded;
 
     [Header("Input System")]
     public InputActionReference move;
@@ -27,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDirection;
 
     [Header("Paso")]
-    public PasoController paso;           
+    public PasoController paso;
     public float distanciaPaso = 2f;
 
     private Collider2D playerCollider;
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         playerCollider = GetComponent<Collider2D>();
     }
 
@@ -63,7 +66,10 @@ public class PlayerController : MonoBehaviour
         else if (moveDirection.x < -0.1f)
             spriteRenderer.flipX = true;
 
-        // Control de caída y salto
+        // Animación de caminar
+        animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
+
+        // Control de caída y salto (gravedad modificada)
         if (rb.linearVelocity.y < 0)
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
@@ -78,14 +84,32 @@ public class PlayerController : MonoBehaviour
         combinedGroundMask = LayerMask.GetMask("Ground", "Platform");
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, combinedGroundMask);
 
-        //detecta si esta de frente y cerca del paso
+        if (!wasGrounded && isGrounded)
+        {
+            // Aterrizó
+            animator.SetBool("IsJumping", false);
+        }
+        else if (wasGrounded && !isGrounded)
+        {
+            // Despegó
+            animator.SetBool("IsJumping", true);
+        }
+        wasGrounded = isGrounded;
+
+        // Salto desde Input System
+        if (isGrounded && jump.action.WasPerformedThisFrame())
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            animator.SetTrigger("Jump");
+        }
+
+        // Detecta si está de frente y cerca del paso
         if (paso != null)
         {
             float distancia = Vector2.Distance(transform.position, paso.transform.position);
 
             if (distancia <= distanciaPaso)
             {
-                // Está de frente si mira hacia el paso
                 bool mirandoDerecha = !spriteRenderer.flipX;
                 bool pasoALaDerecha = paso.transform.position.x > transform.position.x;
 
@@ -103,7 +127,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-            
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
