@@ -196,6 +196,17 @@
                     "action": "Levanta",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea0166f4-861e-414a-9615-e82543b81440",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Levanta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

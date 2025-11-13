@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+  - platform
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - UI
   - MiddleGround
   - BackGround
-  - 
-  - 
+  - Platform
+  - Player
   - 
   - 
   - 
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: Signs
     uniqueID: 2026548439
+    locked: 0
+  - name: Escaleras
+    uniqueID: 1283977063
     locked: 0
   - name: Ground
     uniqueID: 3806222003

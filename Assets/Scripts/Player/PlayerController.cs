@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [Header("Detección de suelo")]
     public Transform groundCheck;
     public float groundCheckRadius = 0.1f;
-    public LayerMask groundLayer;
+    public LayerMask groundAndPlatformLayer;
     private bool isGrounded;
 
     [Header("Input System")]
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour
     [Header("Paso")]
     public PasoController paso;           
     public float distanciaPaso = 2f;
+
+    private Collider2D playerCollider;
 
     private void OnEnable()
     {
@@ -47,6 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerCollider = GetComponent<Collider2D>();
     }
 
     private void Update()
@@ -70,7 +74,9 @@ public class PlayerController : MonoBehaviour
         }
 
         // Detección de suelo
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        int combinedGroundMask;
+        combinedGroundMask = LayerMask.GetMask("Ground", "Platform");
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, combinedGroundMask);
 
         //detecta si esta de frente y cerca del paso
         if (paso != null)
