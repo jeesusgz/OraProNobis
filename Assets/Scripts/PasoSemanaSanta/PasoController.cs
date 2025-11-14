@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PasoController : MonoBehaviour
@@ -15,10 +16,20 @@ public class PasoController : MonoBehaviour
 
     [Header("Movimiento hacia la capilla")]
     public float moveSpeed = 1f;
-    public Transform targetPoint; // La capilla (destino)
+    public Transform targetPoint;
     private Rigidbody2D rb;
 
-    private bool puedeMoverse = false; // 🔹 Controla si el paso puede empezar a moverse
+    private bool puedeMoverse = false;
+    private bool entrando = false;
+    public float arriveThreshold = 0.3f;  // <-- más seguro
+
+    [Header("Detección de suelo")]
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.1f;
+    public LayerMask groundLayer;
+    private bool isGrounded;
+
+    private Collider2D mainCollider;
 
     private void OnEnable()
     {
@@ -42,54 +53,59 @@ public class PasoController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        mainCollider = GetComponent<Collider2D>();
     }
 
     private void OnLevantar(InputAction.CallbackContext context)
     {
-        Debug.Log("E pulsada");
-
-        if (!jugadorCerca)
-        {
-            Debug.Log("Jugador demasiado lejos del paso.");
-            return;
-        }
-
-        if (animado)
-        {
-            Debug.Log("Esperando a que termine animación.");
-            return;
-        }
+        if (!jugadorCerca || animado) return;
 
         animado = true;
 
         if (!levantado)
         {
-            Debug.Log("Activando animación de Levanta");
             animator.SetTrigger("Levanta");
             levantado = true;
-
-            // Espera 2 segundos para permitir movimiento tras la levantá
             puedeMoverse = false;
             Invoke(nameof(ActivarMovimiento), 2f);
         }
         else
         {
-            Debug.Log("Activando animación de Bajar");
             animator.SetTrigger("Arria");
             levantado = false;
             puedeMoverse = false;
         }
 
-        // Finaliza el estado de animación bloqueada tras 3 segundos
         Invoke(nameof(FinAnimacion), 3f);
+    }
+
+    void Update()
+    {
+        if (groundCheck != null)
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if (!entrando && targetPoint != null)
+        {
+            float dist = Mathf.Abs(transform.position.x - targetPoint.position.x);
+
+            if (dist <= arriveThreshold)
+            {
+                EntrarCapilla();
+            }
+        }
     }
 
     void FixedUpdate()
     {
-        if (levantado && puedeMoverse && targetPoint != null)
+        if (levantado && puedeMoverse && targetPoint != null && !entrando)
         {
-            Vector2 direction = (targetPoint.position - transform.position).normalized;
-            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+            Vector2 next = Vector2.MoveTowards(
+                rb.position,
+                new Vector2(targetPoint.position.x, rb.position.y),
+                moveSpeed * Time.fixedDeltaTime
+            );
+
+            rb.MovePosition(next);
 
             animator.SetBool("Andando", true);
         }
@@ -99,13 +115,73 @@ public class PasoController : MonoBehaviour
         }
     }
 
+    private void EntrarCapilla()
+    {
+        if (entrando) return;
+        entrando = true;
+
+        puedeMoverse = false;
+        levantado = false;
+
+        animator.SetBool("Andando", false);
+
+        // desactivar colisiones
+        if (mainCollider != null)
+            mainCollider.enabled = false;
+
+        // prevenir movimientos raros
+        rb.bodyType = RigidbodyType2D.Kinematic;
+
+        // FADE + DESTRUCCIÓN
+        StartCoroutine(FadeAndDestroy(1.5f));
+    }
+
     private void ActivarMovimiento()
     {
-        puedeMoverse = true; // 🔹 El paso ya puede empezar a moverse tras unos segundos
+        puedeMoverse = true;
     }
 
     public void FinAnimacion()
     {
         animado = false;
+    }
+
+    private IEnumerator FadeAndDestroy(float duration)
+    {
+        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+
+            foreach (var sr in sprites)
+            {
+                if (sr != null)
+                {
+                    Color c = sr.color;
+                    sr.color = new Color(c.r, c.g, c.b, alpha);
+                }
+            }
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // asegurar alpha 0
+        foreach (var sr in sprites)
+            if (sr != null)
+                sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f);
+
+        Destroy(gameObject);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
     }
 }
