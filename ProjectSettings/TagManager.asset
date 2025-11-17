@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - platform
+  - Enemigo
+  - Paso
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - BackGround
   - Platform
   - Player
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -60,6 +62,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 3806222003
+    locked: 0
+  - name: Enemy
+    uniqueID: 2858905405
     locked: 0
   - name: Player
     uniqueID: 1007128825
