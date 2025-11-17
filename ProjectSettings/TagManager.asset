@@ -20,8 +20,8 @@ TagManager:
   - Platform
   - Player
   - Enemy
-  - 
-  - 
+  - Ghost
+  - Paso
   - 
   - 
   - 
@@ -57,7 +57,7 @@ TagManager:
   - name: Signs
     uniqueID: 2026548439
     locked: 0
-  - name: Escaleras
+  - name: Platform
     uniqueID: 1283977063
     locked: 0
   - name: Ground
@@ -66,8 +66,14 @@ TagManager:
   - name: Enemy
     uniqueID: 2858905405
     locked: 0
+  - name: Ghost
+    uniqueID: 2755883929
+    locked: 0
   - name: Player
     uniqueID: 1007128825
+    locked: 0
+  - name: Paso
+    uniqueID: 1620936905
     locked: 0
   m_RenderingLayers:
   - Default

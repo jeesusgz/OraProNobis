@@ -60,11 +60,18 @@ public class SpawnerZona : MonoBehaviour
         enemigo.tag = "Enemigo";
 
         // Asignar referencias al clone
-        var ai = enemigo.GetComponent<SkeletonController>(); // Script del enemigo
+        var ai = enemigo.GetComponent<SkeletonController>();
         if (ai != null)
         {
             ai.player = player;
             ai.paso = paso;
+        }
+
+        var ghost = enemigo.GetComponentInChildren<GhostController>();
+        if (ghost != null)
+        {
+            ghost.player = player;
+            ghost.paso = paso;
         }
     }
 
@@ -83,7 +90,7 @@ public class SpawnerZona : MonoBehaviour
     {
         if (zonaSpawn == null)
         {
-            Debug.LogWarning("[SpawnerZona_ConRefs] No hay zona asignada. Usando posición del spawner.");
+            Debug.LogWarning("[SpawnerZona] No hay zona asignada. Usando posición del spawner.");
             return transform.position;
         }
 
