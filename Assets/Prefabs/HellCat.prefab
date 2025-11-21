@@ -235,4 +235,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 2
-  knockbackForce: 10
+  knockbackForce: 100

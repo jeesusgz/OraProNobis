@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAttackHitbox : MonoBehaviour
 {
@@ -6,14 +6,14 @@ public class PlayerAttackHitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("COLISION HITBOX CON: " + collision.name);
+        Debug.Log("COLISIONÓ CON: " + collision.name);
 
-        EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+        EnemyHealth enemy = collision.GetComponentInParent<EnemyHealth>();
 
         if (enemy != null)
         {
-            enemy.TakeDamage(1, transform); // Da�o + knockback
-            Debug.Log("DA�O APLICADO!");
+            Debug.Log("ENEMIGO DETECTADO → HACIENDO DAÑO");
+            enemy.TakeDamage(damage, transform);
         }
     }
 }

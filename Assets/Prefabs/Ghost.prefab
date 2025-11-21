@@ -188,7 +188,6 @@ MonoBehaviour:
   alturaFlotacion: 0.5
   velocidadFlotacion: 2
   rangoDeteccionJugador: 4
-  rangoAtaqueJugador: 2
 --- !u!95 &8792437237553220181
 Animator:
   serializedVersion: 7
@@ -239,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
-  knockbackForce: 10
+  knockbackForce: 100
 --- !u!1 &5703973487919630245
 GameObject:
   m_ObjectHideFlags: 0

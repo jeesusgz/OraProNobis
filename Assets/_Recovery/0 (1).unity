@@ -1041,7 +1041,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.17663765, y: -0.09634781}
+  m_Offset: {x: 0.36429083, y: 0.004290104}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1051,7 +1051,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9036522, y: 1.7065506}
+  m_Size: {x: 2.1364663, y: 1.9078264}
   m_EdgeRadius: 0
 --- !u!114 &954753213
 MonoBehaviour:
@@ -3652,7 +3652,7 @@ Transform:
   m_GameObject: {fileID: 1162010600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.0011788543, w: 0.99999934}
-  m_LocalPosition: {x: 223.65938, y: -3.606248, z: 0}
+  m_LocalPosition: {x: 236.69145, y: -3.606248, z: 0}
   m_LocalScale: {x: 0.8409, y: 0.8409, z: 0.8409}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3710,7 +3710,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 573.85626, y: 17.14846}
+  m_Size: {x: 601.3607, y: 17.079922}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4026,7 +4026,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   hitbox: {fileID: 954753209}
-  hitboxOffset: 0.5
   attackDuration: 1
   attackCooldown: 0.5
 --- !u!1 &1408136999
@@ -4377,7 +4376,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 69.21985, y: 1.1873742}
+  m_Offset: {x: 69.21985, y: 1.3704867}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4387,7 +4386,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 207.28885, y: 2.7735898}
+  m_Size: {x: 207.28885, y: 3.1398149}
   m_EdgeRadius: 0
 --- !u!114 &1571909771
 MonoBehaviour:
@@ -8879,7 +8878,7 @@ Transform:
   m_GameObject: {fileID: 1918631892}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 474.0659, y: -4.393124, z: 0}
+  m_LocalPosition: {x: 506.71085, y: -4.393124, z: 0}
   m_LocalScale: {x: 1.2125, y: 3.0088654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8937,7 +8936,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 808.86957, y: 13.469404}
+  m_Size: {x: 857.1267, y: 11.781152}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

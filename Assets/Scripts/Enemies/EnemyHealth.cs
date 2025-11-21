@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -18,11 +18,16 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= amount;
 
-        // Knockback siempre a la derecha
+        // Knockback REAL según la posición del atacante
         if (rb != null)
         {
-            Vector2 knockDirection = Vector2.right;  // ? empuje a la derecha
-            rb.AddForce(knockDirection * knockbackForce, ForceMode2D.Impulse);
+            float direction = Mathf.Sign(transform.position.x - attacker.position.x);
+            // si el player está a la izquierda → +1 (derecha)
+            // si está a la derecha → -1 (izquierda)
+
+            Vector2 knockVector = new Vector2(direction, 0f);
+
+            rb.AddForce(knockVector * knockbackForce, ForceMode2D.Impulse);
         }
 
         if (currentHealth <= 0)
@@ -33,6 +38,6 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent != null ? transform.parent.gameObject : gameObject);
     }
 }
