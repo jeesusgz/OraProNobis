@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1514391195425355781}
   - component: {fileID: 5359144119556774635}
   - component: {fileID: 3709635459163348519}
-  - component: {fileID: -74379408143276543}
   - component: {fileID: -4038692984264533859}
+  - component: {fileID: 8035165800932936297}
   m_Layer: 10
   m_Name: HellCat
   m_TagString: Enemigo
@@ -207,19 +207,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-74379408143276543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2441673817400743144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632443ce89816f44d8a2ce255770fec1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
-  maxHealth: 2
 --- !u!114 &-4038692984264533859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,3 +222,17 @@ MonoBehaviour:
   damageAmount: 2
   targetTag1: Paso
   targetTag2: Player
+--- !u!114 &8035165800932936297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441673817400743144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edf869c3000ddf49a9444dfb888000d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 2
+  knockbackForce: 5

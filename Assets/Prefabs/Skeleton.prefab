@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 738611742663431923}
   - component: {fileID: 3839005641068214815}
   - component: {fileID: 5627343021959791250}
-  - component: {fileID: 7819680954563359102}
   - component: {fileID: -761992457504851137}
+  - component: {fileID: 7452333308265093382}
   m_Layer: 10
   m_Name: Skeleton
   m_TagString: Enemigo
@@ -207,19 +207,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7819680954563359102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4680305686470156541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632443ce89816f44d8a2ce255770fec1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
-  maxHealth: 5
 --- !u!114 &-761992457504851137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,3 +222,17 @@ MonoBehaviour:
   damageAmount: 1
   targetTag1: Paso
   targetTag2: Player
+--- !u!114 &7452333308265093382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680305686470156541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edf869c3000ddf49a9444dfb888000d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 5
+  knockbackForce: 5

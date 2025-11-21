@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [Header("Input System")]
     public InputActionReference move;
     public InputActionReference jump;
+    public InputActionReference attack;
 
     private Vector2 moveDirection;
 
@@ -39,6 +40,8 @@ public class PlayerController : MonoBehaviour
         move.action.Enable();
         jump.action.Enable();
         jump.action.performed += OnJump;
+        attack.action.Enable();
+        attack.action.performed += OnAttack;
     }
 
     private void OnDisable()
@@ -46,6 +49,8 @@ public class PlayerController : MonoBehaviour
         move.action.Disable();
         jump.action.Disable();
         jump.action.performed -= OnJump;
+        attack.action.Disable();
+        attack.action.performed -= OnAttack;
     }
 
     private void Start()
@@ -130,5 +135,11 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+    }
+
+    private void OnAttack(InputAction.CallbackContext context)
+    {
+        // Llama al script de ataque si lo tienes
+        GetComponent<PlayerAttack>()?.TryAttack();
     }
 }

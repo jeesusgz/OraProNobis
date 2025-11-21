@@ -180,8 +180,19 @@
                 },
                 {
                     "name": "",
-                    "id": "1fa0fcb2-b66d-4de8-a9e9-71ad57d83ac4",
+                    "id": "fb648396-6540-4e49-b1b5-10bab9eebf77",
                     "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6eedd996-b890-4571-8cd9-1c97de34cdc3",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

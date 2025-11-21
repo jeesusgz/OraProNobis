@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 9083175157203085601}
   - component: {fileID: 1508345608669549896}
   - component: {fileID: 8792437237553220181}
-  - component: {fileID: -4960869074254874925}
   - component: {fileID: -6724819665627942949}
   m_Layer: 11
   m_Name: Ghost
@@ -211,20 +210,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-4960869074254874925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3641189887842467786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632443ce89816f44d8a2ce255770fec1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
-  maxHealth: 3
-  invulnerabilityTime: 1
 --- !u!114 &-6724819665627942949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8029179119739708868}
   - component: {fileID: 4339488017970871511}
+  - component: {fileID: 7779645928099135394}
   m_Layer: 13
   m_Name: HitBox
   m_TagString: Untagged
@@ -318,3 +304,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5537066, y: 2.6107836}
   m_EdgeRadius: 0
+--- !u!114 &7779645928099135394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5703973487919630245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edf869c3000ddf49a9444dfb888000d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 3
+  knockbackForce: 5
