@@ -18,11 +18,11 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= amount;
 
-        // Knockback
+        // Knockback siempre a la derecha
         if (rb != null)
         {
-            Vector2 direction = (transform.position - attacker.position).normalized;
-            rb.AddForce(direction * knockbackForce, ForceMode2D.Impulse);
+            Vector2 knockDirection = Vector2.right;  // ? empuje a la derecha
+            rb.AddForce(knockDirection * knockbackForce, ForceMode2D.Impulse);
         }
 
         if (currentHealth <= 0)
