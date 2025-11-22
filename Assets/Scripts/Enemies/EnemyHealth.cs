@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 3;
     public float knockbackForce = 5f;
+    public float knockbackTime = 0.2f;
 
     private int currentHealth;
     private Rigidbody2D rb;
+
+    [HideInInspector] public bool isKnockedBack = false;
 
     private void Start()
     {
@@ -18,22 +22,27 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= amount;
 
-        // Knockback REAL según la posición del atacante
         if (rb != null)
-        {
-            float direction = Mathf.Sign(transform.position.x - attacker.position.x);
-            // si el player está a la izquierda → +1 (derecha)
-            // si está a la derecha → -1 (izquierda)
-
-            Vector2 knockVector = new Vector2(direction, 0f);
-
-            rb.AddForce(knockVector * knockbackForce, ForceMode2D.Impulse);
-        }
+            StartCoroutine(DoKnockback(attacker));
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
+    }
+
+    IEnumerator DoKnockback(Transform attacker)
+    {
+        isKnockedBack = true;
+
+        // Dirección horizontal pura
+        float dir = Mathf.Sign(transform.position.x - attacker.position.x);
+        Vector2 knockVector = new Vector2(dir, 0f);
+
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(knockVector * knockbackForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(knockbackTime);
+
+        isKnockedBack = false;
     }
 
     void Die()

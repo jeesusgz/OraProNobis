@@ -5,12 +5,13 @@ public class SkeletonController : MonoBehaviour
     [Header("Referencias")]
     public Transform paso;
     public Transform player;
+    private EnemyHealth enemyHealth;
 
     [Header("Movimiento")]
     public float speed = 2.5f;
 
     [Header("Ataque")]
-    public float rangoDeteccionJugador = 4f; // distancia para atacar al jugador
+    public float rangoDeteccionJugador = 4f;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -21,16 +22,23 @@ public class SkeletonController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     void FixedUpdate()
     {
+        if (enemyHealth != null && enemyHealth.isKnockedBack)
+        {
+            // Evitar que la IA cancele el knockback
+            anim.SetBool("Walking", false);
+            return;
+        }
+
         if (paso == null || player == null)
             return;
 
         Transform objetivo = paso;
 
-        // Si el jugador está cerca, atacarlo
         float distanciaJugador = Vector2.Distance(transform.position, player.position);
         if (distanciaJugador <= rangoDeteccionJugador)
             objetivo = player;
@@ -43,14 +51,11 @@ public class SkeletonController : MonoBehaviour
         float dir = objetivo.x - transform.position.x;
         float velX = Mathf.Sign(dir) * speed;
 
-        // Solo modificar la velocidad horizontal, gravedad queda intacta
         rb.linearVelocity = new Vector2(velX, rb.linearVelocity.y);
 
-        // Flip del sprite
         if (sr != null)
             sr.flipX = dir > 0;
 
-        // Animación de caminar
         if (anim != null)
             anim.SetBool("Walking", Mathf.Abs(velX) > 0.1f);
     }
