@@ -15,12 +15,15 @@ public class EnemyHealth : MonoBehaviour
 
     [HideInInspector] public bool isKnockedBack = false;
 
+    private GhostController ghost; // ← detectar si este enemigo es un fantasma
+
     private void Start()
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
+        ghost = GetComponent<GhostController>(); // ← si es fantasma, será distinto de null
     }
 
     public void TakeDamage(int amount, Transform attacker)
@@ -29,13 +32,21 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth -= amount;
 
-        StartCoroutine(DamageFlash());
+        if (ghost != null)
+            ghost.PlayHitFlash(); // fantasma usa su propio flash
+        else
+            StartCoroutine(DamageFlash()); // otros enemigos
 
-        if (rb != null)
+        if (rb != null && ghost == null)
             StartCoroutine(DoKnockback(attacker));
 
         if (currentHealth <= 0)
-            StartCoroutine(DieRoutine()); // ← ← AQUI ESTABA EL ERROR
+        {
+            if (ghost != null)
+                ghost.PlayDeath(); // fantasma usa muerte propia
+            else
+                StartCoroutine(DieRoutine()); // enemigo normal
+        }
     }
 
     IEnumerator DoKnockback(Transform attacker)
@@ -67,12 +78,30 @@ public class EnemyHealth : MonoBehaviour
     {
         isDying = true;
 
+        // 1. Parar movimiento
+        if (rb != null)
+            rb.linearVelocity = Vector2.zero;
+
+        // 2. Cortar animaciones previas
         if (anim != null)
+        {
+            anim.SetBool("Walking", false);
+            anim.SetBool("isMoving", false);
             anim.SetTrigger("Die");
+        }
 
-        // Espera a que se reproduzca la animación
-        yield return new WaitForSeconds(0.10f);
+        // 3. Desactivar IA y movimiento (pero NO EnemyHealth)
+        MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
+        foreach (var s in scripts)
+        {
+            if (s != this)
+                s.enabled = false;
+        }
 
+        // 4. Esperar animación
+        yield return new WaitForSeconds(0.8f);
+
+        // 5. Destruir enemigo o su padre
         Destroy(transform.parent != null ? transform.parent.gameObject : gameObject);
     }
 }

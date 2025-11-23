@@ -1,4 +1,5 @@
-using UnityEngine;
+ï»¿using UnityEngine;
+using System.Collections;
 
 public class GhostController : MonoBehaviour
 {
@@ -8,18 +9,19 @@ public class GhostController : MonoBehaviour
 
     [Header("Movimiento")]
     public float speed = 3f;
-    public float alturaFlotacion = 0.5f;   // cuánto sube y baja el fantasma al flotar
-    public float velocidadFlotacion = 2f;  // velocidad del movimiento de flotación
+    public float alturaFlotacion = 0.5f;
+    public float velocidadFlotacion = 2f;
 
-    [Header("Detección / Ataque")]
-    public float rangoDeteccionJugador = 4f; // si el jugador está cerca, se gira hacia él
-    public float rangoAtaqueJugador = 2f;    // si quieres ataque luego
+    [Header("DetecciÃ³n / Ataque")]
+    public float rangoDeteccionJugador = 4f;
 
     private Animator anim;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
 
     private float flotacionOffset;
+
+    private bool isDying = false;
 
     void Awake()
     {
@@ -29,30 +31,23 @@ public class GhostController : MonoBehaviour
 
         // El fantasma NO usa gravedad
         if (rb != null)
-        {
             rb.gravityScale = 0;
-        }
 
-        // Desfase aleatorio en la animación de flotación
         flotacionOffset = Random.Range(0f, 10f);
     }
 
     void Update()
     {
-        if (paso == null || player == null)
-            return;
+        if (isDying) return; // â›” Detener todo si estÃ¡ muriendo
+        if (paso == null || player == null) return;
 
         Flotar();
 
         float distanciaJugador = Vector2.Distance(transform.position, player.position);
 
-        // Si el jugador está cerca, solo se gira hacia él (no cambia el objetivo)
         if (distanciaJugador <= rangoDeteccionJugador)
-        {
             MirarJugador();
-        }
 
-        // Mover hacia el paso SIEMPRE
         MoverHaciaPaso();
     }
 
@@ -62,29 +57,52 @@ public class GhostController : MonoBehaviour
         Vector2 pos = Vector2.MoveTowards(transform.position, objetivo, speed * Time.deltaTime);
         transform.position = pos;
 
-        // Voltear sprite según dirección
-        if (objetivo.x > transform.position.x)
-            sr.flipX = false;
-        else
-            sr.flipX = true;
+        // Voltear sprite segÃºn direcciÃ³n
+        sr.flipX = objetivo.x < transform.position.x;
 
-        // Activar animación de movimiento
-        if (anim != null)
-            anim.SetBool("isMoving", true);
+        anim.SetBool("isMoving", true);
     }
 
     void MirarJugador()
     {
-        if (player.position.x > transform.position.x)
-            sr.flipX = false;
-        else
-            sr.flipX = true;
+        sr.flipX = player.position.x < transform.position.x;
     }
 
     void Flotar()
     {
-        // Movimiento vertical suave tipo "fantasma"
         float y = Mathf.Sin(Time.time * velocidadFlotacion + flotacionOffset) * alturaFlotacion;
         transform.position += new Vector3(0, y * Time.deltaTime, 0);
+    }
+
+    
+
+    public void PlayHitFlash()
+    {
+        StartCoroutine(HitFlashRoutine());
+    }
+
+    IEnumerator HitFlashRoutine()
+    {
+        sr.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
+    }
+
+    public void PlayDeath()
+    {
+        if (isDying) return;
+
+        isDying = true;
+
+        anim.SetBool("isMoving", false);
+        anim.SetTrigger("Die");
+
+        StartCoroutine(DeathRoutine());
+    }
+
+    IEnumerator DeathRoutine()
+    {
+        yield return new WaitForSeconds(0.6f); // duraciÃ³n de la animaciÃ³n
+        Destroy(transform.parent != null ? transform.parent.gameObject : gameObject);
     }
 }

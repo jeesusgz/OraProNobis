@@ -6,13 +6,14 @@ public class PlayerAttackHitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("COLISIONÓ CON: " + collision.name);
+        Debug.Log("Player HITBOX colisionó con: " + collision.name);
 
+        // Buscar EnemyHealth en el objeto impactado o en sus padres
         EnemyHealth enemy = collision.GetComponentInParent<EnemyHealth>();
 
         if (enemy != null)
         {
-            Debug.Log("ENEMIGO DETECTADO → HACIENDO DAÑO");
+            Debug.Log("ENEMIGO DETECTADO → Aplicando daño");
             enemy.TakeDamage(damage, transform);
         }
     }

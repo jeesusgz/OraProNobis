@@ -25,11 +25,9 @@ public class PlayerAttack : MonoBehaviour
     {
         canAttack = false;
 
-        // 👉 Cambiar dirección de la hitbox según flipX
-        if (sr.flipX)
-            hitbox.transform.localPosition = new Vector3(-0.8f, hitbox.transform.localPosition.y, 0);
-        else
-            hitbox.transform.localPosition = new Vector3(0.8f, hitbox.transform.localPosition.y, 0);
+        //Cambiar dirección de la hitbox según flipX
+        float xOffset = sr.flipX ? -0.8f : 0.8f;
+        hitbox.transform.localPosition = new Vector3(xOffset, hitbox.transform.localPosition.y, 0);
 
         Debug.Log("HITBOX ACTIVADA");
         hitbox.SetActive(true);
