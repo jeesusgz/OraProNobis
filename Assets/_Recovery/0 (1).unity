@@ -642,6 +642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
   maxHealth: 20
   invulnerabilityTime: 1
+  flashSpeed: 0.1
 --- !u!1 &646410248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3652,7 +3653,7 @@ Transform:
   m_GameObject: {fileID: 1162010600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.0011788543, w: 0.99999934}
-  m_LocalPosition: {x: 252.32994, y: -3.606248, z: 0}
+  m_LocalPosition: {x: 256.23956, y: -3.606248, z: 0}
   m_LocalScale: {x: 0.8409, y: 0.8409, z: 0.8409}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3710,7 +3711,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 640.8092, y: 17.514627}
+  m_Size: {x: 650.3171, y: 17.044235}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4013,6 +4014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
   maxHealth: 10
   invulnerabilityTime: 1
+  flashSpeed: 0.1
 --- !u!114 &1232959623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8878,7 +8880,7 @@ Transform:
   m_GameObject: {fileID: 1918631892}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 545.8858, y: -4.393124, z: 0}
+  m_LocalPosition: {x: 555.67957, y: -4.393124, z: 0}
   m_LocalScale: {x: 1.2125, y: 3.0088654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8936,7 +8938,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 925.56195, y: 11.311416}
+  m_Size: {x: 941.62683, y: 10.910778}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
