@@ -12,6 +12,8 @@ public class CurrencySystem : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            // Cargar monedas inmediatamente
+            coins = PlayerPrefs.GetInt("Coins", 0);
         }
         else
         {
@@ -22,10 +24,9 @@ public class CurrencySystem : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
-        Debug.Log("Monedas actuales: " + coins);
-
-        // Guardado persistente
         PlayerPrefs.SetInt("Coins", coins);
+        PlayerPrefs.Save();
+        Debug.Log("Monedas actuales: " + coins);
     }
 
     public void LoadCoins()
