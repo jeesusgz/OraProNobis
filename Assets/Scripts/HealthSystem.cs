@@ -6,6 +6,9 @@ public class HealthSystem : MonoBehaviour
     public int maxHealth = 3;
     private int currentHealth;
 
+    [Header("Modos especiales")]
+    public bool infiniteHealth = false;
+
     public float invulnerabilityTime = 1f;
     public float flashSpeed = 0.1f;
 
@@ -33,12 +36,15 @@ public class HealthSystem : MonoBehaviour
         if (isInvulnerable || isDying)
             return;
 
-        currentHealth -= damageAmount;
+        // 🛡️ VIDA INFINITA ACTIVADA → NO BAJA VIDA
+        if (!infiniteHealth)
+            currentHealth -= damageAmount;
+
         Debug.Log(gameObject.name + " ha recibido daño. Vida: " + currentHealth);
 
         StartCoroutine(InvulnerabilityCoroutine());
 
-        if (currentHealth <= 0)
+        if (!infiniteHealth && currentHealth <= 0)
             StartCoroutine(DieRoutine());
     }
 

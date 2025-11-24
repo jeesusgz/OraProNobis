@@ -237,4 +237,7 @@ MonoBehaviour:
   maxHealth: 2
   knockbackForce: 5
   knockbackTime: 0.2
+  minCoins: 1
+  maxCoins: 3
+  coinPrefab: {fileID: 2044151719295698384, guid: 3cb08052b9921d842902b07e37dd86a5, type: 3}
   isKnockedBack: 0

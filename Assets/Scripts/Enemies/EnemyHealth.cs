@@ -7,6 +7,11 @@ public class EnemyHealth : MonoBehaviour
     public float knockbackForce = 5f;
     public float knockbackTime = 0.2f;
 
+    [Header("Drop de Monedas")]
+    public int minCoins = 1;
+    public int maxCoins = 3;
+    public GameObject coinPrefab;
+
     private int currentHealth;
     private SpriteRenderer sr;
     private Animator anim;
@@ -15,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
 
     [HideInInspector] public bool isKnockedBack = false;
 
-    private GhostController ghost; // ← detectar si este enemigo es un fantasma
+    private GhostController ghost;
 
     private void Start()
     {
@@ -23,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
-        ghost = GetComponent<GhostController>(); // ← si es fantasma, será distinto de null
+        ghost = GetComponent<GhostController>();
     }
 
     public void TakeDamage(int amount, Transform attacker)
@@ -33,9 +38,9 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= amount;
 
         if (ghost != null)
-            ghost.PlayHitFlash(); // fantasma usa su propio flash
+            ghost.PlayHitFlash();
         else
-            StartCoroutine(DamageFlash()); // otros enemigos
+            StartCoroutine(DamageFlash());
 
         if (rb != null && ghost == null)
             StartCoroutine(DoKnockback(attacker));
@@ -43,9 +48,14 @@ public class EnemyHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             if (ghost != null)
-                ghost.PlayDeath(); // fantasma usa muerte propia
+            {
+                ghost.PlayDeath();
+                DropCoins();
+            }
             else
-                StartCoroutine(DieRoutine()); // enemigo normal
+            {
+                StartCoroutine(DieRoutine());
+            }
         }
     }
 
@@ -101,7 +111,38 @@ public class EnemyHealth : MonoBehaviour
         // 4. Esperar animación
         yield return new WaitForSeconds(0.8f);
 
+        DropCoins();
+
         // 5. Destruir enemigo o su padre
         Destroy(transform.parent != null ? transform.parent.gameObject : gameObject);
+    }
+
+    private void DropCoins()
+    {
+        int amount = Random.Range(minCoins, maxCoins + 1);
+
+        for (int i = 0; i < amount; i++)
+        {
+            if (CurrencySystem.Instance != null)
+                CurrencySystem.Instance.AddCoins(1);
+
+            // Instancia moneda física
+            if (coinPrefab != null)
+            {
+                GameObject coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
+
+                // Añadimos pequeño impulso aleatorio
+                Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    float forceX = Random.Range(-2f, 2f);
+                    float forceY = Random.Range(2f, 4f);
+
+                    rb.AddForce(new Vector2(forceX, forceY), ForceMode2D.Impulse);
+                }
+            }
+        }
+
+        Debug.Log(gameObject.name + " soltó " + amount + " monedas");
     }
 }

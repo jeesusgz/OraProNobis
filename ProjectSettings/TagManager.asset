@@ -25,7 +25,7 @@ TagManager:
   - GhostDamage
   - PlayerAttack
   - ZonaSpawn
-  - 
+  - Coin
   - 
   - 
   - 
@@ -68,6 +68,9 @@ TagManager:
     locked: 0
   - name: Ghost
     uniqueID: 2755883929
+    locked: 0
+  - name: Coin
+    uniqueID: 2419130545
     locked: 0
   - name: Player
     uniqueID: 1007128825
