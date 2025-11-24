@@ -984,8 +984,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 954753210}
-  - component: {fileID: 954753212}
   - component: {fileID: 954753213}
+  - component: {fileID: 954753214}
   m_Layer: 14
   m_Name: Hitbox
   m_TagString: Untagged
@@ -1008,8 +1008,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1232959614}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -58.08}
---- !u!61 &954753212
-BoxCollider2D:
+--- !u!114 &954753213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954753209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebaef62927f7c0243b524f4f339e345f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackHitbox
+  damage: 1
+--- !u!60 &954753214
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1042,7 +1055,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.30295044, y: 0.004290104}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1052,21 +1065,16 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8019837, y: 1.9078264}
-  m_EdgeRadius: 0
---- !u!114 &954753213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954753209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebaef62927f7c0243b524f4f339e345f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackHitbox
-  damage: 1
+  m_Points:
+    m_Paths:
+    - - {x: -0.0519932, y: 0.71544653}
+      - {x: -0.08136311, y: 0.75569427}
+      - {x: -0.020138085, y: 0.94278544}
+      - {x: -0.7452182, y: 0.18079568}
+      - {x: -1.332234, y: -0.46883753}
+      - {x: -0.897057, y: -0.7405899}
+      - {x: -0.17646065, y: 0.45607042}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1039293919
 GameObject:
   m_ObjectHideFlags: 0
@@ -3653,7 +3661,7 @@ Transform:
   m_GameObject: {fileID: 1162010600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.0011788543, w: 0.99999934}
-  m_LocalPosition: {x: 256.23956, y: -3.606248, z: 0}
+  m_LocalPosition: {x: 269.70557, y: -3.606248, z: 0}
   m_LocalScale: {x: 0.8409, y: 0.8409, z: 0.8409}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3711,7 +3719,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 650.3171, y: 17.044235}
+  m_Size: {x: 685.6938, y: 17.406404}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4028,7 +4036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   hitbox: {fileID: 954753209}
-  attackDuration: 1
+  hitboxActiveTime: 0.1
   attackCooldown: 0.5
 --- !u!1 &1408136999
 GameObject:
@@ -4408,12 +4416,12 @@ MonoBehaviour:
   zonaSpawn: {fileID: 1571909770}
   player: {fileID: 1232959614}
   paso: {fileID: 582552811}
-  tiempoEntreSpawn: 3
+  tiempoEntreSpawn: 5
   maxEnemigos: 5
   probEsqueleto: 60
   probFantasma: 30
   probGato: 10
-  intervaloDificultad: 20
+  intervaloDificultad: 60
 --- !u!1 &1577370465
 GameObject:
   m_ObjectHideFlags: 0
@@ -8880,7 +8888,7 @@ Transform:
   m_GameObject: {fileID: 1918631892}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 555.67957, y: -4.393124, z: 0}
+  m_LocalPosition: {x: 589.41364, y: -4.393124, z: 0}
   m_LocalScale: {x: 1.2125, y: 3.0088654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8938,7 +8946,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 941.62683, y: 10.910778}
+  m_Size: {x: 1003.0873, y: 10.222057}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -4,39 +4,48 @@ using System.Collections;
 public class PlayerAttack : MonoBehaviour
 {
     public GameObject hitbox;
-    public float attackDuration = 0.1f;
-    public float attackCooldown = 0.3f;
+    public float hitboxActiveTime = 0.1f; // Duración del golpe
+    public float attackCooldown = 0.10f;
 
     private bool canAttack = true;
     private SpriteRenderer sr;
+    private Animator anim;
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     public void TryAttack()
     {
         if (canAttack)
-            StartCoroutine(DoAttack());
+        {
+            canAttack = false;
+            anim.SetTrigger("Attack");
+            StartCoroutine(AttackCooldown());
+        }
     }
 
-    IEnumerator DoAttack()
+    // Esta función será llamada desde el evento de animación
+    public void ActivateHitbox()
     {
-        canAttack = false;
-
-        //Cambiar dirección de la hitbox según flipX
         float xOffset = sr.flipX ? -0.8f : 0.8f;
         hitbox.transform.localPosition = new Vector3(xOffset, hitbox.transform.localPosition.y, 0);
-
-        Debug.Log("HITBOX ACTIVADA");
         hitbox.SetActive(true);
+        StartCoroutine(DeactivateHitbox());
+        Debug.Log("HITBOX ACTIVADA");
+    }
 
-        yield return new WaitForSeconds(attackDuration);
-
-        Debug.Log("HITBOX DESACTIVADA");
+    private IEnumerator DeactivateHitbox()
+    {
+        yield return new WaitForSeconds(hitboxActiveTime);
         hitbox.SetActive(false);
+        Debug.Log("HITBOX DESACTIVADA");
+    }
 
+    private IEnumerator AttackCooldown()
+    {
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
     }
