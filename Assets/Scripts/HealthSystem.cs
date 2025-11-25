@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class HealthSystem : MonoBehaviour
 {
+    public static event Action OnPlayerDamaged;
+
     public int maxHealth = 3;
-    private int currentHealth;
+    public int currentHealth;
 
     [Header("Modos especiales")]
     public bool infiniteHealth = false;
@@ -36,11 +39,13 @@ public class HealthSystem : MonoBehaviour
         if (isInvulnerable || isDying)
             return;
 
-        // 🛡️ VIDA INFINITA ACTIVADA → NO BAJA VIDA
+        //VIDA INFINITA ACTIVADA → NO BAJA VIDA
         if (!infiniteHealth)
             currentHealth -= damageAmount;
 
         Debug.Log(gameObject.name + " ha recibido daño. Vida: " + currentHealth);
+
+        OnPlayerDamaged?.Invoke();
 
         StartCoroutine(InvulnerabilityCoroutine());
 

@@ -21,7 +21,7 @@ public class PasoController : MonoBehaviour
 
     private bool puedeMoverse = false;
     private bool entrando = false;
-    public float arriveThreshold = 0.3f;  // <-- más seguro
+    public float arriveThreshold = 0.3f;
 
     [Header("Detección de suelo")]
     public Transform groundCheck;
@@ -30,6 +30,17 @@ public class PasoController : MonoBehaviour
     private bool isGrounded;
 
     private Collider2D mainCollider;
+
+    [Header("Estamina")]
+    public float maxStamina = 100f;
+    public float currentStamina;
+    public float staminaDrainPerSecond = 20f;
+    public float staminaRecoveryPerSecond = 10f;
+    public float fullDrainPenaltyTime = 2f; // segundos de penalización
+    public float lowStaminaMultiplier = 0.5f; // velocidad reducida al estar baja
+
+    private bool fullDrainPenaltyActive = false;
+    private float penaltyTimer = 0f;
 
     private void OnEnable()
     {
@@ -54,11 +65,13 @@ public class PasoController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         mainCollider = GetComponent<Collider2D>();
+
+        currentStamina = maxStamina;
     }
 
     private void OnLevantar(InputAction.CallbackContext context)
     {
-        if (!jugadorCerca || animado) return;
+        if (!jugadorCerca || animado || fullDrainPenaltyActive || currentStamina <= 0f) return;
 
         animado = true;
 
@@ -81,9 +94,25 @@ public class PasoController : MonoBehaviour
 
     void Update()
     {
+        // Actualizar detección de suelo
         if (groundCheck != null)
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
+        // Penalización por estamina vacía
+        if (fullDrainPenaltyActive)
+        {
+            penaltyTimer -= Time.deltaTime;
+            if (penaltyTimer <= 0f)
+                fullDrainPenaltyActive = false;
+        }
+
+        // Recuperar estamina si no se levanta
+        if (!animado && !fullDrainPenaltyActive)
+        {
+            RecoverStamina();
+        }
+
+        // Movimiento automático hacia la capilla
         if (!entrando && targetPoint != null)
         {
             float dist = Mathf.Abs(transform.position.x - targetPoint.position.x);
@@ -99,19 +128,50 @@ public class PasoController : MonoBehaviour
     {
         if (levantado && puedeMoverse && targetPoint != null && !entrando)
         {
+            float speedMultiplier = 1f;
+
+            if (currentStamina / maxStamina < 0.2f)
+                speedMultiplier = lowStaminaMultiplier;
+
             Vector2 next = Vector2.MoveTowards(
                 rb.position,
                 new Vector2(targetPoint.position.x, rb.position.y),
-                moveSpeed * Time.fixedDeltaTime
+                moveSpeed * speedMultiplier * Time.fixedDeltaTime
             );
 
             rb.MovePosition(next);
-
             animator.SetBool("Andando", true);
+
+            // Consumir estamina al moverse
+            currentStamina -= staminaDrainPerSecond * Time.fixedDeltaTime;
+
+            // ⚡ Si se vacía la estamina, forzar Arria
+            if (currentStamina <= 0f)
+            {
+                currentStamina = 0f;
+                fullDrainPenaltyActive = true;
+                penaltyTimer = fullDrainPenaltyTime;
+                puedeMoverse = false;
+
+                // Forzar animación de Arria si estaba levantado
+                if (levantado)
+                {
+                    animator.SetTrigger("Arria");
+                    levantado = false;
+                    animado = true;
+                    Invoke(nameof(FinAnimacion), 3f); // termina la animación
+                }
+            }
         }
-        else
+    }
+
+    void RecoverStamina()
+    {
+        if (currentStamina < maxStamina)
         {
-            animator.SetBool("Andando", false);
+            currentStamina += staminaRecoveryPerSecond * Time.deltaTime;
+            if (currentStamina > maxStamina)
+                currentStamina = maxStamina;
         }
     }
 
@@ -125,14 +185,11 @@ public class PasoController : MonoBehaviour
 
         animator.SetBool("Andando", false);
 
-        // desactivar colisiones
         if (mainCollider != null)
             mainCollider.enabled = false;
 
-        // prevenir movimientos raros
         rb.bodyType = RigidbodyType2D.Kinematic;
 
-        // FADE + DESTRUCCIÓN
         StartCoroutine(FadeAndDestroy(1.5f));
     }
 
@@ -168,7 +225,6 @@ public class PasoController : MonoBehaviour
             yield return null;
         }
 
-        // asegurar alpha 0
         foreach (var sr in sprites)
             if (sr != null)
                 sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f);
