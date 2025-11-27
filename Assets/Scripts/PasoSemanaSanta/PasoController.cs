@@ -74,7 +74,8 @@ public class PasoController : MonoBehaviour
 
     private void OnLevantar(InputAction.CallbackContext context)
     {
-        if (!jugadorCerca || animado || fullDrainPenaltyActive || currentStamina <= 0f) return;
+        if (!jugadorCerca || animado || fullDrainPenaltyActive || currentStamina <= 0f)
+            return;
 
         animado = true;
 
@@ -97,33 +98,27 @@ public class PasoController : MonoBehaviour
 
     void Update()
     {
-        // Actualizar detección de suelo
+        // Detección de suelo
         if (groundCheck != null)
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // Penalización por estamina vacía
+        // Penalización por estamina
         if (fullDrainPenaltyActive)
         {
             penaltyTimer -= Time.deltaTime;
-            if (penaltyTimer <= 0f)
-                fullDrainPenaltyActive = false;
+            if (penaltyTimer <= 0f) fullDrainPenaltyActive = false;
         }
 
-        // Recuperar estamina si no se levanta
+        // Recuperar estamina
         if (!animado && !fullDrainPenaltyActive)
-        {
             RecoverStamina();
-        }
 
         // Movimiento automático hacia la capilla
         if (!entrando && targetPoint != null)
         {
             float dist = Mathf.Abs(transform.position.x - targetPoint.position.x);
-
             if (dist <= arriveThreshold)
-            {
                 EntrarCapilla();
-            }
         }
 
         if (staminaBar != null)
@@ -245,5 +240,25 @@ public class PasoController : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
+    }
+
+    public bool Animado
+    {
+        get { return animado; }
+    }
+
+    public bool FullDrainPenaltyActive
+    {
+        get { return fullDrainPenaltyActive; }
+    }
+
+    public float CurrentStamina
+    {
+        get { return currentStamina; }
+    }
+
+    public bool Levantado
+    {
+        get { return levantado; }
     }
 }
