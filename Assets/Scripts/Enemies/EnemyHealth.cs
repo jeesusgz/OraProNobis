@@ -123,9 +123,6 @@ public class EnemyHealth : MonoBehaviour
 
         for (int i = 0; i < amount; i++)
         {
-            if (CurrencySystem.Instance != null)
-                CurrencySystem.Instance.AddCoins(1);
-
             // Instancia moneda física
             if (coinPrefab != null)
             {
@@ -137,7 +134,6 @@ public class EnemyHealth : MonoBehaviour
                 {
                     float forceX = Random.Range(-2f, 2f);
                     float forceY = Random.Range(2f, 4f);
-
                     rb.AddForce(new Vector2(forceX, forceY), ForceMode2D.Impulse);
                 }
             }

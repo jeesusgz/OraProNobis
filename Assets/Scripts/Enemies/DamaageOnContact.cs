@@ -20,11 +20,19 @@ public class DamageOnContact : MonoBehaviour
     {
         if (obj.CompareTag(targetTag1) || obj.CompareTag(targetTag2))
         {
+            // Para Player
             HealthSystem health = obj.GetComponent<HealthSystem>();
-
             if (health != null)
             {
                 health.TakeDamage(damageAmount);
+                return;
+            }
+
+            // Para Paso
+            PasoHealthSystem pasoHealth = obj.GetComponent<PasoHealthSystem>();
+            if (pasoHealth != null)
+            {
+                pasoHealth.TakeDamage(damageAmount);
             }
         }
     }

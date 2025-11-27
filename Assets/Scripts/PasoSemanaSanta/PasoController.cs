@@ -39,6 +39,9 @@ public class PasoController : MonoBehaviour
     public float fullDrainPenaltyTime = 2f; // segundos de penalización
     public float lowStaminaMultiplier = 0.5f; // velocidad reducida al estar baja
 
+    [Header("UI del Paso")]
+    public UnityEngine.UI.Image staminaBar;
+
     private bool fullDrainPenaltyActive = false;
     private float penaltyTimer = 0f;
 
@@ -122,6 +125,9 @@ public class PasoController : MonoBehaviour
                 EntrarCapilla();
             }
         }
+
+        if (staminaBar != null)
+            staminaBar.fillAmount = currentStamina / maxStamina;
     }
 
     void FixedUpdate()

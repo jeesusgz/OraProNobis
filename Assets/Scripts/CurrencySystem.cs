@@ -27,6 +27,11 @@ public class CurrencySystem : MonoBehaviour
         PlayerPrefs.SetInt("Coins", coins);
         PlayerPrefs.Save();
         Debug.Log("Monedas actuales: " + coins);
+
+        // Actualizar HUD con efecto
+        CoinUI ui = FindObjectOfType<CoinUI>();
+        if (ui != null)
+            ui.PlayCoinEffect();
     }
 
     public void LoadCoins()
