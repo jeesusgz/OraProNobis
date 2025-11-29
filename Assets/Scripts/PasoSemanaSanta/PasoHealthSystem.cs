@@ -103,7 +103,7 @@ public class PasoHealthSystem : MonoBehaviour
     void Die()
     {
         Debug.Log(gameObject.name + " paso destruido");
-        Destroy(gameObject);
+        FindObjectOfType<DeathMenu>().MostrarMenuMuerte();
     }
 
     void UpdateUI()

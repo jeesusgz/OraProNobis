@@ -81,6 +81,7 @@ public class HealthSystem : MonoBehaviour
 
     IEnumerator DieRoutine()
     {
+        
         isDying = true;
 
         Debug.Log(gameObject.name + " está muriendo...");
@@ -104,12 +105,7 @@ public class HealthSystem : MonoBehaviour
         if (isPlayer)
         {
             Debug.Log("PLAYER MUERTO");
-            // TODO: respawn o pantalla de game over
-        }
-        else
-        {
-            Debug.Log(gameObject.name + " enemigo/paso destruido");
-            Destroy(gameObject);
+            FindObjectOfType<DeathMenu>().MostrarMenuMuerte();
         }
     }
 }

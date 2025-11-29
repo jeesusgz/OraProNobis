@@ -240,6 +240,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MenuPausa",
+            "id": "c03076a3-5f35-41eb-b695-a06cf0e3e6de",
+            "actions": [
+                {
+                    "name": "ESC",
+                    "type": "Button",
+                    "id": "298fd10a-6c84-461b-b942-9d53b33ba78d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5377587a-0a35-409f-a798-b0dc663ba036",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
