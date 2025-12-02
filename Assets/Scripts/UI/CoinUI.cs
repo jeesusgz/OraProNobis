@@ -5,45 +5,52 @@ using UnityEngine.UI;
 
 public class CoinUI : MonoBehaviour
 {
+    public static CoinUI Instance;
+
     public Image coinIcon;
-    public TextMeshProUGUI coinsText; // Cambiar a Text si usas UI Text
+    public TextMeshProUGUI coinsText;
     public AudioClip coinSound;
     public float popScale = 1.5f;
     public float popDuration = 0.2f;
 
     private AudioSource audioSource;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        UpdateUI();
-    }
 
-    public void UpdateUI()
-    {
-        if (CurrencySystem.Instance != null)
+        // Suscribirse a eventos del CurrencyManager
+        if (CurrencyManager.Instance != null)
         {
-            coinsText.text = CurrencySystem.Instance.coins.ToString();
+            CurrencyManager.Instance.OnMoneyChanged += UpdateUI;
         }
+
+        UpdateUI(CurrencyManager.Instance.gameData.monedas);
     }
 
-    // Llamar al recoger moneda
+    public void UpdateUI(int value)
+    {
+        coinsText.text = value.ToString();
+    }
+
     public void PlayCoinEffect()
     {
-        // Animación pop
         if (coinIcon != null)
         {
             coinIcon.transform.DOKill();
             coinIcon.transform.localScale = Vector3.one;
-            coinIcon.transform.DOScale(popScale, popDuration).SetLoops(2, LoopType.Yoyo);
+            coinIcon.transform.DOScale(popScale, popDuration)
+                .SetLoops(2, LoopType.Yoyo);
         }
 
-        // Sonido
         if (audioSource != null && coinSound != null)
         {
             audioSource.PlayOneShot(coinSound);
         }
-
-        UpdateUI();
     }
 }

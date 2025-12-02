@@ -8,12 +8,16 @@ public class CoinPickup : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Sumamos monedas
-            if (CurrencySystem.Instance != null)
-                CurrencySystem.Instance.AddCoins(value);
+            // Sumar monedas usando el CurrencyManager
+            if (CurrencyManager.Instance != null)
+                CurrencyManager.Instance.AddMoney(value);
 
-            // Efecto sonoro opcional
-            // AudioSource.PlayClipAtPoint(coinSound, transform.position);
+            // Actualizar UI
+            if (CoinUI.Instance != null)
+                CoinUI.Instance.PlayCoinEffect();
+
+            // Guardar datos
+            SaveSystem.Save(CurrencyManager.Instance.gameData);
 
             Destroy(gameObject);
         }

@@ -14,6 +14,7 @@ public class CurrencyManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SaveSystem.Load(gameData);  // Carga datos al iniciar
         }
         else
         {
@@ -23,7 +24,17 @@ public class CurrencyManager : MonoBehaviour
 
     private void Start()
     {
+        // Llamamos a la UI al iniciar
         OnMoneyChanged?.Invoke(gameData.monedas);
+    }
+
+    public void AddMoney(int amount)
+    {
+        gameData.monedas += amount;
+
+        OnMoneyChanged?.Invoke(gameData.monedas);
+
+        SaveSystem.Save(gameData);
     }
 
     public bool TrySpend(int amount)
@@ -31,18 +42,14 @@ public class CurrencyManager : MonoBehaviour
         if (gameData.monedas >= amount)
         {
             gameData.monedas -= amount;
+
             OnMoneyChanged?.Invoke(gameData.monedas);
+
             SaveSystem.Save(gameData);
+
             return true;
         }
 
         return false;
-    }
-
-    public void AddMoney(int amount)
-    {
-        gameData.monedas += amount;
-        OnMoneyChanged?.Invoke(gameData.monedas);
-        SaveSystem.Save(gameData);
     }
 }
