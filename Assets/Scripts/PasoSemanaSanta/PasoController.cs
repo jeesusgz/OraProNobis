@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.ShaderData;
 
 public class PasoController : MonoBehaviour
 {
-    [Header("Configuración")]
+    [Header("Datos Persistentes del Juego")]
+    public GameData gameData;    // 🔥 SE AÑADE ESTO
+
+    [Header("Configuración base")]
     public float distanciaActivacion = 2f;
     public Transform jugador;
     public bool jugadorCerca = false;
@@ -36,14 +40,39 @@ public class PasoController : MonoBehaviour
     public float currentStamina;
     public float staminaDrainPerSecond = 20f;
     public float staminaRecoveryPerSecond = 10f;
-    public float fullDrainPenaltyTime = 2f; // segundos de penalización
-    public float lowStaminaMultiplier = 0.5f; // velocidad reducida al estar baja
+    public float fullDrainPenaltyTime = 2f;
+    public float lowStaminaMultiplier = 0.5f;
 
     [Header("UI del Paso")]
     public UnityEngine.UI.Image staminaBar;
 
     private bool fullDrainPenaltyActive = false;
     private float penaltyTimer = 0f;
+
+    // ============================
+    //    🔥 NAZARENOS / SLOTS 🔥
+    // ============================
+    [Header("Nazarenos")]
+    public GameObject nazarenoPrefab;
+    public Transform destinoCapilla;
+    public Transform nazarenoSpawnPoint;
+    public int maxSlotsDelante = 2;
+    public int maxSlotsDetras = 2;
+    public float offsetDelante = 5;
+    public float offsetDetras = -5;
+
+    [Header("Colliders de Spawn")]
+    public BoxCollider2D colliderDelante; 
+    public BoxCollider2D colliderDetras;
+
+    private NazarenoController[] slotsDelante;
+    private NazarenoController[] slotsDetras;
+
+    private void Awake()
+    {
+        slotsDelante = new NazarenoController[maxSlotsDelante];
+        slotsDetras = new NazarenoController[maxSlotsDetras];
+    }
 
     private void OnEnable()
     {
@@ -69,8 +98,37 @@ public class PasoController : MonoBehaviour
         animator = GetComponent<Animator>();
         mainCollider = GetComponent<Collider2D>();
 
+        // 🔥🔥🔥 APLICAR MEJORAS DEL GAMEDATA 🔥🔥🔥
+        ApplyUpgradesFromGameData();
+
         currentStamina = maxStamina;
     }
+
+    // ============================================================
+    //     🔥 APLICAR VALORES DE MEJORAS COMPRADAS
+    // ============================================================
+    private void ApplyUpgradesFromGameData()
+    {
+        // VIDA DEL PASO
+        if (gameData.vidaPasoNivel > 0)
+        {
+            maxStamina += gameData.vidaPasoNivel * 10f;     // ejemplo: +10 por nivel
+        }
+
+        // ESTAMINA MEJORADA
+        if (gameData.estaminaPasoNivel > 0)
+        {
+            maxStamina += gameData.estaminaPasoNivel * 20f; // ejemplo
+        }
+
+        // VELOCIDAD DEL PASO
+        if (gameData.velocidadPasoNivel > 0)
+        {
+            moveSpeed += gameData.velocidadPasoNivel * 0.3f;
+        }
+    }
+
+    // ============================================================
 
     private void OnLevantar(InputAction.CallbackContext context)
     {
@@ -98,22 +156,18 @@ public class PasoController : MonoBehaviour
 
     void Update()
     {
-        // Detección de suelo
         if (groundCheck != null)
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // Penalización por estamina
         if (fullDrainPenaltyActive)
         {
             penaltyTimer -= Time.deltaTime;
             if (penaltyTimer <= 0f) fullDrainPenaltyActive = false;
         }
 
-        // Recuperar estamina
         if (!animado && !fullDrainPenaltyActive)
             RecoverStamina();
 
-        // Movimiento automático hacia la capilla
         if (!entrando && targetPoint != null)
         {
             float dist = Mathf.Abs(transform.position.x - targetPoint.position.x);
@@ -143,10 +197,8 @@ public class PasoController : MonoBehaviour
             rb.MovePosition(next);
             animator.SetBool("Andando", true);
 
-            // Consumir estamina al moverse
             currentStamina -= staminaDrainPerSecond * Time.fixedDeltaTime;
 
-            // ⚡ Si se vacía la estamina, forzar Arria
             if (currentStamina <= 0f)
             {
                 currentStamina = 0f;
@@ -154,13 +206,12 @@ public class PasoController : MonoBehaviour
                 penaltyTimer = fullDrainPenaltyTime;
                 puedeMoverse = false;
 
-                // Forzar animación de Arria si estaba levantado
                 if (levantado)
                 {
                     animator.SetTrigger("Arria");
                     levantado = false;
                     animado = true;
-                    Invoke(nameof(FinAnimacion), 3f); // termina la animación
+                    Invoke(nameof(FinAnimacion), 3f);
                 }
             }
         }
@@ -226,10 +277,6 @@ public class PasoController : MonoBehaviour
             yield return null;
         }
 
-        foreach (var sr in sprites)
-            if (sr != null)
-                sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f);
-
         Destroy(gameObject);
     }
 
@@ -242,23 +289,103 @@ public class PasoController : MonoBehaviour
         }
     }
 
-    public bool Animado
+    // ============================================================
+    // 🔥 NAZARENOS / SLOTS 🔥
+    // ============================================================
+
+    // Comprar/reponer un nazareno
+    public bool ComprarNazareno(bool delante)
     {
-        get { return animado; }
+        NazarenoController[] slotArray = delante ? slotsDelante : slotsDetras;
+
+        for (int i = 0; i < slotArray.Length; i++)
+        {
+            if (slotArray[i] == null)
+            {
+                SpawnNazareno(i, delante);
+                return true;
+            }
+        }
+
+        return false; // slots llenos
     }
 
-    public bool FullDrainPenaltyActive
+    private void SpawnNazareno(int slotIndex, bool delante)
     {
-        get { return fullDrainPenaltyActive; }
+        NazarenoController[] slotArray = delante ? slotsDelante : slotsDetras;
+
+        GameObject n = Instantiate(nazarenoPrefab);
+        NazarenoController nc = n.GetComponent<NazarenoController>();
+
+        // Asignamos referencias
+        nc.paso = this;
+        nc.destinoCapilla = destinoCapilla;
+
+        slotArray[slotIndex] = nc;
+
+        // Elegimos el collider correcto
+        BoxCollider2D box = delante ? colliderDelante : colliderDetras;
+
+        if (box != null)
+        {
+            // Coordenadas del área de spawn
+            Vector2 min = box.bounds.min;
+            Vector2 max = box.bounds.max;
+
+            float spawnX = Random.Range(min.x, max.x);
+            float spawnY = Random.Range(min.y, max.y);
+
+            n.transform.position = new Vector3(spawnX, spawnY, transform.position.z);
+        }
+        else
+        {
+            n.transform.position = transform.position;
+        }
+
+        // Offset automático según si va delante o detrás
+        nc.offset = delante ? 1f : -1f;
     }
 
-    public float CurrentStamina
+    // Aviso de muerte del nazareno
+    public void NotifyNazarenoDeath(NazarenoController naz)
     {
-        get { return currentStamina; }
+        for (int i = 0; i < slotsDelante.Length; i++)
+        {
+            if (slotsDelante[i] == naz) slotsDelante[i] = null;
+        }
+
+        for (int i = 0; i < slotsDetras.Length; i++)
+        {
+            if (slotsDetras[i] == naz) slotsDetras[i] = null;
+        }
     }
 
-    public bool Levantado
+    // Reponer slots vacíos al comenzar el día
+    public void ReponerNazarenosDelDia()
     {
-        get { return levantado; }
+        for (int i = 0; i < slotsDelante.Length; i++)
+        {
+            if (slotsDelante[i] == null)
+            {
+                // aquí puedes mostrar UI para comprar
+            }
+        }
+
+        for (int i = 0; i < slotsDetras.Length; i++)
+        {
+            if (slotsDetras[i] == null)
+            {
+                // aquí puedes mostrar UI para comprar
+            }
+        }
     }
+
+    // =========================
+    // Getters opcionales
+    // =========================
+    public bool Animado => animado;
+    public bool FullDrainPenaltyActive => fullDrainPenaltyActive;
+    public float CurrentStamina => currentStamina;
+    public bool Levantado => levantado;
+    public bool PuedeMoverse => puedeMoverse;
 }
