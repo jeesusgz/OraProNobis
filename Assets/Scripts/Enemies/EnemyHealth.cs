@@ -42,7 +42,8 @@ public class EnemyHealth : MonoBehaviour
         else
             StartCoroutine(DamageFlash());
 
-        if (rb != null && ghost == null)
+        // ⛔ NO knockback si lo golpea un nazareno
+        if (rb != null && ghost == null && !attacker.CompareTag("Nazareno"))
             StartCoroutine(DoKnockback(attacker));
 
         if (currentHealth <= 0)
@@ -61,6 +62,10 @@ public class EnemyHealth : MonoBehaviour
 
     IEnumerator DoKnockback(Transform attacker)
     {
+        // ⛔ Bloque extra de seguridad (por si otro script llama a knockback)
+        if (attacker.CompareTag("Nazareno"))
+            yield break;
+
         isKnockedBack = true;
 
         float dir = Mathf.Sign(transform.position.x - attacker.position.x);
@@ -88,11 +93,9 @@ public class EnemyHealth : MonoBehaviour
     {
         isDying = true;
 
-        // 1. Parar movimiento
         if (rb != null)
             rb.linearVelocity = Vector2.zero;
 
-        // 2. Cortar animaciones previas
         if (anim != null)
         {
             anim.SetBool("Walking", false);
@@ -100,7 +103,6 @@ public class EnemyHealth : MonoBehaviour
             anim.SetTrigger("Die");
         }
 
-        // 3. Desactivar IA y movimiento (pero NO EnemyHealth)
         MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
         foreach (var s in scripts)
         {
@@ -108,12 +110,10 @@ public class EnemyHealth : MonoBehaviour
                 s.enabled = false;
         }
 
-        // 4. Esperar animación
         yield return new WaitForSeconds(0.8f);
 
         DropCoins();
 
-        // 5. Destruir enemigo o su padre
         Destroy(transform.parent != null ? transform.parent.gameObject : gameObject);
     }
 
@@ -123,12 +123,10 @@ public class EnemyHealth : MonoBehaviour
 
         for (int i = 0; i < amount; i++)
         {
-            // Instancia moneda física
             if (coinPrefab != null)
             {
                 GameObject coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
 
-                // Añadimos pequeño impulso aleatorio
                 Rigidbody2D rb = coin.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {

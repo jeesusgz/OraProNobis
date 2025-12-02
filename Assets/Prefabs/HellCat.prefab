@@ -167,7 +167,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &5359144119556774635
 MonoBehaviour:
@@ -222,6 +222,7 @@ MonoBehaviour:
   damageAmount: 2
   targetTag1: Paso
   targetTag2: Player
+  targetTag3: Nazareno
 --- !u!114 &8035165800932936297
 MonoBehaviour:
   m_ObjectHideFlags: 0
