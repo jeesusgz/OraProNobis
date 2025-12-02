@@ -75,11 +75,11 @@ TagManager:
   - name: Player
     uniqueID: 1007128825
     locked: 0
-  - name: Nazareno
-    uniqueID: 3925854675
-    locked: 0
   - name: Paso
     uniqueID: 1620936905
+    locked: 0
+  - name: Nazareno
+    uniqueID: 3925854675
     locked: 0
   m_RenderingLayers:
   - Default

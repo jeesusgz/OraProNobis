@@ -314,6 +314,7 @@ public class PasoController : MonoBehaviour
     {
         NazarenoController[] slotArray = delante ? slotsDelante : slotsDetras;
 
+        // Instanciamos el prefab
         GameObject n = Instantiate(nazarenoPrefab);
         NazarenoController nc = n.GetComponent<NazarenoController>();
 
@@ -328,14 +329,29 @@ public class PasoController : MonoBehaviour
 
         if (box != null)
         {
-            // Coordenadas del área de spawn
             Vector2 min = box.bounds.min;
             Vector2 max = box.bounds.max;
 
-            float spawnX = Random.Range(min.x, max.x);
-            float spawnY = Random.Range(min.y, max.y);
+            // Separación entre nazarenos
+            float spacing = 2f;
 
-            n.transform.position = new Vector3(spawnX, spawnY, transform.position.z);
+            // Calculamos la X según el slot, para que no se superpongan
+            float spawnX = delante
+                ? min.x + slotIndex * spacing
+                : max.x - slotIndex * spacing;
+
+            // Lanzamos un raycast hacia abajo desde arriba del collider para detectar el suelo
+            float rayStartY = max.y + 2f; // empezamos por encima del collider
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(spawnX, rayStartY), Vector2.down, 10f, groundLayer);
+
+            float spawnY = hit.collider != null ? hit.point.y : min.y;
+
+            // Ajustamos para que los pies del sprite queden sobre el suelo
+            Transform groundPoint = n.transform.Find("Feet"); // punto hijo en la base del sprite
+            float feetOffset = groundPoint != null ? groundPoint.localPosition.y : 0f;
+            float finalY = spawnY - feetOffset;
+
+            n.transform.position = new Vector3(spawnX, finalY, transform.position.z);
         }
         else
         {

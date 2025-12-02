@@ -16,13 +16,11 @@ public class NazarenoController : MonoBehaviour
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.simulated = true;
         rb.gravityScale = 0;
         rb.freezeRotation = true;
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
 
         Collider2D col = GetComponent<Collider2D>();
-        col.isTrigger = true;
+        col.isTrigger = true;  // 👈 NO choca con nada
     }
 
     private void Start()
