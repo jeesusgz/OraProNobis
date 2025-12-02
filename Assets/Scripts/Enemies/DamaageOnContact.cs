@@ -5,6 +5,7 @@ public class DamageOnContact : MonoBehaviour
     public int damageAmount = 1;
     public string targetTag1 = "Paso";
     public string targetTag2 = "Player";
+    public string targetTag3 = "Nazareno";
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -18,21 +19,31 @@ public class DamageOnContact : MonoBehaviour
 
     void TryDamage(GameObject obj)
     {
-        if (obj.CompareTag(targetTag1) || obj.CompareTag(targetTag2))
+        // Comparar tags
+        if (obj.CompareTag(targetTag1) || obj.CompareTag(targetTag2) || obj.CompareTag(targetTag3))
         {
-            // Para Player
-            HealthSystem health = obj.GetComponent<HealthSystem>();
-            if (health != null)
+            // Player
+            HealthSystem playerHealth = obj.GetComponent<HealthSystem>();
+            if (playerHealth != null)
             {
-                health.TakeDamage(damageAmount);
+                playerHealth.TakeDamage(damageAmount);
                 return;
             }
 
-            // Para Paso
+            // Paso
             PasoHealthSystem pasoHealth = obj.GetComponent<PasoHealthSystem>();
             if (pasoHealth != null)
             {
                 pasoHealth.TakeDamage(damageAmount);
+                return;
+            }
+
+            // Nazareno
+            NazarenoHealthSystem nazHealth = obj.GetComponent<NazarenoHealthSystem>();
+            if (nazHealth != null)
+            {
+                nazHealth.TakeDamage(damageAmount);
+                return;
             }
         }
     }

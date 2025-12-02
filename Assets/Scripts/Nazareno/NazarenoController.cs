@@ -30,6 +30,10 @@ public class NazarenoController : MonoBehaviour
         // Guardamos la distancia inicial al paso para mantenerla siempre
         if (paso != null)
             initialXOffset = transform.position.x - paso.transform.position.x;
+
+        // Si no asignaste el Animator, lo busca en el hijo
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
