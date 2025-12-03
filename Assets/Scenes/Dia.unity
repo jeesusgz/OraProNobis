@@ -1076,6 +1076,7 @@ GameObject:
   - component: {fileID: 599759611}
   - component: {fileID: 599759610}
   - component: {fileID: 599759609}
+  - component: {fileID: 599759612}
   m_Layer: 0
   m_Name: Botonvelocidad
   m_TagString: Untagged
@@ -1135,7 +1136,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 98d581fbdfea8ee4cb13cbd5a2ea15fe, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1185,6 +1186,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599759607}
   m_CullTransparentMesh: 1
+--- !u!114 &599759612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599759607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796c79b515f789f41a60b55327d38408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
+  precio: 50
+  button: {fileID: 599759609}
+  tipoUpgrade: 1
+  mensajePrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!1 &616307752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,6 +1976,7 @@ GameObject:
   - component: {fileID: 951175161}
   - component: {fileID: 951175160}
   - component: {fileID: 951175159}
+  - component: {fileID: 951175162}
   m_Layer: 0
   m_Name: Botonvida
   m_TagString: Untagged
@@ -2017,7 +2036,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 98d581fbdfea8ee4cb13cbd5a2ea15fe, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -2067,6 +2086,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951175157}
   m_CullTransparentMesh: 1
+--- !u!114 &951175162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951175157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796c79b515f789f41a60b55327d38408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
+  precio: 50
+  button: {fileID: 951175159}
+  tipoUpgrade: 1
+  mensajePrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!1 &1008192346
 GameObject:
   m_ObjectHideFlags: 0
@@ -2834,6 +2870,7 @@ GameObject:
   - component: {fileID: 1194902351}
   - component: {fileID: 1194902350}
   - component: {fileID: 1194902349}
+  - component: {fileID: 1194902352}
   m_Layer: 0
   m_Name: Botonvelocidad
   m_TagString: Untagged
@@ -2893,7 +2930,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 6f7a5918acdd56a46a63378569560b70, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -2943,6 +2980,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194902347}
   m_CullTransparentMesh: 1
+--- !u!114 &1194902352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194902347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796c79b515f789f41a60b55327d38408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
+  precio: 50
+  button: {fileID: 1194902349}
+  tipoUpgrade: 0
+  mensajePrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!1 &1266240210
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,6 +3256,7 @@ GameObject:
   - component: {fileID: 1288924786}
   - component: {fileID: 1288924785}
   - component: {fileID: 1288924784}
+  - component: {fileID: 1288924787}
   m_Layer: 0
   m_Name: Botonvida
   m_TagString: Untagged
@@ -3261,7 +3316,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 6f7a5918acdd56a46a63378569560b70, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -3311,6 +3366,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288924782}
   m_CullTransparentMesh: 1
+--- !u!114 &1288924787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288924782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796c79b515f789f41a60b55327d38408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
+  precio: 50
+  button: {fileID: 1288924784}
+  tipoUpgrade: 0
+  mensajePrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!1 &1289181118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,6 +3395,7 @@ GameObject:
   - component: {fileID: 1289181122}
   - component: {fileID: 1289181121}
   - component: {fileID: 1289181120}
+  - component: {fileID: 1289181123}
   m_Layer: 0
   m_Name: "BotonDa\xF1o"
   m_TagString: Untagged
@@ -3382,7 +3455,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 6f7a5918acdd56a46a63378569560b70, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -3432,6 +3505,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289181118}
   m_CullTransparentMesh: 1
+--- !u!114 &1289181123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289181118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796c79b515f789f41a60b55327d38408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
+  precio: 50
+  button: {fileID: 1289181120}
+  tipoUpgrade: 0
+  mensajePrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!1 &1299238416
 GameObject:
   m_ObjectHideFlags: 0
@@ -4172,6 +4262,7 @@ GameObject:
   - component: {fileID: 1663489524}
   - component: {fileID: 1663489523}
   - component: {fileID: 1663489522}
+  - component: {fileID: 1663489525}
   m_Layer: 0
   m_Name: BotonAgregar
   m_TagString: Untagged
@@ -4231,7 +4322,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 98d581fbdfea8ee4cb13cbd5a2ea15fe, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -4281,6 +4372,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663489520}
   m_CullTransparentMesh: 1
+--- !u!114 &1663489525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663489520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796c79b515f789f41a60b55327d38408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
+  precio: 100
+  button: {fileID: 1663489522}
+  tipoUpgrade: 2
+  mensajePrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!1 &1729408912
 GameObject:
   m_ObjectHideFlags: 0
@@ -5131,6 +5239,7 @@ GameObject:
   - component: {fileID: 1961981596}
   - component: {fileID: 1961981595}
   - component: {fileID: 1961981594}
+  - component: {fileID: 1961981597}
   m_Layer: 0
   m_Name: BotonEstamina
   m_TagString: Untagged
@@ -5190,7 +5299,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 98d581fbdfea8ee4cb13cbd5a2ea15fe, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -5240,6 +5349,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961981592}
   m_CullTransparentMesh: 1
+--- !u!114 &1961981597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961981592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796c79b515f789f41a60b55327d38408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
+  precio: 50
+  button: {fileID: 1961981594}
+  tipoUpgrade: 1
+  mensajePrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
