@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
+using System.Collections;
 
 public class HealthSystem : MonoBehaviour
 {
     public static event Action OnPlayerDamaged;
+    public static event Action<int> OnMaxHealthChanged;
 
-    public int maxHealth = 3;
+    [Header("Vida")]
+    public int baseMaxHealth = 6;
+    public int maxHealth;
     public int currentHealth;
 
     [Header("Modos especiales")]
@@ -23,15 +26,37 @@ public class HealthSystem : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private MonoBehaviour[] scripts;
 
-    void Start()
+    [Header("Referencias UI")]
+    public HeartManager playerHealthHeartManager;
+
+    void Awake()
     {
+        // Configuramos maxHealth antes de Start
+        maxHealth = baseMaxHealth;
+
+        if (CurrencyManager.Instance != null)
+        {
+            int nivel = CurrencyManager.Instance.gameData.vidaJugadorNivel;
+            maxHealth += nivel;
+        }
+
         currentHealth = maxHealth;
 
+        // Notificamos la UI desde el inicio
+        OnMaxHealthChanged?.Invoke(maxHealth);
+        OnPlayerDamaged?.Invoke();
+    }
+
+    void Start()
+    {
         anim = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
         isPlayer = CompareTag("Player");
         scripts = GetComponents<MonoBehaviour>();
+
+        // Inicializamos corazones en HeartManager
+        if (playerHealthHeartManager != null)
+            playerHealthHeartManager.InicializarHearts();
     }
 
     public void TakeDamage(int damageAmount)
@@ -39,14 +64,12 @@ public class HealthSystem : MonoBehaviour
         if (isInvulnerable || isDying)
             return;
 
-        //VIDA INFINITA ACTIVADA → NO BAJA VIDA
         if (!infiniteHealth)
             currentHealth -= damageAmount;
 
-        Debug.Log(gameObject.name + " ha recibido daño. Vida: " + currentHealth);
+        currentHealth = Mathf.Max(currentHealth, 0);
 
         OnPlayerDamaged?.Invoke();
-
         StartCoroutine(InvulnerabilityCoroutine());
 
         if (!infiniteHealth && currentHealth <= 0)
@@ -56,7 +79,6 @@ public class HealthSystem : MonoBehaviour
     IEnumerator InvulnerabilityCoroutine()
     {
         isInvulnerable = true;
-
         float timer = 0f;
 
         while (timer < invulnerabilityTime)
@@ -65,26 +87,18 @@ public class HealthSystem : MonoBehaviour
             {
                 spriteRenderer.color = Color.red;
                 yield return new WaitForSeconds(flashSpeed);
-
                 spriteRenderer.color = Color.white;
                 yield return new WaitForSeconds(flashSpeed);
             }
-
             timer += flashSpeed * 2f;
         }
-
-        if (spriteRenderer != null)
-            spriteRenderer.color = Color.white;
 
         isInvulnerable = false;
     }
 
     IEnumerator DieRoutine()
     {
-        
         isDying = true;
-
-        Debug.Log(gameObject.name + " está muriendo...");
 
         if (isPlayer && anim != null)
             anim.SetTrigger("Die");
@@ -97,15 +111,20 @@ public class HealthSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        Die();
+        if (isPlayer)
+            FindObjectOfType<DeathMenu>().MostrarMenuMuerte();
     }
 
-    void Die()
+    // Subir la vida máxima y actualizar UI
+    public void SubirNivelVida(int cantidad = 1)
     {
-        if (isPlayer)
-        {
-            Debug.Log("PLAYER MUERTO");
-            FindObjectOfType<DeathMenu>().MostrarMenuMuerte();
-        }
+        maxHealth += cantidad;
+        currentHealth += cantidad;
+
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
+        OnMaxHealthChanged?.Invoke(maxHealth);
+        OnPlayerDamaged?.Invoke();
     }
 }

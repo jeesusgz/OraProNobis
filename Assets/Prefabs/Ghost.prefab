@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8792437237553220181}
   - component: {fileID: -6724819665627942949}
   - component: {fileID: 5546649753792105479}
+  - component: {fileID: -3463310267435105579}
   m_Layer: 11
   m_Name: Ghost
   m_TagString: Enemigo
@@ -225,6 +226,7 @@ MonoBehaviour:
   damageAmount: 1
   targetTag1: Paso
   targetTag2: Player
+  targetTag3: Nazareno
 --- !u!114 &5546649753792105479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +246,20 @@ MonoBehaviour:
   maxCoins: 3
   coinPrefab: {fileID: 2044151719295698384, guid: 3cb08052b9921d842902b07e37dd86a5, type: 3}
   isKnockedBack: 0
+--- !u!114 &-3463310267435105579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3641189887842467786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571eedaa40eacfc40ab6bc2f757006f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
+  damage: 1
+  hitCooldown: 1
 --- !u!1 &5703973487919630245
 GameObject:
   m_ObjectHideFlags: 0

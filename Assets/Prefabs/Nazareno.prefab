@@ -157,6 +157,8 @@ GameObject:
   - component: {fileID: 3446405155071909395}
   - component: {fileID: 4369036850923578962}
   - component: {fileID: 8709598218036451123}
+  - component: {fileID: -6819055981905947218}
+  - component: {fileID: 4908700895766634944}
   m_Layer: 0
   m_Name: Nazareno
   m_TagString: Nazareno
@@ -282,7 +284,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274b8115270157c4dbfad03b4c08f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NazarenoHealthSystem
-  maxHealth: 3
-  currentHealth: 3
+  maxHealth: 10
+  currentHealth: 10
   invulnerabilityTime: 0.5
   flashSpeed: 0.1
+--- !u!114 &-6819055981905947218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738922370594148982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc1bab28e3fd6a5439393711c8ecd1ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NazarenoFakeMove
+--- !u!114 &4908700895766634944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738922370594148982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61a79761f84bc4b928d243d3ec5740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NazarenoAttack
+  damage: 1
+  hitCooldown: 0.5

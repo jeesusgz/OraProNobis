@@ -1,11 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class HeartManager : MonoBehaviour
 {
-    public int maxHealth = 10;
-    public int currentHealth;
+    public HealthSystem playerHealth;
 
     public Sprite fullHeart;
     public Sprite halfHeart;
@@ -16,16 +15,40 @@ public class HeartManager : MonoBehaviour
 
     private List<Image> hearts = new List<Image>();
 
-    void Start()
+    void OnEnable()
     {
-        currentHealth = maxHealth;
-        CreateHearts();
-        UpdateHearts();
+        if (playerHealth != null)
+        {
+            HealthSystem.OnMaxHealthChanged += UpdateMaxHealth;
+            HealthSystem.OnPlayerDamaged += UpdateHeartsFromHealthSystem;
+        }
     }
 
-    void CreateHearts()
+    void OnDisable()
     {
-        int totalHearts = maxHealth / 2;
+        if (playerHealth != null)
+        {
+            HealthSystem.OnMaxHealthChanged -= UpdateMaxHealth;
+            HealthSystem.OnPlayerDamaged -= UpdateHeartsFromHealthSystem;
+        }
+    }
+
+    // ✅ Nuevo método público para inicializar corazones correctamente
+    public void InicializarHearts()
+    {
+        if (playerHealth == null) return;
+
+        InitializeHearts(playerHealth.maxHealth);
+        UpdateHeartsFromHealthSystem();
+    }
+
+    void InitializeHearts(int maxHealth)
+    {
+        foreach (Transform child in heartsContainer)
+            Destroy(child.gameObject);
+        hearts.Clear();
+
+        int totalHearts = Mathf.CeilToInt(maxHealth / 2f);
 
         for (int i = 0; i < totalHearts; i++)
         {
@@ -34,9 +57,28 @@ public class HeartManager : MonoBehaviour
         }
     }
 
-    public void UpdateHearts()
+    void UpdateMaxHealth(int newMaxHealth)
     {
-        int health = currentHealth;
+        int totalHearts = Mathf.CeilToInt(newMaxHealth / 2f);
+
+        if (totalHearts > hearts.Count)
+        {
+            int heartsToAdd = totalHearts - hearts.Count;
+            for (int i = 0; i < heartsToAdd; i++)
+            {
+                GameObject h = Instantiate(heartPrefab, heartsContainer);
+                hearts.Add(h.GetComponent<Image>());
+            }
+        }
+
+        UpdateHeartsFromHealthSystem();
+    }
+
+    void UpdateHeartsFromHealthSystem()
+    {
+        if (playerHealth == null) return;
+
+        int health = playerHealth.currentHealth;
 
         for (int i = 0; i < hearts.Count; i++)
         {
@@ -55,15 +97,5 @@ public class HeartManager : MonoBehaviour
                 hearts[i].sprite = emptyHeart;
             }
         }
-    }
-
-    public void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-
-        if (currentHealth < 0)
-            currentHealth = 0;
-
-        UpdateHearts();
     }
 }
