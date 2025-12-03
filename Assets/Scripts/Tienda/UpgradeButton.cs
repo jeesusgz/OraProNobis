@@ -37,8 +37,16 @@ public class UpgradeButton : MonoBehaviour
                     break;
                 case UpgradeType.Nazarenos:
                     CurrencyManager.Instance.gameData.cantidadNazarenos++;
+                    CurrencyManager.Instance.gameData.vidaNazarenoNivel++;
+
                     if (CurrencyManager.Instance.gameData.cantidadNazarenos > 4)
                         CurrencyManager.Instance.gameData.cantidadNazarenos = 4;
+
+                    NazarenoHealthSystem[] nazarenos = FindObjectsOfType<NazarenoHealthSystem>();
+                    foreach (var n in nazarenos)
+                    {
+                        n.SubirNivelVida(); // Añade +2 de vida a cada nazareno
+                    }
                     break;
             }
 

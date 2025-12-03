@@ -18,4 +18,5 @@ public class GameData : ScriptableObject
 
     [Header("Nazarenos")]
     public int cantidadNazarenos = 0;
+    public int vidaNazarenoNivel = 0;
 }

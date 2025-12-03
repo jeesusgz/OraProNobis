@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class NazarenoHealthSystem : MonoBehaviour
@@ -93,7 +92,20 @@ public class NazarenoHealthSystem : MonoBehaviour
 
     void Die()
     {
-        // Aquí puedes avisar al paso si quieres que desaparezca como los otros
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Sube la vida máxima del nazareno en 2 unidades y actualiza la vida actual
+    /// </summary>
+    public void SubirNivelVida()
+    {
+        maxHealth += 2;
+        currentHealth += 2; // También aumenta la vida actual
+
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
+        Debug.Log(gameObject.name + " subió de nivel. Nueva vida máxima: " + maxHealth);
     }
 }

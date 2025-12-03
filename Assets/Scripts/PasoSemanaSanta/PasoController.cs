@@ -322,6 +322,14 @@ public class PasoController : MonoBehaviour
         nc.paso = this;
         nc.destinoCapilla = destinoCapilla;
 
+        // Ajustamos la vida según el nivel de nazareno
+        NazarenoHealthSystem salud = n.GetComponent<NazarenoHealthSystem>();
+        if (salud != null && CurrencyManager.Instance != null)
+        {
+            salud.maxHealth += CurrencyManager.Instance.gameData.vidaNazarenoNivel * 2; // cada nivel suma 2
+            salud.currentHealth = salud.maxHealth;
+        }
+
         slotArray[slotIndex] = nc;
 
         // Elegimos el collider correcto

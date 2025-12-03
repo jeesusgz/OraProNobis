@@ -284,8 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274b8115270157c4dbfad03b4c08f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NazarenoHealthSystem
-  maxHealth: 10
-  currentHealth: 10
+  maxHealth: 4
+  currentHealth: 4
   invulnerabilityTime: 0.5
   flashSpeed: 0.1
 --- !u!114 &-6819055981905947218
