@@ -1440,7 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   precioBase: 50
   incrementoPrecio: 5
-  tipoUpgrade: 5
+  tipoUpgrade: 4
   nivelBoton: 0
 --- !u!114 &599759613
 MonoBehaviour:
@@ -2719,7 +2719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   precioBase: 50
   incrementoPrecio: 5
-  tipoUpgrade: 3
+  tipoUpgrade: 2
   nivelBoton: 0
 --- !u!114 &951175163
 MonoBehaviour:
@@ -5458,7 +5458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   precioBase: 100
   incrementoPrecio: 5
-  tipoUpgrade: 6
+  tipoUpgrade: 5
   nivelBoton: 0
 --- !u!114 &1663489526
 MonoBehaviour:
@@ -6775,7 +6775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   precioBase: 50
   incrementoPrecio: 5
-  tipoUpgrade: 4
+  tipoUpgrade: 3
   nivelBoton: 0
 --- !u!114 &1961981598
 MonoBehaviour:

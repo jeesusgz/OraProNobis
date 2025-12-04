@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
     public PasoController paso;
     public float distanciaPaso = 2f;
 
+    [Header("Enemigos")]
+    public float bounceForceOnEnemy = 12f;
+
     private Collider2D playerCollider;
 
     private void OnEnable()
@@ -91,24 +94,20 @@ public class PlayerController : MonoBehaviour
 
         if (!wasGrounded && isGrounded)
         {
-            // Aterrizó
             animator.SetBool("IsJumping", false);
         }
         else if (wasGrounded && !isGrounded)
         {
-            // Despegó
             animator.SetBool("IsJumping", true);
         }
         wasGrounded = isGrounded;
 
-        // Salto desde Input System
         if (isGrounded && jump.action.WasPerformedThisFrame())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             animator.SetTrigger("Jump");
         }
 
-        // Detecta si está de frente y cerca del paso
         if (paso != null)
         {
             float distancia = Vector2.Distance(transform.position, paso.transform.position);
@@ -139,7 +138,44 @@ public class PlayerController : MonoBehaviour
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-        // Llama al script de ataque si lo tienes
         GetComponent<PlayerAttack>()?.TryAttack();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Comprueba si el objeto con el que colisionamos tiene el Tag "Enemigo"
+        if (!collision.collider.CompareTag("Enemigo"))
+            return;
+
+        // Comprueba la dirección de la colisión usando los puntos de contacto
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            // La normal de contacto indica la dirección perpendicular a la superficie de colisión.
+            // Si contact.normal.y es un valor positivo alto (cercano a 1), significa que el jugador fue golpeado desde abajo, 
+            // o lo que es lo mismo, el jugador aterrizó sobre el enemigo.
+
+            float dot = Vector2.Dot(contact.normal, Vector2.up);
+
+            // Umbral para decidir si es una colisión "superior". 
+            // 0.8f funciona bien para superficies planas superiores.
+            if (dot > 0.8f)
+            {
+                // *** ¡SOLUCIÓN APLICADA AQUÍ! ***
+                // Reiniciamos la velocidad vertical actual y aplicamos una fuerza de salto hacia arriba (Impulse).
+
+                // 1. Opcional: Ejecuta la lógica para "matar" o "dañar" al enemigo aquí, si corresponde.
+                // collision.gameObject.GetComponent<EnemyScript>()?.TakeDamage(); 
+
+                // 2. Aplica el rebote al jugador:
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f); // Reinicia velocidad Y actual
+                rb.AddForce(Vector2.up * bounceForceOnEnemy, ForceMode2D.Impulse); // Aplica rebote
+
+                // Opcional: Activa una animación de salto/rebote
+                animator.SetTrigger("Jump");
+
+                // Ya hemos procesado el rebote, podemos salir del método
+                return;
+            }
+        }
     }
 }
