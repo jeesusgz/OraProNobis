@@ -14,9 +14,17 @@ public class GameData : ScriptableObject
     [Header("Jugador")]
     public int vidaJugadorNivel = 0;
     public int dañoJugadorNivel = 0;
-    public int velocidadJugadorNivel = 0;
 
     [Header("Nazarenos")]
     public int cantidadNazarenos = 0;
     public int vidaNazarenoNivel = 0;
+
+    [Header("Niveles de botones")]
+    public int jugadorVidaBotonNivel = 0;
+    public int jugadorFuerzaBotonNivel = 0;
+    public int pasoVidaBotonNivel = 0;
+    public int pasoEstaminaBotonNivel = 0;
+    public int pasoVelocidadBotonNivel = 0;
+    public int nazarenosCantidadBotonNivel = 0;
+    public int nazarenosVidaBotonNivel = 0;
 }

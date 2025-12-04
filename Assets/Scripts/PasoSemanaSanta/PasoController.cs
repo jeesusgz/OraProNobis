@@ -124,7 +124,10 @@ public class PasoController : MonoBehaviour
         // VELOCIDAD DEL PASO
         if (gameData.velocidadPasoNivel > 0)
         {
-            moveSpeed += gameData.velocidadPasoNivel * 0.3f;
+            moveSpeed += gameData.velocidadPasoNivel * 0.5f;
+
+            if (moveSpeed > 3f)
+                moveSpeed = 3f;
         }
     }
 
@@ -326,36 +329,28 @@ public class PasoController : MonoBehaviour
         NazarenoHealthSystem salud = n.GetComponent<NazarenoHealthSystem>();
         if (salud != null && CurrencyManager.Instance != null)
         {
-            salud.maxHealth += CurrencyManager.Instance.gameData.vidaNazarenoNivel * 2; // cada nivel suma 2
-            salud.currentHealth = salud.maxHealth;
+            for (int i = 0; i < CurrencyManager.Instance.gameData.vidaNazarenoNivel; i++)
+            {
+                salud.SubirNivelVida();
+            }
         }
 
         slotArray[slotIndex] = nc;
 
-        // Elegimos el collider correcto
         BoxCollider2D box = delante ? colliderDelante : colliderDetras;
 
         if (box != null)
         {
             Vector2 min = box.bounds.min;
             Vector2 max = box.bounds.max;
-
-            // Separación entre nazarenos
             float spacing = 2f;
+            float spawnX = delante ? min.x + slotIndex * spacing : max.x - slotIndex * spacing;
 
-            // Calculamos la X según el slot, para que no se superpongan
-            float spawnX = delante
-                ? min.x + slotIndex * spacing
-                : max.x - slotIndex * spacing;
-
-            // Lanzamos un raycast hacia abajo desde arriba del collider para detectar el suelo
-            float rayStartY = max.y + 2f; // empezamos por encima del collider
+            float rayStartY = max.y + 2f;
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(spawnX, rayStartY), Vector2.down, 10f, groundLayer);
-
             float spawnY = hit.collider != null ? hit.point.y : min.y;
 
-            // Ajustamos para que los pies del sprite queden sobre el suelo
-            Transform groundPoint = n.transform.Find("Feet"); // punto hijo en la base del sprite
+            Transform groundPoint = n.transform.Find("Feet");
             float feetOffset = groundPoint != null ? groundPoint.localPosition.y : 0f;
             float finalY = spawnY - feetOffset;
 
@@ -366,7 +361,6 @@ public class PasoController : MonoBehaviour
             n.transform.position = transform.position;
         }
 
-        // Offset automático según si va delante o detrás
         nc.offset = delante ? 1f : -1f;
     }
 
