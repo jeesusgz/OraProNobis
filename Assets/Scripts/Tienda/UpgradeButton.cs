@@ -19,13 +19,14 @@ public class UpgradeButton : MonoBehaviour
     public UpgradeType tipoUpgrade;
 
     [HideInInspector]
-    public int nivelBoton = 0; // Nivel individual de este botón para calcular precio
+    public int nivelBoton = 0;
+
+    public UpgradeButtonUI buttonUI; // <<-- Asignar en el inspector
 
     void Start()
     {
         if (CurrencyManager.Instance == null) return;
 
-        // Inicializamos el nivel del botón desde GameData según tipo
         switch (tipoUpgrade)
         {
             case UpgradeType.JugadorVida: nivelBoton = CurrencyManager.Instance.gameData.jugadorVidaBotonNivel; break;
@@ -94,5 +95,11 @@ public class UpgradeButton : MonoBehaviour
         }
 
         SaveSystem.Save(CurrencyManager.Instance.gameData);
+
+        // <<-- Mostramos el mensaje emergente después de la compra
+        if (buttonUI != null)
+        {
+            buttonUI.MostrarMensajeMejora(tipoUpgrade);
+        }
     }
 }

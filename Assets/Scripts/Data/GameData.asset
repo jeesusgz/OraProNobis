@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6f1393b01a6d748abe0933cf11ea23, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: Assembly-CSharp::GameData
-  monedas: 9861
-  vidaPasoNivel: 0
-  estaminaPasoNivel: 0
-  velocidadPasoNivel: 0
-  vidaJugadorNivel: 1
-  "da\xF1oJugadorNivel": 0
-  cantidadNazarenos: 0
-  vidaNazarenoNivel: 0
-  jugadorVidaBotonNivel: 1
-  jugadorFuerzaBotonNivel: 0
-  pasoVidaBotonNivel: 0
-  pasoEstaminaBotonNivel: 0
-  pasoVelocidadBotonNivel: 0
-  nazarenosCantidadBotonNivel: 0
-  nazarenosVidaBotonNivel: 1
+  monedas: 7881
+  vidaPasoNivel: 12
+  estaminaPasoNivel: 14
+  velocidadPasoNivel: 12
+  vidaJugadorNivel: 25
+  "da\xF1oJugadorNivel": 16
+  cantidadNazarenos: 4
+  vidaNazarenoNivel: 11
+  jugadorVidaBotonNivel: 24
+  jugadorFuerzaBotonNivel: 15
+  pasoVidaBotonNivel: 11
+  pasoEstaminaBotonNivel: 13
+  pasoVelocidadBotonNivel: 12
+  nazarenosCantidadBotonNivel: 23
+  nazarenosVidaBotonNivel: 12

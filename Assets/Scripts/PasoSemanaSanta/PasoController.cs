@@ -112,13 +112,13 @@ public class PasoController : MonoBehaviour
         // VIDA DEL PASO
         if (gameData.vidaPasoNivel > 0)
         {
-            maxStamina += gameData.vidaPasoNivel * 10f;     // ejemplo: +10 por nivel
+            maxStamina += gameData.vidaPasoNivel * 5f;
         }
 
         // ESTAMINA MEJORADA
         if (gameData.estaminaPasoNivel > 0)
         {
-            maxStamina += gameData.estaminaPasoNivel * 20f; // ejemplo
+            maxStamina += gameData.estaminaPasoNivel * 20f;
         }
 
         // VELOCIDAD DEL PASO

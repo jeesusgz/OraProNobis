@@ -119,6 +119,42 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &52825992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 52825993}
+  m_Layer: 0
+  m_Name: TextoEmergente
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &52825993
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52825992}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8879918471253312861}
+  m_Father: {fileID: 1008220684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0018921, y: 194.94}
+  m_SizeDelta: {x: 346.2644, y: 123.1234}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &143138687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,10 +1474,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796c79b515f789f41a60b55327d38408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
-  precioBase: 50
+  precioBase: 100
   incrementoPrecio: 5
   tipoUpgrade: 4
   nivelBoton: 0
+  buttonUI: {fileID: 599759613}
 --- !u!114 &599759613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1457,8 +1494,8 @@ MonoBehaviour:
   button: {fileID: 599759609}
   coinImage: {fileID: 1346972651}
   priceText: {fileID: 752008043}
-  mensajePrefab: {fileID: 0}
-  canvasTransform: {fileID: 0}
+  mensajePrefab: {fileID: 3743678017012853240, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+  canvasTransform: {fileID: 1434539006}
   buttonScript: {fileID: 599759612}
 --- !u!1 &616307752
 GameObject:
@@ -2721,6 +2758,7 @@ MonoBehaviour:
   incrementoPrecio: 5
   tipoUpgrade: 2
   nivelBoton: 0
+  buttonUI: {fileID: 951175163}
 --- !u!114 &951175163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2736,8 +2774,8 @@ MonoBehaviour:
   button: {fileID: 951175159}
   coinImage: {fileID: 384736943}
   priceText: {fileID: 803107278}
-  mensajePrefab: {fileID: 0}
-  canvasTransform: {fileID: 0}
+  mensajePrefab: {fileID: 3743678017012853240, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+  canvasTransform: {fileID: 1434539006}
   buttonScript: {fileID: 951175162}
 --- !u!1 &1008192346
 GameObject:
@@ -2909,6 +2947,7 @@ RectTransform:
   - {fileID: 1310470582}
   - {fileID: 248231510}
   - {fileID: 1760676930}
+  - {fileID: 52825993}
   m_Father: {fileID: 1434539006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4241,6 +4280,7 @@ MonoBehaviour:
   incrementoPrecio: 5
   tipoUpgrade: 0
   nivelBoton: 0
+  buttonUI: {fileID: 1288924788}
 --- !u!114 &1288924788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4256,8 +4296,8 @@ MonoBehaviour:
   button: {fileID: 1288924784}
   coinImage: {fileID: 1309457065}
   priceText: {fileID: 1258483477}
-  mensajePrefab: {fileID: 0}
-  canvasTransform: {fileID: 0}
+  mensajePrefab: {fileID: 3743678017012853240, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+  canvasTransform: {fileID: 1434539006}
   buttonScript: {fileID: 1288924787}
 --- !u!1 &1289181118
 GameObject:
@@ -4412,6 +4452,7 @@ MonoBehaviour:
   incrementoPrecio: 5
   tipoUpgrade: 1
   nivelBoton: 0
+  buttonUI: {fileID: 1289181124}
 --- !u!114 &1289181124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4427,8 +4468,8 @@ MonoBehaviour:
   button: {fileID: 1289181120}
   coinImage: {fileID: 543308050}
   priceText: {fileID: 1117507657}
-  mensajePrefab: {fileID: 0}
-  canvasTransform: {fileID: 0}
+  mensajePrefab: {fileID: 3743678017012853240, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+  canvasTransform: {fileID: 1434539006}
   buttonScript: {fileID: 1289181123}
 --- !u!1 &1299238416
 GameObject:
@@ -5460,6 +5501,7 @@ MonoBehaviour:
   incrementoPrecio: 5
   tipoUpgrade: 5
   nivelBoton: 0
+  buttonUI: {fileID: 1663489526}
 --- !u!114 &1663489526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5475,8 +5517,8 @@ MonoBehaviour:
   button: {fileID: 1663489522}
   coinImage: {fileID: 1221774659}
   priceText: {fileID: 2065168085}
-  mensajePrefab: {fileID: 0}
-  canvasTransform: {fileID: 0}
+  mensajePrefab: {fileID: 3743678017012853240, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+  canvasTransform: {fileID: 1434539006}
   buttonScript: {fileID: 1663489525}
 --- !u!1 &1729408912
 GameObject:
@@ -5983,6 +6025,7 @@ MonoBehaviour:
   incrementoPrecio: 5
   tipoUpgrade: 6
   nivelBoton: 0
+  buttonUI: {fileID: 1821367375}
 --- !u!114 &1821367372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6092,8 +6135,8 @@ MonoBehaviour:
   button: {fileID: 1821367372}
   coinImage: {fileID: 512515446}
   priceText: {fileID: 2039111681}
-  mensajePrefab: {fileID: 0}
-  canvasTransform: {fileID: 0}
+  mensajePrefab: {fileID: 3743678017012853240, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+  canvasTransform: {fileID: 1434539006}
   buttonScript: {fileID: 1821367371}
 --- !u!1 &1903248546
 GameObject:
@@ -6777,6 +6820,7 @@ MonoBehaviour:
   incrementoPrecio: 5
   tipoUpgrade: 3
   nivelBoton: 0
+  buttonUI: {fileID: 1961981598}
 --- !u!114 &1961981598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6792,8 +6836,8 @@ MonoBehaviour:
   button: {fileID: 1961981594}
   coinImage: {fileID: 919671454}
   priceText: {fileID: 1924453241}
-  mensajePrefab: {fileID: 0}
-  canvasTransform: {fileID: 0}
+  mensajePrefab: {fileID: 3743678017012853240, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+  canvasTransform: {fileID: 1434539006}
   buttonScript: {fileID: 1961981597}
 --- !u!1 &2039111679
 GameObject:
@@ -7067,6 +7111,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065168083}
   m_CullTransparentMesh: 1
+--- !u!1001 &8879918471253312860
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 52825993}
+    m_Modifications:
+    - target: {fileID: 3743678017012853240, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_Name
+      value: TextoEmergente
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+--- !u!224 &8879918471253312861 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+  m_PrefabInstance: {fileID: 8879918471253312860}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
