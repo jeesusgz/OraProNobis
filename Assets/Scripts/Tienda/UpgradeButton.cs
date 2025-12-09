@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UpgradeButton : MonoBehaviour
 {
@@ -21,7 +21,15 @@ public class UpgradeButton : MonoBehaviour
     [HideInInspector]
     public int nivelBoton = 0;
 
-    public UpgradeButtonUI buttonUI; // <<-- Asignar en el inspector
+    public UpgradeButtonUI buttonUI; // Asignar en el inspector
+
+    public int maxJugadorVida = 42;
+    public int maxJugadorFuerza = 10;
+    public int maxPasoVida = 100;
+    public int maxPasoEstamina = 100;
+    public int maxPasoVelocidad = 3;
+    public int maxNazarenosCantidad = 4; // límite natural
+    public int maxNazarenosVida = 10;
 
     void Start()
     {
@@ -39,18 +47,37 @@ public class UpgradeButton : MonoBehaviour
         }
     }
 
-    public int PrecioActual => precioBase + nivelBoton * incrementoPrecio;
+    public bool EstaMaximo()
+    {
+        return tipoUpgrade switch
+        {
+            UpgradeType.JugadorVida => nivelBoton >= maxJugadorVida,
+            UpgradeType.JugadorFuerza => nivelBoton >= maxJugadorFuerza,
+            UpgradeType.PasoVida => nivelBoton >= maxPasoVida,
+            UpgradeType.PasoEstamina => nivelBoton >= maxPasoEstamina,
+            UpgradeType.PasoVelocidad => nivelBoton >= maxPasoVelocidad,
+            UpgradeType.NazarenosCantidad => nivelBoton >= maxNazarenosCantidad,
+            UpgradeType.NazarenosVida => nivelBoton >= maxNazarenosVida,
+            _ => false
+        };
+    }
+
+    // 🔥 Si está al máximo → el precio es "infinito" para que no se pueda comprar
+    public int PrecioActual => EstaMaximo() ? 99999 : precioBase + nivelBoton * incrementoPrecio;
 
     public void ComprarMejora()
     {
         if (CurrencyManager.Instance == null) return;
+
+        // ⛔ No dejar comprar si está al máximo
+        if (EstaMaximo()) return;
 
         int precio = PrecioActual;
         if (!CurrencyManager.Instance.TrySpend(precio)) return;
 
         nivelBoton++;
 
-        // Aplicamos el efecto y guardamos el nivel del bot�n
+        // Aplicamos el efecto y guardamos el nivel del botón
         switch (tipoUpgrade)
         {
             case UpgradeType.JugadorVida:
@@ -59,7 +86,7 @@ public class UpgradeButton : MonoBehaviour
                 break;
 
             case UpgradeType.JugadorFuerza:
-                CurrencyManager.Instance.gameData.da�oJugadorNivel++;
+                CurrencyManager.Instance.gameData.dañoJugadorNivel++;
                 CurrencyManager.Instance.gameData.jugadorFuerzaBotonNivel = nivelBoton;
                 break;
 
@@ -96,10 +123,8 @@ public class UpgradeButton : MonoBehaviour
 
         SaveSystem.Save(CurrencyManager.Instance.gameData);
 
-        // <<-- Mostramos el mensaje emergente despu�s de la compra
-        if (buttonUI != null)
-        {
-            buttonUI.MostrarMensajeMejora(tipoUpgrade);
-        }
+        // Mensaje emergente
+        if (buttonUI != null) buttonUI.MostrarMensajeMejora(tipoUpgrade);
     }
 }
+

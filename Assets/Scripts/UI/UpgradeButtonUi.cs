@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,9 +11,9 @@ public class UpgradeButtonUI : MonoBehaviour
     public GameObject mensajePrefab;
     public Transform canvasTransform;
 
-    public UpgradeButton buttonScript; // Referencia al UpgradeButton
+    public UpgradeButton buttonScript;
 
-    private static GameObject mensajeActivo; // <<-- static para un mensaje global
+    private static GameObject mensajeActivo;
 
     void Update()
     {
@@ -21,18 +21,45 @@ public class UpgradeButtonUI : MonoBehaviour
             return;
 
         int precioActual = buttonScript.PrecioActual;
-        bool puedeComprar = CurrencyManager.Instance.gameData.monedas >= precioActual;
+        int monedas = CurrencyManager.Instance.gameData.monedas;
+        bool estaAlMaximo = buttonScript.EstaMaximo();
 
-        button.interactable = puedeComprar;
-        priceText.color = puedeComprar ? Color.green : Color.red;
+        if (estaAlMaximo)
+        {
+            button.interactable = false;
+
+            if (coinImage != null)
+                coinImage.gameObject.SetActive(false);
+
+            priceText.text = "MAX";
+            priceText.color = Color.yellow;
+
+            return;
+        }
+
+        if (coinImage != null)
+            coinImage.gameObject.SetActive(true);
+
         priceText.text = precioActual.ToString();
+        priceText.color = monedas >= precioActual ? Color.green : Color.red;
+
+        button.interactable = monedas >= precioActual;
+    }
+
+    // 🔥 SE EJECUTA AL CAMBIAR DE MENÚ O DESACTIVAR EL GAMEOBJECT
+    void OnDisable()
+    {
+        if (mensajeActivo != null)
+        {
+            Destroy(mensajeActivo);
+            mensajeActivo = null;
+        }
     }
 
     public void MostrarMensaje(string texto)
     {
         if (mensajePrefab != null && canvasTransform != null)
         {
-            // Destruir mensaje antiguo si existe
             if (mensajeActivo != null)
                 Destroy(mensajeActivo);
 
@@ -59,15 +86,25 @@ public class UpgradeButtonUI : MonoBehaviour
         string mensaje = tipoUpgrade switch
         {
             UpgradeButton.UpgradeType.JugadorVida => "+1 Vida del Jugador",
-            UpgradeButton.UpgradeType.JugadorFuerza => "+1 Da�o del Jugador",
+            UpgradeButton.UpgradeType.JugadorFuerza => "+1 Daño del Jugador",
             UpgradeButton.UpgradeType.PasoVida => "+10 Vida del Paso",
             UpgradeButton.UpgradeType.PasoEstamina => "+5 Estamina del Paso",
             UpgradeButton.UpgradeType.PasoVelocidad => "+0.5 Velocidad del Paso",
-            UpgradeButton.UpgradeType.NazarenosCantidad => "+1 Nazareno (m�x 4)",
+            UpgradeButton.UpgradeType.NazarenosCantidad => "+1 Nazareno (máx 4)",
             UpgradeButton.UpgradeType.NazarenosVida => "+1 Vida de los Nazarenos",
             _ => "Mejora aplicada"
         };
 
         MostrarMensaje(mensaje);
+    }
+
+    public void MostrarMensajeSinDinero()
+    {
+        MostrarMensaje("No tienes suficientes monedas");
+    }
+
+    public void MostrarMensajeMaximo()
+    {
+        MostrarMensaje("Ya está al nivel máximo");
     }
 }
