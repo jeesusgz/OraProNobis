@@ -1095,13 +1095,12 @@ MonoBehaviour:
   staminaBar: {fileID: 1555417543}
   nazarenoPrefab: {fileID: 8738922370594148982, guid: 3fb5edb2691dc9b4383128af54fc7cac, type: 3}
   destinoCapilla: {fileID: 1408137000}
-  nazarenoSpawnPoint: {fileID: 0}
   maxSlotsDelante: 2
   maxSlotsDetras: 2
-  offsetDelante: 1.5
-  offsetDetras: -1.5
   colliderDelante: {fileID: 1980861099}
   colliderDetras: {fileID: 1064248576}
+  slotsDelante: []
+  slotsDetras: []
 --- !u!95 &582552815
 Animator:
   serializedVersion: 7
@@ -4996,7 +4995,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -39.25711, y: 9.873556}
+  m_Offset: {x: -31.467735, y: 11.020386}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5006,7 +5005,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 24.920715, y: 17.433834}
+  m_Size: {x: 34.30809, y: 19.740349}
   m_EdgeRadius: 0
 --- !u!1 &1068458706
 GameObject:
@@ -5660,7 +5659,7 @@ Transform:
   m_GameObject: {fileID: 1162010600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.0011788543, w: 0.99999934}
-  m_LocalPosition: {x: 385.68695, y: -3.606248, z: 0}
+  m_LocalPosition: {x: 390.03082, y: -3.606248, z: 0}
   m_LocalScale: {x: 0.8409, y: 0.8409, z: 0.8409}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5718,7 +5717,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 956.2968, y: 17.651756}
+  m_Size: {x: 967.78394, y: 17.352055}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -12169,7 +12168,7 @@ Transform:
   m_GameObject: {fileID: 1918631892}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 879.9619, y: -4.393124, z: 0}
+  m_LocalPosition: {x: 890.8439, y: -4.393124, z: 0}
   m_LocalScale: {x: 1.2125, y: 3.0088654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12227,7 +12226,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 1473.3217, y: 18.231823}
+  m_Size: {x: 1493.1746, y: 18.108528}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -12628,7 +12627,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 47.044647, y: 11.082466}
+  m_Offset: {x: 38.945568, y: 10.724796}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -12638,7 +12637,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 27.280659, y: 17.031822}
+  m_Size: {x: 35.52771, y: 19.306435}
   m_EdgeRadius: 0
 --- !u!1 &2018617754
 GameObject:

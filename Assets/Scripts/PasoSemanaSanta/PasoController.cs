@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.ShaderData;
 
 public class PasoController : MonoBehaviour
 {
     [Header("Datos Persistentes del Juego")]
-    public GameData gameData;    // 🔥 SE AÑADE ESTO
+    public GameData gameData;
 
     [Header("Configuración base")]
     public float distanciaActivacion = 2f;
@@ -49,24 +48,22 @@ public class PasoController : MonoBehaviour
     private bool fullDrainPenaltyActive = false;
     private float penaltyTimer = 0f;
 
-    // ============================
-    //    🔥 NAZARENOS / SLOTS 🔥
-    // ============================
+    // =========================
+    //    NAZARENOS / SLOTS
+    // =========================
     [Header("Nazarenos")]
     public GameObject nazarenoPrefab;
     public Transform destinoCapilla;
-    public Transform nazarenoSpawnPoint;
     public int maxSlotsDelante = 2;
     public int maxSlotsDetras = 2;
-    public float offsetDelante = 5;
-    public float offsetDetras = -5;
 
     [Header("Colliders de Spawn")]
-    public BoxCollider2D colliderDelante; 
+    public BoxCollider2D colliderDelante;
     public BoxCollider2D colliderDetras;
+    private float distanciaSeguridad = 0.10f;
 
-    private NazarenoController[] slotsDelante;
-    private NazarenoController[] slotsDetras;
+    [HideInInspector] public NazarenoController[] slotsDelante;
+    [HideInInspector] public NazarenoController[] slotsDetras;
 
     private void Awake()
     {
@@ -98,40 +95,24 @@ public class PasoController : MonoBehaviour
         animator = GetComponent<Animator>();
         mainCollider = GetComponent<Collider2D>();
 
-        // 🔥🔥🔥 APLICAR MEJORAS DEL GAMEDATA 🔥🔥🔥
         ApplyUpgradesFromGameData();
-
         currentStamina = maxStamina;
     }
 
-    // ============================================================
-    //     🔥 APLICAR VALORES DE MEJORAS COMPRADAS
-    // ============================================================
     private void ApplyUpgradesFromGameData()
     {
-        // VIDA DEL PASO
         if (gameData.vidaPasoNivel > 0)
-        {
             maxStamina += gameData.vidaPasoNivel * 5f;
-        }
 
-        // ESTAMINA MEJORADA
         if (gameData.estaminaPasoNivel > 0)
-        {
             maxStamina += gameData.estaminaPasoNivel * 20f;
-        }
 
-        // VELOCIDAD DEL PASO
         if (gameData.velocidadPasoNivel > 0)
         {
             moveSpeed += gameData.velocidadPasoNivel * 0.5f;
-
-            if (moveSpeed > 3f)
-                moveSpeed = 3f;
+            if (moveSpeed > 3f) moveSpeed = 3f;
         }
     }
-
-    // ============================================================
 
     private void OnLevantar(InputAction.CallbackContext context)
     {
@@ -186,10 +167,7 @@ public class PasoController : MonoBehaviour
     {
         if (levantado && puedeMoverse && targetPoint != null && !entrando)
         {
-            float speedMultiplier = 1f;
-
-            if (currentStamina / maxStamina < 0.2f)
-                speedMultiplier = lowStaminaMultiplier;
+            float speedMultiplier = currentStamina / maxStamina < 0.2f ? lowStaminaMultiplier : 1f;
 
             Vector2 next = Vector2.MoveTowards(
                 rb.position,
@@ -201,7 +179,6 @@ public class PasoController : MonoBehaviour
             animator.SetBool("Andando", true);
 
             currentStamina -= staminaDrainPerSecond * Time.fixedDeltaTime;
-
             if (currentStamina <= 0f)
             {
                 currentStamina = 0f;
@@ -237,26 +214,17 @@ public class PasoController : MonoBehaviour
 
         puedeMoverse = false;
         levantado = false;
-
         animator.SetBool("Andando", false);
 
         if (mainCollider != null)
             mainCollider.enabled = false;
 
         rb.bodyType = RigidbodyType2D.Kinematic;
-
         StartCoroutine(FadeAndDestroy(1.5f));
     }
 
-    private void ActivarMovimiento()
-    {
-        puedeMoverse = true;
-    }
-
-    public void FinAnimacion()
-    {
-        animado = false;
-    }
+    private void ActivarMovimiento() => puedeMoverse = true;
+    public void FinAnimacion() => animado = false;
 
     private IEnumerator FadeAndDestroy(float duration)
     {
@@ -266,7 +234,6 @@ public class PasoController : MonoBehaviour
         while (elapsed < duration)
         {
             float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
-
             foreach (var sr in sprites)
             {
                 if (sr != null)
@@ -275,7 +242,6 @@ public class PasoController : MonoBehaviour
                     sr.color = new Color(c.r, c.g, c.b, alpha);
                 }
             }
-
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -283,20 +249,9 @@ public class PasoController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void OnDrawGizmosSelected()
-    {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        }
-    }
-
-    // ============================================================
-    // 🔥 NAZARENOS / SLOTS 🔥
-    // ============================================================
-
-    // Comprar/reponer un nazareno
+    // =========================
+    // NAZARENOS
+    // =========================
     public bool ComprarNazareno(bool delante)
     {
         NazarenoController[] slotArray = delante ? slotsDelante : slotsDetras;
@@ -310,97 +265,49 @@ public class PasoController : MonoBehaviour
             }
         }
 
-        return false; // slots llenos
+        return false;
     }
 
     private void SpawnNazareno(int slotIndex, bool delante)
     {
         NazarenoController[] slotArray = delante ? slotsDelante : slotsDetras;
 
-        // Instanciamos el prefab
         GameObject n = Instantiate(nazarenoPrefab);
         NazarenoController nc = n.GetComponent<NazarenoController>();
 
-        // Asignamos referencias
         nc.paso = this;
         nc.destinoCapilla = destinoCapilla;
-
-        // Ajustamos la vida según el nivel de nazareno
-        NazarenoHealthSystem salud = n.GetComponent<NazarenoHealthSystem>();
-        if (salud != null && CurrencyManager.Instance != null)
-        {
-            for (int i = 0; i < CurrencyManager.Instance.gameData.vidaNazarenoNivel; i++)
-            {
-                salud.SubirNivelVida();
-            }
-        }
+        nc.delante = delante;
+        nc.lider = slotIndex == 0 ? null : slotArray[slotIndex - 1];
 
         slotArray[slotIndex] = nc;
 
         BoxCollider2D box = delante ? colliderDelante : colliderDetras;
-
         if (box != null)
         {
-            Vector2 min = box.bounds.min;
-            Vector2 max = box.bounds.max;
-            float spacing = 2f;
-            float spawnX = delante ? min.x + slotIndex * spacing : max.x - slotIndex * spacing;
+            float spacing = nc.GetComponent<Collider2D>().bounds.size.x + distanciaSeguridad;
+            float spawnX = delante
+                ? box.bounds.min.x + spacing / 2 + slotIndex * spacing
+                : box.bounds.max.x - spacing / 2 - slotIndex * spacing;
 
-            float rayStartY = max.y + 2f;
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(spawnX, rayStartY), Vector2.down, 10f, groundLayer);
-            float spawnY = hit.collider != null ? hit.point.y : min.y;
-
-            Transform groundPoint = n.transform.Find("Feet");
-            float feetOffset = groundPoint != null ? groundPoint.localPosition.y : 0f;
-            float finalY = spawnY - feetOffset;
-
-            n.transform.position = new Vector3(spawnX, finalY, transform.position.z);
+            float spawnY = box.bounds.min.y;
+            n.transform.position = new Vector3(spawnX, spawnY, transform.position.z);
         }
         else
         {
             n.transform.position = transform.position;
         }
-
-        nc.offset = delante ? 1f : -1f;
     }
 
-    // Aviso de muerte del nazareno
     public void NotifyNazarenoDeath(NazarenoController naz)
     {
         for (int i = 0; i < slotsDelante.Length; i++)
-        {
             if (slotsDelante[i] == naz) slotsDelante[i] = null;
-        }
 
         for (int i = 0; i < slotsDetras.Length; i++)
-        {
             if (slotsDetras[i] == naz) slotsDetras[i] = null;
-        }
     }
 
-    // Reponer slots vacíos al comenzar el día
-    public void ReponerNazarenosDelDia()
-    {
-        for (int i = 0; i < slotsDelante.Length; i++)
-        {
-            if (slotsDelante[i] == null)
-            {
-                // aquí puedes mostrar UI para comprar
-            }
-        }
-
-        for (int i = 0; i < slotsDetras.Length; i++)
-        {
-            if (slotsDetras[i] == null)
-            {
-                // aquí puedes mostrar UI para comprar
-            }
-        }
-    }
-
-    // =========================
-    // Getters opcionales
-    // =========================
     public bool Animado => animado;
     public bool FullDrainPenaltyActive => fullDrainPenaltyActive;
     public float CurrentStamina => currentStamina;

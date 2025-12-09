@@ -3,65 +3,112 @@ using UnityEngine;
 
 public class NazarenoController : MonoBehaviour
 {
-    public PasoController paso;      // asignado por el spawner
-    public float offset = 1f;        // distancia inicial al spawn
+    public PasoController paso;
+    public NazarenoController lider;
     public Transform destinoCapilla;
+    public bool delante;
     public int damage = 1;
+
+    [Header("Offsets y Separación")]
+    public float extraGap = 0.05f;
+    public float offsetY = 0f;  // ← AJUSTA ESTE VALOR (prueba 0.2, 0.3, etc.)
 
     private Animator animator;
     private bool eliminado = false;
-    private float initialXOffset;
+
+    [HideInInspector] public BoxCollider2D myCollider;
+    private float distanciaSeguridad = 0.05f;
 
     private void Awake()
     {
+        myCollider = GetComponent<BoxCollider2D>();
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.gravityScale = 0;
         rb.freezeRotation = true;
 
-        Collider2D col = GetComponent<Collider2D>();
-        col.isTrigger = true;  // 👈 NO choca con nada
+        if (myCollider != null)
+            myCollider.isTrigger = true;
     }
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-
-        // Guardamos la distancia inicial al paso para mantenerla siempre
-        if (paso != null)
-            initialXOffset = transform.position.x - paso.transform.position.x;
-
-        // Si no asignaste el Animator, lo busca en el hijo
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
     }
 
-    private void Update()
+    // ==== CÁLCULO DE OFFSETS REALES ====
+    private float GetOffsetRespectoPaso()
+    {
+        if (paso == null) return 0f;
+
+        Collider2D colPaso = paso.GetComponent<Collider2D>();
+        float anchoPaso = colPaso != null ? colPaso.bounds.size.x : 1f;
+        float anchoNaz = myCollider != null ? myCollider.bounds.size.x : 0.5f;
+
+        float offsetBase = (anchoPaso * 0.5f) + (anchoNaz * 0.5f) + extraGap;
+        return delante ? offsetBase : -offsetBase;
+    }
+
+    private float GetSeparationRespectoLider()
+    {
+        float anchoLider = lider != null && lider.myCollider != null ? lider.myCollider.bounds.size.x : 0.5f;
+        float anchoNaz = myCollider != null ? myCollider.bounds.size.x : 0.5f;
+
+        return (anchoLider * 0.5f) + (anchoNaz * 0.5f) + distanciaSeguridad;
+    }
+
+    private void FixedUpdate()
     {
         if (eliminado || paso == null) return;
 
-        // Solo se mueve si el paso está levantado y puede moverse
-        if (paso.Levantado && paso.CurrentStamina > 0f && paso.Animado == false)
-        {
-            float moveStep = paso.moveSpeed * Time.deltaTime;
+        Vector3 objetivo;
 
-            // Movemos el nazareno sumando exactamente lo que se mueve el paso
-            transform.position += new Vector3(moveStep, 0, 0);
+        if (lider != null)
+        {
+            float separation = GetSeparationRespectoLider();
+            float dir = delante ? 1f : -1f;
+            objetivo = lider.transform.position + new Vector3(separation * dir, 0f, 0f);
+        }
+        else
+        {
+            float offset = GetOffsetRespectoPaso();
+            objetivo = paso.transform.position + new Vector3(offset, 0f, 0f);
+        }
+
+        // 🎯 SOLUCIÓN DEFINITIVA: Y fija del suelo, IGNORA si el paso está levantado
+        objetivo.y = paso.transform.position.y - (paso.Levantado ? 0.25f : 0f);
+
+        if (paso.Levantado && paso.CurrentStamina > 0f && !paso.Animado)
+        {
+            float speedMultiplier = paso.CurrentStamina / paso.maxStamina < 0.2f ? paso.lowStaminaMultiplier : 1f;
+            float followerSpeedFactor = 1.2f;
+            float step = paso.moveSpeed * speedMultiplier * followerSpeedFactor * Time.fixedDeltaTime;
+
+            float dist = Vector3.Distance(transform.position, objetivo);
+
+            if (dist < 0.01f)
+            {
+                transform.position = objetivo;
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, objetivo, step);
+            }
 
             if (animator != null)
-                animator.SetBool("walking", true);
+                animator.SetBool("walking", dist > 0.005f);
         }
         else
         {
             if (animator != null)
                 animator.SetBool("walking", false);
+            transform.position = objetivo;
         }
 
-        // Llegó a la capilla → fade out
         if (destinoCapilla != null && Mathf.Abs(transform.position.x - destinoCapilla.position.x) < 0.2f)
-        {
             StartCoroutine(FadeOutAndDestroy());
-        }
     }
 
     private IEnumerator FadeOutAndDestroy()
@@ -86,7 +133,9 @@ public class NazarenoController : MonoBehaviour
             yield return null;
         }
 
-        paso.NotifyNazarenoDeath(this);
+        if (paso != null)
+            paso.NotifyNazarenoDeath(this);
+
         Destroy(gameObject);
     }
 
