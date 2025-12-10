@@ -26,11 +26,10 @@ public class UpgradeButton : MonoBehaviour
 
     public int maxJugadorVida = 42;
     public int maxJugadorFuerza = 10;
-    public int maxPasoVida = 100;
-    public int maxPasoEstamina = 100;
+    public int maxPasoVida = 7;
+    public int maxPasoEstamina = 10;
     public int maxPasoVelocidad = 3;
-    //public int maxNazarenosCantidad = 4; // límite natural
-    public int maxNazarenosVida = 10;
+    public int maxNazarenosVida = 6;
 
     void Start()
     {

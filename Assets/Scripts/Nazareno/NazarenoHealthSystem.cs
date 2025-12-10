@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using System.Collections;
 
 public class NazarenoHealthSystem : MonoBehaviour
@@ -7,7 +7,7 @@ public class NazarenoHealthSystem : MonoBehaviour
     public int maxHealth = 3;
     public int currentHealth;
 
-    [Header("Invulnerabilidad al recibir daÒo")]
+    [Header("Invulnerabilidad al recibir da√±o")]
     public float invulnerabilityTime = 0.5f;
     public float flashSpeed = 0.1f;
 
@@ -20,11 +20,15 @@ public class NazarenoHealthSystem : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
-
         anim = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         scripts = GetComponents<MonoBehaviour>();
+
+        // üî• Aplicar mejora guardada en GameData
+        int nivel = CurrencyManager.Instance.gameData.vidaNazarenoNivel;
+
+        maxHealth = 3 + (nivel * 2);   // cada nivel suma +2 (igual que SubirNivelVida)
+        currentHealth = maxHealth;
     }
 
     public void TakeDamage(int damage)
@@ -32,7 +36,7 @@ public class NazarenoHealthSystem : MonoBehaviour
         if (isInvulnerable || isDying) return;
 
         currentHealth -= damage;
-        Debug.Log(gameObject.name + " recibiÛ daÒo. Vida: " + currentHealth);
+        Debug.Log(gameObject.name + " recibi√≥ da√±o. Vida: " + currentHealth);
 
         StartCoroutine(InvulnerabilityCoroutine());
 
@@ -82,7 +86,7 @@ public class NazarenoHealthSystem : MonoBehaviour
     void Die() => Destroy(gameObject);
 
     /// <summary>
-    /// Sube la vida m·xima del nazareno en 2 unidades y actualiza la vida actual
+    /// Sube la vida m√°xima del nazareno en 2 unidades y actualiza la vida actual
     /// </summary>
     public void SubirNivelVida()
     {
@@ -90,6 +94,6 @@ public class NazarenoHealthSystem : MonoBehaviour
         currentHealth += 2;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
 
-        Debug.Log(gameObject.name + " subiÛ de nivel. Nueva vida m·xima: " + maxHealth);
+        Debug.Log(gameObject.name + " subi√≥ de nivel. Nueva vida m√°xima: " + maxHealth);
     }
 }
