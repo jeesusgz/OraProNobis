@@ -22,48 +22,24 @@ public class UpgradeButtonUI : MonoBehaviour
 
         int precioActual = buttonScript.PrecioActual;
         int monedas = CurrencyManager.Instance.gameData.monedas;
-        bool estaAlMaximo = false;
+        bool estaAlMaximo = buttonScript.EstaMaximo(); // 🔥 Única línea que cambia
 
-        // 🔥 Comprobación especial para NazarenosCantidad
-        if (buttonScript.tipoUpgrade == UpgradeButton.UpgradeType.NazarenosCantidad)
-        {
-            PasoController paso = FindObjectOfType<PasoController>();
-            if (paso != null)
-            {
-                int nazarenosActivos = 0;
-                foreach (var n in paso.slotsDelante)
-                    if (n != null) nazarenosActivos++;
-                foreach (var n in paso.slotsDetras)
-                    if (n != null) nazarenosActivos++;
+        // Lógica unificada para TODOS los upgrades
+        button.interactable = monedas >= precioActual && !estaAlMaximo;
 
-                estaAlMaximo = nazarenosActivos >= (paso.maxSlotsDelante + paso.maxSlotsDetras);
-            }
-        }
-        else
-        {
-            // Para otros upgrades usamos la lógica normal
-            estaAlMaximo = buttonScript.EstaMaximo();
-        }
+        if (coinImage != null)
+            coinImage.gameObject.SetActive(!estaAlMaximo);
 
         if (estaAlMaximo)
         {
-            button.interactable = false;
-
-            if (coinImage != null)
-                coinImage.gameObject.SetActive(false);
-
             priceText.text = "MAX";
             priceText.color = Color.yellow;
-            return;
         }
-
-        if (coinImage != null)
-            coinImage.gameObject.SetActive(true);
-
-        priceText.text = precioActual.ToString();
-        priceText.color = monedas >= precioActual ? Color.green : Color.red;
-
-        button.interactable = monedas >= precioActual;
+        else
+        {
+            priceText.text = precioActual.ToString();
+            priceText.color = monedas >= precioActual ? Color.green : Color.red;
+        }
     }
 
     // 🔥 SE EJECUTA AL CAMBIAR DE MENÚ O DESACTIVAR EL GAMEOBJECT

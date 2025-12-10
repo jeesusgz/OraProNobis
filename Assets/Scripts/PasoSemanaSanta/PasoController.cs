@@ -98,6 +98,7 @@ public class PasoController : MonoBehaviour
         ApplyUpgradesFromGameData();
         currentStamina = maxStamina;
         InicializarNazarenos();
+
     }
 
     private void ApplyUpgradesFromGameData()
@@ -276,17 +277,21 @@ public class PasoController : MonoBehaviour
 
     public void InicializarNazarenos()
     {
+        Debug.Log($"Inicializar | gameData.cantidadNazarenos: {gameData.cantidadNazarenos}");
+
         // Vaciar slots
-        for (int i = 0; i < slotsDelante.Length; i++)
-            slotsDelante[i] = null;
-        for (int i = 0; i < slotsDetras.Length; i++)
-            slotsDetras[i] = null;
+        for (int i = 0; i < slotsDelante.Length; i++) slotsDelante[i] = null;
+        for (int i = 0; i < slotsDetras.Length; i++) slotsDetras[i] = null;
 
-        // Determinar cuántos delante y detrás
-        int delanteCount = Mathf.Min(gameData.cantidadNazarenos, maxSlotsDelante);
-        int detrasCount = Mathf.Min(gameData.cantidadNazarenos - delanteCount, maxSlotsDetras);
+        // 🔥 CORREGIDO: Respeta el máximo real
+        int totalSlots = maxSlotsDelante + maxSlotsDetras; // 4
+        int nazarenosReales = Mathf.Min(gameData.cantidadNazarenos, totalSlots);
 
-        // Instanciar los nazarenos
+        int delanteCount = Mathf.Min(nazarenosReales, maxSlotsDelante);
+        int detrasCount = nazarenosReales - delanteCount;
+
+        Debug.Log($"Spawneando: {delanteCount} delante + {detrasCount} detras = {nazarenosReales}/{totalSlots}");
+
         for (int i = 0; i < delanteCount; i++)
             SpawnNazareno(i, true);
 
@@ -336,11 +341,14 @@ public class PasoController : MonoBehaviour
             for (int i = 0; i < slotsDetras.Length; i++)
                 if (slotsDetras[i] == naz) { slotsDetras[i] = null; break; }
 
-        // Reducir cantidad
+        // 🔥 Corregir cantidad persistente
         if (gameData.cantidadNazarenos > 0)
             gameData.cantidadNazarenos--;
 
-        SaveSystem.Save(gameData);
+        // Asegurar que no sea negativo
+        gameData.cantidadNazarenos = Mathf.Max(0, gameData.cantidadNazarenos);
+
+        SaveSystem.Save(gameData); // Guardar inmediatamente
     }
 
     public bool Animado => animado;
