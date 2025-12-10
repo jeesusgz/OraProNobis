@@ -9,9 +9,9 @@ public class NazarenoController : MonoBehaviour
     public bool delante;
     public int damage = 1;
 
-    [Header("Offsets y Separación")]
+    [Header("Offsets y separación")]
     public float extraGap = 0.05f;
-    public float offsetY = 0f;  // ← AJUSTA ESTE VALOR (prueba 0.2, 0.3, etc.)
+    public float offsetY = 0f;
 
     private Animator animator;
     private bool eliminado = false;
@@ -38,7 +38,6 @@ public class NazarenoController : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
     }
 
-    // ==== CÁLCULO DE OFFSETS REALES ====
     private float GetOffsetRespectoPaso()
     {
         if (paso == null) return 0f;
@@ -77,7 +76,6 @@ public class NazarenoController : MonoBehaviour
             objetivo = paso.transform.position + new Vector3(offset, 0f, 0f);
         }
 
-        // 🎯 SOLUCIÓN DEFINITIVA: Y fija del suelo, IGNORA si el paso está levantado
         objetivo.y = paso.transform.position.y - (paso.Levantado ? 0.25f : 0f);
 
         if (paso.Levantado && paso.CurrentStamina > 0f && !paso.Animado)
@@ -87,23 +85,14 @@ public class NazarenoController : MonoBehaviour
             float step = paso.moveSpeed * speedMultiplier * followerSpeedFactor * Time.fixedDeltaTime;
 
             float dist = Vector3.Distance(transform.position, objetivo);
+            if (dist < 0.01f) transform.position = objetivo;
+            else transform.position = Vector3.MoveTowards(transform.position, objetivo, step);
 
-            if (dist < 0.01f)
-            {
-                transform.position = objetivo;
-            }
-            else
-            {
-                transform.position = Vector3.MoveTowards(transform.position, objetivo, step);
-            }
-
-            if (animator != null)
-                animator.SetBool("walking", dist > 0.005f);
+            if (animator != null) animator.SetBool("walking", dist > 0.005f);
         }
         else
         {
-            if (animator != null)
-                animator.SetBool("walking", false);
+            if (animator != null) animator.SetBool("walking", false);
             transform.position = objetivo;
         }
 
@@ -111,14 +100,13 @@ public class NazarenoController : MonoBehaviour
             StartCoroutine(FadeOutAndDestroy());
     }
 
-    private IEnumerator FadeOutAndDestroy()
+    public IEnumerator FadeOutAndDestroy()
     {
         eliminado = true;
-        if (animator != null)
-            animator.SetBool("walking", false);
+        if (animator != null) animator.SetBool("walking", false);
 
         SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
-        float t = 0;
+        float t = 0f;
         float duration = 0.7f;
 
         while (t < duration)
@@ -133,16 +121,20 @@ public class NazarenoController : MonoBehaviour
             yield return null;
         }
 
-        if (paso != null)
-            paso.NotifyNazarenoDeath(this);
-
+        // Solo este nazareno
+        NotifyDeath();
         Destroy(gameObject);
+    }
+
+    public void NotifyDeath()
+    {
+        if (paso != null)
+            paso.NotifyNazarenoDeath(this); // <- 'this' asegura que solo se borre este nazareno
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         EnemyHealth enemy = other.GetComponent<EnemyHealth>();
-        if (enemy != null)
-            enemy.TakeDamage(damage, transform);
+        if (enemy != null) enemy.TakeDamage(damage, transform);
     }
 }

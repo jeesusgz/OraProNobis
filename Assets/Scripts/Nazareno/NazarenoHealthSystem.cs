@@ -63,17 +63,20 @@ public class NazarenoHealthSystem : MonoBehaviour
     IEnumerator DieRoutine()
     {
         isDying = true;
-        Debug.Log(gameObject.name + " está muriendo...");
 
         if (anim != null) anim.SetTrigger("Die");
 
         foreach (var s in scripts)
-        {
             if (s != this) s.enabled = false;
-        }
 
         yield return new WaitForSeconds(0.8f);
-        Die();
+
+        // Llamar solo a su propio controlador
+        NazarenoController nc = GetComponent<NazarenoController>();
+        if (nc != null)
+            StartCoroutine(nc.FadeOutAndDestroy());
+        else
+            Destroy(gameObject);
     }
 
     void Die() => Destroy(gameObject);

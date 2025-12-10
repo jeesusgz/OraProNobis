@@ -22,7 +22,28 @@ public class UpgradeButtonUI : MonoBehaviour
 
         int precioActual = buttonScript.PrecioActual;
         int monedas = CurrencyManager.Instance.gameData.monedas;
-        bool estaAlMaximo = buttonScript.EstaMaximo();
+        bool estaAlMaximo = false;
+
+        // 🔥 Comprobación especial para NazarenosCantidad
+        if (buttonScript.tipoUpgrade == UpgradeButton.UpgradeType.NazarenosCantidad)
+        {
+            PasoController paso = FindObjectOfType<PasoController>();
+            if (paso != null)
+            {
+                int nazarenosActivos = 0;
+                foreach (var n in paso.slotsDelante)
+                    if (n != null) nazarenosActivos++;
+                foreach (var n in paso.slotsDetras)
+                    if (n != null) nazarenosActivos++;
+
+                estaAlMaximo = nazarenosActivos >= (paso.maxSlotsDelante + paso.maxSlotsDetras);
+            }
+        }
+        else
+        {
+            // Para otros upgrades usamos la lógica normal
+            estaAlMaximo = buttonScript.EstaMaximo();
+        }
 
         if (estaAlMaximo)
         {
@@ -33,7 +54,6 @@ public class UpgradeButtonUI : MonoBehaviour
 
             priceText.text = "MAX";
             priceText.color = Color.yellow;
-
             return;
         }
 

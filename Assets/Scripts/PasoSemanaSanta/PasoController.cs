@@ -97,6 +97,7 @@ public class PasoController : MonoBehaviour
 
         ApplyUpgradesFromGameData();
         currentStamina = maxStamina;
+        InicializarNazarenos();
     }
 
     private void ApplyUpgradesFromGameData()
@@ -261,11 +262,36 @@ public class PasoController : MonoBehaviour
             if (slotArray[i] == null)
             {
                 SpawnNazareno(i, delante);
+
+                // Solo aumentar la cantidad global si no supera el máximo total
+                if (gameData.cantidadNazarenos < maxSlotsDelante + maxSlotsDetras)
+                    gameData.cantidadNazarenos++;
+
                 return true;
             }
         }
 
         return false;
+    }
+
+    public void InicializarNazarenos()
+    {
+        // Vaciar slots
+        for (int i = 0; i < slotsDelante.Length; i++)
+            slotsDelante[i] = null;
+        for (int i = 0; i < slotsDetras.Length; i++)
+            slotsDetras[i] = null;
+
+        // Determinar cuántos delante y detrás
+        int delanteCount = Mathf.Min(gameData.cantidadNazarenos, maxSlotsDelante);
+        int detrasCount = Mathf.Min(gameData.cantidadNazarenos - delanteCount, maxSlotsDetras);
+
+        // Instanciar los nazarenos
+        for (int i = 0; i < delanteCount; i++)
+            SpawnNazareno(i, true);
+
+        for (int i = 0; i < detrasCount; i++)
+            SpawnNazareno(i, false);
     }
 
     private void SpawnNazareno(int slotIndex, bool delante)
@@ -299,13 +325,22 @@ public class PasoController : MonoBehaviour
         }
     }
 
+
     public void NotifyNazarenoDeath(NazarenoController naz)
     {
+        bool eliminado = false;
         for (int i = 0; i < slotsDelante.Length; i++)
-            if (slotsDelante[i] == naz) slotsDelante[i] = null;
+            if (slotsDelante[i] == naz) { slotsDelante[i] = null; eliminado = true; break; }
 
-        for (int i = 0; i < slotsDetras.Length; i++)
-            if (slotsDetras[i] == naz) slotsDetras[i] = null;
+        if (!eliminado)
+            for (int i = 0; i < slotsDetras.Length; i++)
+                if (slotsDetras[i] == naz) { slotsDetras[i] = null; break; }
+
+        // Reducir cantidad
+        if (gameData.cantidadNazarenos > 0)
+            gameData.cantidadNazarenos--;
+
+        SaveSystem.Save(gameData);
     }
 
     public bool Animado => animado;
