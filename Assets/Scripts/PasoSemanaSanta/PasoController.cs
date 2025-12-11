@@ -45,6 +45,9 @@ public class PasoController : MonoBehaviour
     [Header("UI del Paso")]
     public UnityEngine.UI.Image staminaBar;
 
+    [Header("UI de Victoria")]
+    public GameObject menuVictoria;
+
     private bool fullDrainPenaltyActive = false;
     private float penaltyTimer = 0f;
 
@@ -246,6 +249,12 @@ public class PasoController : MonoBehaviour
             }
             elapsed += Time.deltaTime;
             yield return null;
+        }
+
+        if (menuVictoria != null)
+        {
+            menuVictoria.SetActive(true);
+            Time.timeScale = 0f;
         }
 
         Destroy(gameObject);
