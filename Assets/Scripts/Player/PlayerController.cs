@@ -62,6 +62,9 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<Collider2D>();
+
+        int nivelVelocidad = CurrencyManager.Instance.gameData.jugadorVelocidadBotonNivel;
+        speed = 5f + (nivelVelocidad * 1f);
     }
 
     private void Update()
@@ -139,6 +142,12 @@ public class PlayerController : MonoBehaviour
     private void OnAttack(InputAction.CallbackContext context)
     {
         GetComponent<PlayerAttack>()?.TryAttack();
+    }
+
+    public void SubirVelocidad()
+    {
+        // Sube +1 de speed por nivel
+        speed += 1f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

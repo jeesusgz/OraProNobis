@@ -14,7 +14,8 @@ public class UpgradeButton : MonoBehaviour
         PasoEstamina,
         PasoVelocidad,
         NazarenosCantidad,
-        NazarenosVida
+        NazarenosVida,
+        JugadorVelocidad
     }
 
     public UpgradeType tipoUpgrade;
@@ -30,6 +31,7 @@ public class UpgradeButton : MonoBehaviour
     public int maxPasoEstamina = 10;
     public int maxPasoVelocidad = 3;
     public int maxNazarenosVida = 6;
+    public int maxJugadorVelocidad = 3;
 
     void Start()
     {
@@ -45,6 +47,7 @@ public class UpgradeButton : MonoBehaviour
             case UpgradeType.PasoVelocidad: nivelBoton = CurrencyManager.Instance.gameData.pasoVelocidadBotonNivel; break;
             case UpgradeType.NazarenosCantidad: /* No usamos nivelBoton */ break;
             case UpgradeType.NazarenosVida: nivelBoton = CurrencyManager.Instance.gameData.nazarenosVidaBotonNivel; break;
+            case UpgradeType.JugadorVelocidad:nivelBoton = CurrencyManager.Instance.gameData.jugadorVelocidadBotonNivel;break;
         }
     }
 
@@ -65,6 +68,7 @@ public class UpgradeButton : MonoBehaviour
             UpgradeType.PasoEstamina => nivelBoton >= maxPasoEstamina,
             UpgradeType.PasoVelocidad => nivelBoton >= maxPasoVelocidad,
             UpgradeType.NazarenosVida => nivelBoton >= maxNazarenosVida,
+            UpgradeType.JugadorVelocidad => nivelBoton >= maxJugadorVelocidad,
             _ => false
         };
     }
@@ -164,6 +168,19 @@ public class UpgradeButton : MonoBehaviour
             case UpgradeType.PasoVelocidad:
                 CurrencyManager.Instance.gameData.velocidadPasoNivel++;
                 CurrencyManager.Instance.gameData.pasoVelocidadBotonNivel = nivelBoton;
+                break;
+            case UpgradeType.JugadorVelocidad:
+                // Sube +1 de velocidad por nivel
+                PlayerController player = FindAnyObjectByType<PlayerController>();
+
+                if (player != null)
+                {
+                    player.SubirVelocidad();
+                }
+
+                // Guardar nivel en GameData
+                CurrencyManager.Instance.gameData.jugadorVelocidadBotonNivel = nivelBoton;
+
                 break;
             case UpgradeType.NazarenosVida:
                 CurrencyManager.Instance.gameData.vidaNazarenoNivel++;

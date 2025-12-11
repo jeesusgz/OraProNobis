@@ -27,4 +27,5 @@ public class GameData : ScriptableObject
     public int pasoVelocidadBotonNivel = 0;
     public int nazarenosCantidadBotonNivel = 0;
     public int nazarenosVidaBotonNivel = 0;
+    public int jugadorVelocidadBotonNivel = 0;
 }
