@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {
@@ -12,24 +13,29 @@ public class MainMenu : MonoBehaviour
 
         botonContinuar.SetActive(existe);
         botonNuevaPartida.SetActive(true);
+
+        //Seleccionar correctamente el botón inicial
+        EventSystem.current.SetSelectedGameObject(null);
+
+        if (existe)
+            EventSystem.current.SetSelectedGameObject(botonContinuar);
+        else
+            EventSystem.current.SetSelectedGameObject(botonNuevaPartida);
     }
 
     public void NuevaPartida()
     {
-        SaveSystem.DeleteSave();  // borra el archivo guardado
+        SaveSystem.DeleteSave();
 
-        CurrencyManager.Instance.gameData.ResetData(); // 🔥 resetea valores actuales en memoria
+        CurrencyManager.Instance.gameData.ResetData();
+        SaveSystem.Save(CurrencyManager.Instance.gameData);
 
-        SaveSystem.Save(CurrencyManager.Instance.gameData); // guarda vacío para evitar errores
-
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Dia"); // o tu escena de nivel
+        SceneManager.LoadScene("Dia");
     }
 
     public void Continuar()
     {
-        // Resetear TimeScale
         Time.timeScale = 1f;
-
         SceneManager.LoadScene("Dia");
     }
 }

@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 52825993}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextoEmergente
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 143138688}
   - component: {fileID: 143138690}
   - component: {fileID: 143138689}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 184680599}
   - component: {fileID: 184680598}
   - component: {fileID: 184680597}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BotonNazareno
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7228912e4e39720448948864da3f4d1e, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 420488a56a92c3843a214848940e35c7, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 7228912e4e39720448948864da3f4d1e, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 235973021}
   - component: {fileID: 235973023}
   - component: {fileID: 235973022}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,7 +557,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 248231510}
-  m_Layer: 0
+  - component: {fileID: 248231511}
+  m_Layer: 5
   m_Name: PanelPaso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,6 +588,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00088501, y: -0.001}
   m_SizeDelta: {x: 1087.6, y: 513.002}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &248231511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248231509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d489fcac0be254a4d8ac0ad12150ce14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoMenuSelector
 --- !u!1 &278272876
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +612,7 @@ GameObject:
   - component: {fileID: 278272880}
   - component: {fileID: 278272879}
   - component: {fileID: 278272878}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: volver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +670,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: d0a2f2c068931464c978cb8ce16681e0, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 2cbd4557352c9a046a94e6ed8a06c71c, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: d0a2f2c068931464c978cb8ce16681e0, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -719,7 +732,7 @@ GameObject:
   - component: {fileID: 361208432}
   - component: {fileID: 361208434}
   - component: {fileID: 361208433}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -794,7 +807,7 @@ GameObject:
   - component: {fileID: 378596644}
   - component: {fileID: 378596646}
   - component: {fileID: 378596645}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -869,7 +882,7 @@ GameObject:
   - component: {fileID: 384736942}
   - component: {fileID: 384736944}
   - component: {fileID: 384736943}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +958,7 @@ GameObject:
   - component: {fileID: 437403418}
   - component: {fileID: 437403417}
   - component: {fileID: 437403416}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BotonPaso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1003,7 +1016,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7228912e4e39720448948864da3f4d1e, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 420488a56a92c3843a214848940e35c7, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 7228912e4e39720448948864da3f4d1e, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1065,7 +1078,7 @@ GameObject:
   - component: {fileID: 512515445}
   - component: {fileID: 512515447}
   - component: {fileID: 512515446}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1129,6 +1142,135 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512515444}
   m_CullTransparentMesh: 1
+--- !u!1 &530633834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 530633836}
+  - component: {fileID: 530633835}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &530633835
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530633834}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 8fa761a0652c0e34984056aead0ea4a8, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.61
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &530633836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530633834}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 572.4129, y: 332.93478, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &543308048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,7 +1282,7 @@ GameObject:
   - component: {fileID: 543308049}
   - component: {fileID: 543308051}
   - component: {fileID: 543308050}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1216,7 +1358,7 @@ GameObject:
   - component: {fileID: 581583697}
   - component: {fileID: 581583696}
   - component: {fileID: 581583695}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: volver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1274,7 +1416,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: d0a2f2c068931464c978cb8ce16681e0, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 2cbd4557352c9a046a94e6ed8a06c71c, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: d0a2f2c068931464c978cb8ce16681e0, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1339,7 +1481,7 @@ GameObject:
   - component: {fileID: 599759609}
   - component: {fileID: 599759612}
   - component: {fileID: 599759613}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Botonvelocidad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1399,7 +1541,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 98d581fbdfea8ee4cb13cbd5a2ea15fe, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1476,7 +1618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
   precioBase: 100
-  incrementoPrecio: 5
+  incrementoPrecio: 10
   tipoUpgrade: 4
   nivelBoton: 0
   buttonUI: {fileID: 599759613}
@@ -1516,7 +1658,7 @@ GameObject:
   - component: {fileID: 616307753}
   - component: {fileID: 616307755}
   - component: {fileID: 616307754}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1789,7 +1931,7 @@ GameObject:
   - component: {fileID: 693878258}
   - component: {fileID: 693878260}
   - component: {fileID: 693878259}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CantidadCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1925,7 +2067,7 @@ GameObject:
   - component: {fileID: 752008042}
   - component: {fileID: 752008044}
   - component: {fileID: 752008043}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Precio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2141,7 +2283,7 @@ GameObject:
   - component: {fileID: 803107277}
   - component: {fileID: 803107279}
   - component: {fileID: 803107278}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Precio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2277,7 +2419,7 @@ GameObject:
   - component: {fileID: 878534228}
   - component: {fileID: 878534230}
   - component: {fileID: 878534229}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2413,7 +2555,7 @@ GameObject:
   - component: {fileID: 882255618}
   - component: {fileID: 882255620}
   - component: {fileID: 882255619}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2549,7 +2691,7 @@ GameObject:
   - component: {fileID: 919671453}
   - component: {fileID: 919671455}
   - component: {fileID: 919671454}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2624,7 +2766,7 @@ GameObject:
   - component: {fileID: 947971440}
   - component: {fileID: 947971442}
   - component: {fileID: 947971441}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2763,7 +2905,7 @@ GameObject:
   - component: {fileID: 951175159}
   - component: {fileID: 951175162}
   - component: {fileID: 951175163}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Botonvida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2823,7 +2965,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 98d581fbdfea8ee4cb13cbd5a2ea15fe, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -2940,7 +3082,7 @@ GameObject:
   - component: {fileID: 982119749}
   - component: {fileID: 982119751}
   - component: {fileID: 982119750}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3015,7 +3157,7 @@ GameObject:
   - component: {fileID: 1008192347}
   - component: {fileID: 1008192349}
   - component: {fileID: 1008192348}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3150,7 +3292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1008220684}
   - component: {fileID: 1008220685}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PanelTienda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3218,7 +3360,7 @@ GameObject:
   - component: {fileID: 1025800046}
   - component: {fileID: 1025800045}
   - component: {fileID: 1025800044}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Jugar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3276,7 +3418,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 98d581fbdfea8ee4cb13cbd5a2ea15fe, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3338,7 +3480,7 @@ GameObject:
   - component: {fileID: 1029386030}
   - component: {fileID: 1029386032}
   - component: {fileID: 1029386031}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3472,13 +3614,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1077748087}
-  m_Layer: 0
+  - component: {fileID: 1077748088}
+  m_Layer: 5
   m_Name: PanelPrincipial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1077748087
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3503,6 +3646,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0018921, y: 5.9399986}
   m_SizeDelta: {x: 1087.6, y: 524.88}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1077748088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077748086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d489fcac0be254a4d8ac0ad12150ce14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoMenuSelector
 --- !u!1 &1117507655
 GameObject:
   m_ObjectHideFlags: 0
@@ -3514,7 +3669,7 @@ GameObject:
   - component: {fileID: 1117507656}
   - component: {fileID: 1117507658}
   - component: {fileID: 1117507657}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Precio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3650,7 +3805,7 @@ GameObject:
   - component: {fileID: 1162532316}
   - component: {fileID: 1162532318}
   - component: {fileID: 1162532317}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3787,7 +3942,7 @@ GameObject:
   - component: {fileID: 1167501550}
   - component: {fileID: 1167501549}
   - component: {fileID: 1167501548}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BotonJugador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3845,7 +4000,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7228912e4e39720448948864da3f4d1e, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 420488a56a92c3843a214848940e35c7, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 7228912e4e39720448948864da3f4d1e, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3907,7 +4062,7 @@ GameObject:
   - component: {fileID: 1221774658}
   - component: {fileID: 1221774660}
   - component: {fileID: 1221774659}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3982,7 +4137,7 @@ GameObject:
   - component: {fileID: 1258483476}
   - component: {fileID: 1258483478}
   - component: {fileID: 1258483477}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Precio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4118,7 +4273,7 @@ GameObject:
   - component: {fileID: 1266240211}
   - component: {fileID: 1266240213}
   - component: {fileID: 1266240212}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ImagenCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4193,7 +4348,7 @@ GameObject:
   - component: {fileID: 1272728809}
   - component: {fileID: 1272728811}
   - component: {fileID: 1272728810}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4327,7 +4482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1278806687}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Titulo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4368,7 +4523,7 @@ GameObject:
   - component: {fileID: 1288924784}
   - component: {fileID: 1288924787}
   - component: {fileID: 1288924788}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Botonvida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4428,7 +4583,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 6f7a5918acdd56a46a63378569560b70, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -4548,7 +4703,7 @@ GameObject:
   - component: {fileID: 1289181120}
   - component: {fileID: 1289181123}
   - component: {fileID: 1289181124}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: "BotonDa\xF1o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4608,7 +4763,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 6f7a5918acdd56a46a63378569560b70, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -4725,7 +4880,7 @@ GameObject:
   - component: {fileID: 1299238417}
   - component: {fileID: 1299238419}
   - component: {fileID: 1299238418}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4861,7 +5016,7 @@ GameObject:
   - component: {fileID: 1309457064}
   - component: {fileID: 1309457066}
   - component: {fileID: 1309457065}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4934,13 +5089,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1310470582}
-  m_Layer: 0
+  - component: {fileID: 1310470583}
+  m_Layer: 5
   m_Name: PanelJugador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1310470582
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4964,6 +5120,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00088501, y: -0.001}
   m_SizeDelta: {x: 1087.6, y: 513.002}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1310470583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310470581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d489fcac0be254a4d8ac0ad12150ce14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoMenuSelector
 --- !u!1 &1346972649
 GameObject:
   m_ObjectHideFlags: 0
@@ -4975,7 +5143,7 @@ GameObject:
   - component: {fileID: 1346972650}
   - component: {fileID: 1346972652}
   - component: {fileID: 1346972651}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5050,7 +5218,7 @@ GameObject:
   - component: {fileID: 1419528733}
   - component: {fileID: 1419528735}
   - component: {fileID: 1419528734}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5187,7 +5355,7 @@ GameObject:
   - component: {fileID: 1434539009}
   - component: {fileID: 1434539008}
   - component: {fileID: 1434539007}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5290,7 +5458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1536775868}
   - component: {fileID: 1536775869}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5346,7 +5514,7 @@ GameObject:
   - component: {fileID: 1577790753}
   - component: {fileID: 1577790755}
   - component: {fileID: 1577790754}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5483,7 +5651,7 @@ GameObject:
   - component: {fileID: 1663034451}
   - component: {fileID: 1663034450}
   - component: {fileID: 1663034449}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: volver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5541,7 +5709,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: d0a2f2c068931464c978cb8ce16681e0, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 2cbd4557352c9a046a94e6ed8a06c71c, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: d0a2f2c068931464c978cb8ce16681e0, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -5606,7 +5774,7 @@ GameObject:
   - component: {fileID: 1663489522}
   - component: {fileID: 1663489525}
   - component: {fileID: 1663489526}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BotonAgregar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5666,7 +5834,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 98d581fbdfea8ee4cb13cbd5a2ea15fe, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -5783,7 +5951,7 @@ GameObject:
   - component: {fileID: 1701792991}
   - component: {fileID: 1701792993}
   - component: {fileID: 1701792992}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Precio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5919,7 +6087,7 @@ GameObject:
   - component: {fileID: 1729408913}
   - component: {fileID: 1729408915}
   - component: {fileID: 1729408914}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6055,7 +6223,7 @@ GameObject:
   - component: {fileID: 1736872401}
   - component: {fileID: 1736872403}
   - component: {fileID: 1736872402}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6189,7 +6357,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760676930}
-  m_Layer: 0
+  - component: {fileID: 1760676931}
+  m_Layer: 5
   m_Name: PanelNazareno
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6218,6 +6387,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00088501, y: -0.001}
   m_SizeDelta: {x: 1087.6, y: 513.002}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1760676931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760676929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d489fcac0be254a4d8ac0ad12150ce14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoMenuSelector
 --- !u!1 &1792450216
 GameObject:
   m_ObjectHideFlags: 0
@@ -6368,7 +6549,7 @@ GameObject:
   - component: {fileID: 1821367372}
   - component: {fileID: 1821367371}
   - component: {fileID: 1821367375}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Botonvida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6453,7 +6634,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 6f7a5918acdd56a46a63378569560b70, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -6548,7 +6729,7 @@ GameObject:
   - component: {fileID: 1824098904}
   - component: {fileID: 1824098903}
   - component: {fileID: 1824098902}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BotonVelocidad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6608,8 +6789,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
-  precioBase: 50
-  incrementoPrecio: 5
+  precioBase: 100
+  incrementoPrecio: 10
   tipoUpgrade: 7
   nivelBoton: 0
   buttonUI: {fileID: 1824098902}
@@ -6651,7 +6832,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 6f7a5918acdd56a46a63378569560b70, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 03d39956c98839349b49d555297a5683, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -6725,7 +6906,7 @@ GameObject:
   - component: {fileID: 1903248547}
   - component: {fileID: 1903248549}
   - component: {fileID: 1903248548}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6861,7 +7042,7 @@ GameObject:
   - component: {fileID: 1924453240}
   - component: {fileID: 1924453242}
   - component: {fileID: 1924453241}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Precio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6998,7 +7179,7 @@ GameObject:
   - component: {fileID: 1942727717}
   - component: {fileID: 1942727716}
   - component: {fileID: 1942727715}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Salir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7056,7 +7237,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: d0a2f2c068931464c978cb8ce16681e0, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 2cbd4557352c9a046a94e6ed8a06c71c, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: d0a2f2c068931464c978cb8ce16681e0, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -7118,7 +7299,7 @@ GameObject:
   - component: {fileID: 1951428749}
   - component: {fileID: 1951428751}
   - component: {fileID: 1951428750}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7257,7 +7438,7 @@ GameObject:
   - component: {fileID: 1961981594}
   - component: {fileID: 1961981597}
   - component: {fileID: 1961981598}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BotonEstamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7317,7 +7498,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 98d581fbdfea8ee4cb13cbd5a2ea15fe, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 7d0cdb27fd2aa6b49b3073f4aa9ff61b, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: a7ed4fc2c8927274dbe7fd4e5605a89c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -7434,7 +7615,7 @@ GameObject:
   - component: {fileID: 2039111680}
   - component: {fileID: 2039111682}
   - component: {fileID: 2039111681}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Precio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7570,7 +7751,7 @@ GameObject:
   - component: {fileID: 2065168084}
   - component: {fileID: 2065168086}
   - component: {fileID: 2065168085}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Precio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7707,6 +7888,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextoEmergente
       objectReference: {fileID: 0}
+    - target: {fileID: 3743678017012853240, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8112540096925524567, guid: 7ce98fa922486c0428cd4f80ed66e0fc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7802,5 +7987,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 666112983}
+  - {fileID: 530633836}
   - {fileID: 1434539006}
   - {fileID: 787804423}

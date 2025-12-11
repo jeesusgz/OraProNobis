@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement; // Opcional, para reiniciar escena
 
 public class GameTimer : MonoBehaviour
 {
-    public float totalTime = 600f; // Tiempo en segundos
+    public float totalTime = 300f; // Tiempo en segundos
     public TMP_Text timerText;    // Asignar en Inspector
     private float currentTime;
     private bool isRunning = true;
