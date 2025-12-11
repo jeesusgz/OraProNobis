@@ -28,4 +28,24 @@ public class GameData : ScriptableObject
     public int nazarenosCantidadBotonNivel = 0;
     public int nazarenosVidaBotonNivel = 0;
     public int jugadorVelocidadBotonNivel = 0;
+
+    public void ResetData()
+    {
+        monedas = 0;
+        vidaPasoNivel = 0;
+        estaminaPasoNivel = 0;
+        velocidadPasoNivel = 0;
+        vidaJugadorNivel = 0;
+        dañoJugadorNivel = 0;
+        cantidadNazarenos = 0;
+        vidaNazarenoNivel = 0;
+        jugadorVidaBotonNivel = 0;
+        jugadorFuerzaBotonNivel = 0;
+        pasoVidaBotonNivel = 0;
+        pasoEstaminaBotonNivel = 0;
+        pasoVelocidadBotonNivel = 0;
+        nazarenosCantidadBotonNivel = 0;
+        nazarenosVidaBotonNivel = 0;
+        jugadorVelocidadBotonNivel = 0;
+    }
 }

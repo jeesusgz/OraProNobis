@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.IO; // Necesario para SaveExists y DeleteSave usando PlayerPrefs
 
 public static class SaveSystem
 {
@@ -17,6 +18,21 @@ public static class SaveSystem
         string json = PlayerPrefs.GetString(KEY);
         var s = JsonUtility.FromJson<SerializableData>(json);
         s.ApplyTo(data);
+    }
+
+
+    public static bool SaveExists()
+    {
+        return PlayerPrefs.HasKey(KEY);
+    }
+
+    public static void DeleteSave()
+    {
+        if (PlayerPrefs.HasKey(KEY))
+        {
+            PlayerPrefs.DeleteKey(KEY);
+            PlayerPrefs.Save();
+        }
     }
 
     [System.Serializable]
