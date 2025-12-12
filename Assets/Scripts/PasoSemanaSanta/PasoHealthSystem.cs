@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System;
@@ -44,7 +44,7 @@ public class PasoHealthSystem : MonoBehaviour
         if (!infiniteHealth)
             currentHealth -= damageAmount;
 
-        Debug.Log(gameObject.name + " ha recibido da�o. Vida: " + currentHealth);
+        Debug.Log(gameObject.name + " ha recibido daño. Vida: " + currentHealth);
 
         UpdateUI();
 
@@ -84,7 +84,7 @@ public class PasoHealthSystem : MonoBehaviour
     {
         isDying = true;
 
-        Debug.Log(gameObject.name + " est� muriendo...");
+        Debug.Log(gameObject.name + " está muriendo...");
 
         if (anim != null)
             anim.SetTrigger("Die");
@@ -103,6 +103,14 @@ public class PasoHealthSystem : MonoBehaviour
     void Die()
     {
         Debug.Log(gameObject.name + " paso destruido");
+
+        //Poner música de muerte
+        if (MusicManager.Instance != null)
+        {
+            MusicManager.Instance.CambiarAMusicaMuerte();
+        }
+
+        // Mostrar menú de muerte
         FindObjectOfType<DeathMenu>().MostrarMenuMuerte();
     }
 
