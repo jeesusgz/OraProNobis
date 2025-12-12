@@ -13,6 +13,12 @@ public class SkeletonController : MonoBehaviour
     [Header("Ataque")]
     public float rangoDeteccionJugador = 4f;
 
+    [Header("Audio de pasos")]
+    public AudioClip pasoClip;
+    public AudioSource audioSourcePasos;
+    public float intervaloEntrePasos = 0.5f;
+    private float tiempoDesdeUltimoPaso = 0f;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Animator anim;
@@ -44,6 +50,24 @@ public class SkeletonController : MonoBehaviour
             objetivo = player;
 
         MoverHacia(objetivo.position);
+
+        // Sonido de pasos
+        if (anim.GetBool("Walking"))
+        {
+            tiempoDesdeUltimoPaso += Time.fixedDeltaTime;
+            if (tiempoDesdeUltimoPaso >= intervaloEntrePasos)
+            {
+                if (audioSourcePasos != null && pasoClip != null)
+                {
+                    audioSourcePasos.PlayOneShot(pasoClip);
+                }
+                tiempoDesdeUltimoPaso = 0f;
+            }
+        }
+        else
+        {
+            tiempoDesdeUltimoPaso = intervaloEntrePasos; // reinicia contador cuando no camina
+        }
     }
 
     void MoverHacia(Vector2 objetivo)

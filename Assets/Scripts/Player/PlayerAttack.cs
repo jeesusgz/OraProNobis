@@ -7,6 +7,10 @@ public class PlayerAttack : MonoBehaviour
     public float hitboxActiveTime = 0.1f; // Duración del golpe
     public float attackCooldown = 0.10f;
 
+    [Header("Audio de ataque")]
+    public AudioClip attackClip;
+    public AudioSource attackAudioSource;
+
     private bool canAttack = true;
     private SpriteRenderer sr;
     private Animator anim;
@@ -34,6 +38,13 @@ public class PlayerAttack : MonoBehaviour
         hitbox.transform.localPosition = new Vector3(xOffset, hitbox.transform.localPosition.y, 0);
         hitbox.SetActive(true);
         StartCoroutine(DeactivateHitbox());
+
+        // Reproducir sonido de ataque
+        if (attackAudioSource != null && attackClip != null)
+        {
+            attackAudioSource.PlayOneShot(attackClip);
+        }
+
         Debug.Log("HITBOX ACTIVADA");
     }
 

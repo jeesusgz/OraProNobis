@@ -15,6 +15,20 @@ public class PlayerController : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
 
+    [Header("Audio de pasos")]
+    public AudioClip pasoClip;
+    public AudioSource audioSourcePasos; // asigna un AudioSource en el inspector
+    public float intervaloEntrePasos = 0.4f; // segundos entre pasos
+    private float tiempoDesdeUltimoPaso = 0f;
+
+    [Header("Audio de salto")]
+    public AudioClip saltoClip;
+    public AudioSource audioSourceSalto; // asigna un AudioSource en el inspector
+
+    [Header("Audio de monedas")]
+    public AudioClip monedaClip;
+    public AudioSource audioSourceMoneda;
+
     [Header("Detección de suelo")]
     public Transform groundCheck;
     public float groundCheckRadius = 0.1f;
@@ -123,6 +137,25 @@ public class PlayerController : MonoBehaviour
                 bool mirandoFrente = (mirandoDerecha && pasoALaDerecha) || (!mirandoDerecha && !pasoALaDerecha);
             }
         }
+
+        // Sonido de pasos
+        if (isGrounded && Mathf.Abs(moveDirection.x) > 0.1f)
+        {
+            tiempoDesdeUltimoPaso += Time.deltaTime;
+            if (tiempoDesdeUltimoPaso >= intervaloEntrePasos)
+            {
+                if (audioSourcePasos != null && pasoClip != null)
+                {
+                    audioSourcePasos.PlayOneShot(pasoClip);
+                }
+                tiempoDesdeUltimoPaso = 0f;
+            }
+        }
+        else
+        {
+            // Reinicia el contador si no se está moviendo
+            tiempoDesdeUltimoPaso = intervaloEntrePasos;
+        }
     }
 
     private void FixedUpdate()
@@ -136,6 +169,14 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            // Reproducir sonido de salto
+            if (audioSourceSalto != null && saltoClip != null)
+            {
+                audioSourceSalto.PlayOneShot(saltoClip);
+            }
+
+            animator.SetTrigger("Jump");
         }
     }
 
@@ -149,6 +190,15 @@ public class PlayerController : MonoBehaviour
         // Sube +1 de speed por nivel
         speed += 1f;
     }
+
+    public void RecogerMoneda()
+    {
+        if (audioSourceMoneda != null && monedaClip != null)
+        {
+            audioSourceMoneda.PlayOneShot(monedaClip);
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

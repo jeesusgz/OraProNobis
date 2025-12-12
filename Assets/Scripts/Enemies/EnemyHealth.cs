@@ -12,6 +12,11 @@ public class EnemyHealth : MonoBehaviour
     public int maxCoins = 3;
     public GameObject coinPrefab;
 
+    [Header("Audio")]
+    public AudioClip dañoClip;
+    public AudioSource audioSource;
+    public AudioClip muerteClip;
+
     private int currentHealth;
     private SpriteRenderer sr;
     private Animator anim;
@@ -36,6 +41,10 @@ public class EnemyHealth : MonoBehaviour
         if (isDying) return;
 
         currentHealth -= amount;
+
+        // Reproducir sonido de daño
+        if (audioSource != null && dañoClip != null)
+            audioSource.PlayOneShot(dañoClip);
 
         if (ghost != null)
             ghost.PlayHitFlash();
@@ -109,6 +118,9 @@ public class EnemyHealth : MonoBehaviour
             if (s != this)
                 s.enabled = false;
         }
+
+        if (audioSource != null && muerteClip != null)
+            audioSource.PlayOneShot(muerteClip);
 
         yield return new WaitForSeconds(0.8f);
 

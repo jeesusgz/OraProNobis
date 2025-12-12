@@ -12,6 +12,10 @@ public class GhostController : MonoBehaviour
     public float alturaFlotacion = 0.5f;
     public float velocidadFlotacion = 2f;
 
+    [Header("Audio")]
+    public AudioClip muerteClip;
+    public AudioSource audioSource;
+
     [Header("Detección / Ataque")]
     public float rangoDeteccionJugador = 4f;
 
@@ -93,6 +97,10 @@ public class GhostController : MonoBehaviour
         if (isDying) return;
 
         isDying = true;
+
+        // Reproducir sonido de muerte
+        if (audioSource != null && muerteClip != null)
+            audioSource.PlayOneShot(muerteClip);
 
         anim.SetBool("isMoving", false);
         anim.SetTrigger("Die");

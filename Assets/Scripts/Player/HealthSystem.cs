@@ -12,6 +12,10 @@ public class HealthSystem : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
 
+    [Header("Audio de daño")]
+    public AudioClip dañoClip;         
+    public AudioSource audioSourceDaño;
+
     [Header("Modos especiales")]
     public bool infiniteHealth = false;
 
@@ -69,6 +73,12 @@ public class HealthSystem : MonoBehaviour
 
         currentHealth = Mathf.Max(currentHealth, 0);
 
+        
+        if (audioSourceDaño != null && dañoClip != null)
+        {
+            audioSourceDaño.PlayOneShot(dañoClip);
+        }
+
         OnPlayerDamaged?.Invoke();
         StartCoroutine(InvulnerabilityCoroutine());
 
@@ -100,9 +110,14 @@ public class HealthSystem : MonoBehaviour
     {
         isDying = true;
 
+        // Activar animación de muerte
         if (isPlayer && anim != null)
             anim.SetTrigger("Die");
 
+        // Cambiar música de fondo a la de muerte
+        MusicManager.Instance?.CambiarAMusicaMuerte();
+
+        // Desactivar otros scripts
         foreach (var s in scripts)
         {
             if (s != this)
@@ -112,7 +127,7 @@ public class HealthSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         if (isPlayer)
-            FindObjectOfType<DeathMenu>().MostrarMenuMuerte();
+            FindObjectOfType<DeathMenu>()?.MostrarMenuMuerte();
     }
 
     // Subir la vida máxima y actualizar UI

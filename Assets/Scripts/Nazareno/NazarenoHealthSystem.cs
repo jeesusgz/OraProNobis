@@ -18,6 +18,11 @@ public class NazarenoHealthSystem : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private MonoBehaviour[] scripts;
 
+    [Header("Audio")]
+    public AudioClip dañoClip;
+    public AudioClip muerteClip;
+    public AudioSource audioSource;
+
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -37,6 +42,10 @@ public class NazarenoHealthSystem : MonoBehaviour
 
         currentHealth -= damage;
         Debug.Log(gameObject.name + " recibió daño. Vida: " + currentHealth);
+
+        // 🔊 Reproducir sonido de daño
+        if (audioSource != null && dañoClip != null)
+            audioSource.PlayOneShot(dañoClip);
 
         StartCoroutine(InvulnerabilityCoroutine());
 
@@ -73,6 +82,10 @@ public class NazarenoHealthSystem : MonoBehaviour
         foreach (var s in scripts)
             if (s != this) s.enabled = false;
 
+        // 🔊 Reproducir sonido de muerte
+        if (audioSource != null && muerteClip != null)
+            audioSource.PlayOneShot(muerteClip);
+
         yield return new WaitForSeconds(0.8f);
 
         // Llamar solo a su propio controlador
@@ -82,8 +95,6 @@ public class NazarenoHealthSystem : MonoBehaviour
         else
             Destroy(gameObject);
     }
-
-    void Die() => Destroy(gameObject);
 
     /// <summary>
     /// Sube la vida máxima del nazareno en 2 unidades y actualiza la vida actual

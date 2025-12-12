@@ -8,7 +8,14 @@ public class CoinPickup : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Sumar monedas usando el CurrencyManager
+            // Reproducir sonido de moneda desde el jugador
+            PlayerController player = collision.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.RecogerMoneda();
+            }
+
+            // Sumar monedas
             if (CurrencyManager.Instance != null)
                 CurrencyManager.Instance.AddMoney(value);
 
@@ -19,6 +26,7 @@ public class CoinPickup : MonoBehaviour
             // Guardar datos
             SaveSystem.Save(CurrencyManager.Instance.gameData);
 
+            // Destruir moneda
             Destroy(gameObject);
         }
     }

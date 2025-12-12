@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6f1393b01a6d748abe0933cf11ea23, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: Assembly-CSharp::GameData
-  monedas: 0
+  monedas: 61
   vidaPasoNivel: 0
   estaminaPasoNivel: 0
   velocidadPasoNivel: 0
   vidaJugadorNivel: 0
-  "da\xF1oJugadorNivel": 0
+  "da\xF1oJugadorNivel": 1
   cantidadNazarenos: 0
   vidaNazarenoNivel: 0
   jugadorVidaBotonNivel: 0

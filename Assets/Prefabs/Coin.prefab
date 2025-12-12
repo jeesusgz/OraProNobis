@@ -238,6 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20be13fbd5cd96041b87fa57b2cf6c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinPickup
+  coinClip: {fileID: 0}
+  audioSourceCoin: {fileID: 0}
   value: 1
 --- !u!114 &5145980629169959433
 MonoBehaviour:

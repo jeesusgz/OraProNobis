@@ -876,7 +876,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: a3d6f8219236f4b4080227a11086d566, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.683
+  m_Volume: 0.562
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2271,6 +2271,7 @@ GameObject:
   - component: {fileID: 2103218186}
   - component: {fileID: 2103218185}
   - component: {fileID: 2103218184}
+  - component: {fileID: 2103218188}
   m_Layer: 0
   m_Name: UIAudioManager
   m_TagString: Untagged
@@ -2304,7 +2305,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIAudioManager
   audioSource: {fileID: 2103218186}
   hoverClip: {fileID: 8300000, guid: b1ad53d21bd0a8f4d9e4193c815c2ae5, type: 3}
-  clickClip: {fileID: 0}
+  clickClip: {fileID: 8300000, guid: f527530a022566243af2009efcd77ab9, type: 3}
+  errorClip: {fileID: 8300000, guid: 2c0fe6ec42953a742ae28b0a89b4b303, type: 3}
+  levelUpClip: {fileID: 8300000, guid: 784d4e128cec4924d918d2e3ca533ba9, type: 3}
 --- !u!82 &2103218186
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2417,6 +2420,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2103218188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103218183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fe595905c05c3409ce46bdbe44e0a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonAudioAutoAdder
 --- !u!1 &2130341091
 GameObject:
   m_ObjectHideFlags: 0

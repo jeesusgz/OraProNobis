@@ -34,6 +34,10 @@ public class PausaMenu : MonoBehaviour
         menuPausa.SetActive(true);
         Time.timeScale = 0f;
         juegoPausado = true;
+
+        // Pausar la música de fondo
+        if (MusicManager.Instance != null && MusicManager.Instance.audioSource != null)
+            MusicManager.Instance.audioSource.Pause();
     }
 
     public void Reanudar()
@@ -41,6 +45,10 @@ public class PausaMenu : MonoBehaviour
         menuPausa.SetActive(false);
         Time.timeScale = 1f;
         juegoPausado = false;
+
+        // Reanudar la música de fondo
+        if (MusicManager.Instance != null && MusicManager.Instance.audioSource != null)
+            MusicManager.Instance.audioSource.UnPause();
     }
 
     public void ReiniciarNivel()

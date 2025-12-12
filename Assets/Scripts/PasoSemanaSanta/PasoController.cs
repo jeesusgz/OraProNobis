@@ -253,6 +253,7 @@ public class PasoController : MonoBehaviour
 
         if (menuVictoria != null)
         {
+            MusicManager.Instance?.CambiarAMusicaVictoria();
             menuVictoria.SetActive(true);
             Time.timeScale = 0f;
         }

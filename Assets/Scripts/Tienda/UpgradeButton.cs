@@ -90,33 +90,33 @@ public class UpgradeButton : MonoBehaviour
 
     public void ComprarMejora()
     {
-        Debug.Log($"🔥 1. INICIO {tipoUpgrade}");
+        Debug.Log($"1. INICIO {tipoUpgrade}");
 
         if (CurrencyManager.Instance == null)
         {
-            Debug.LogError("❌ 2. CurrencyManager NULL");
+            Debug.LogError("2. CurrencyManager NULL");
             return;
         }
-        Debug.Log($"✅ 2. CurrencyManager OK | Monedas: {CurrencyManager.Instance.gameData.monedas}");
+        Debug.Log($"2. CurrencyManager OK | Monedas: {CurrencyManager.Instance.gameData.monedas}");
 
         // 🔥 NAZARENOSCANTIDAD: SIN PASOCONTROLLER (funciona entre escenas)
         if (tipoUpgrade == UpgradeType.NazarenosCantidad)
         {
-            Debug.Log("🔥 3. NazarenosCantidad (GameData ONLY)");
+            Debug.Log("3. NazarenosCantidad (GameData ONLY)");
 
             if (CurrencyManager.Instance.gameData.cantidadNazarenos >= 4)
             {
-                Debug.Log("❌ 4. Máximo 4 nazarenos");
+                Debug.Log("4. Máximo 4 nazarenos");
                 buttonUI?.MostrarMensajeMaximo();
                 return;
             }
 
             int precio = PrecioActual;
-            Debug.Log($"💰 5. Precio: {precio} | Actual: {CurrencyManager.Instance.gameData.cantidadNazarenos}/4");
+            Debug.Log($"5. Precio: {precio} | Actual: {CurrencyManager.Instance.gameData.cantidadNazarenos}/4");
 
             if (!CurrencyManager.Instance.TrySpend(precio))
             {
-                Debug.Log("❌ 6. Sin dinero");
+                Debug.Log("6. Sin dinero");
                 buttonUI?.MostrarMensajeSinDinero();
                 return;
             }
@@ -126,12 +126,16 @@ public class UpgradeButton : MonoBehaviour
             SaveSystem.Save(CurrencyManager.Instance.gameData);
 
             buttonUI?.MostrarMensajeMejora(tipoUpgrade);
-            Debug.Log($"✅ 7. Nazareno #{CurrencyManager.Instance.gameData.cantidadNazarenos}/4 COMPRADO!");
+            Debug.Log($"7. Nazareno #{CurrencyManager.Instance.gameData.cantidadNazarenos}/4 COMPRADO!");
+
+            // 🔹 Reproducir sonido de level up
+            UIAudioManager.Instance?.PlayLevelUp();
+
             return;
         }
 
         // 🔹 LÓGICA NORMAL (arreglado el switch)
-        Debug.Log("🔥 3. Upgrade normal");
+        Debug.Log("3. Upgrade normal");
 
         if (EstaMaximo())
         {
@@ -170,17 +174,12 @@ public class UpgradeButton : MonoBehaviour
                 CurrencyManager.Instance.gameData.pasoVelocidadBotonNivel = nivelBoton;
                 break;
             case UpgradeType.JugadorVelocidad:
-                // Sube +1 de velocidad por nivel
                 PlayerController player = FindAnyObjectByType<PlayerController>();
-
                 if (player != null)
                 {
                     player.SubirVelocidad();
                 }
-
-                // Guardar nivel en GameData
                 CurrencyManager.Instance.gameData.jugadorVelocidadBotonNivel = nivelBoton;
-
                 break;
             case UpgradeType.NazarenosVida:
                 CurrencyManager.Instance.gameData.vidaNazarenoNivel++;
@@ -193,6 +192,9 @@ public class UpgradeButton : MonoBehaviour
 
         SaveSystem.Save(CurrencyManager.Instance.gameData);
         buttonUI?.MostrarMensajeMejora(tipoUpgrade);
-        Debug.Log("✅ Upgrade aplicado!");
+        Debug.Log("Upgrade aplicado!");
+
+        // 🔹 Reproducir sonido de level up
+        UIAudioManager.Instance?.PlayLevelUp();
     }
 }
