@@ -1574,6 +1574,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
   gameData: {fileID: 11400000, guid: 17b6f6528269f8043a947f5c5ca35ddc, type: 2}
+  modoPresentacion: 1
+  dineroPresentacion: 99999
 --- !u!4 &1290994564
 Transform:
   m_ObjectHideFlags: 0

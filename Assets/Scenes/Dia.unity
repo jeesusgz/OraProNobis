@@ -4845,7 +4845,7 @@ MonoBehaviour:
   nivelBoton: 0
   buttonUI: {fileID: 1289181124}
   maxJugadorVida: 42
-  maxJugadorFuerza: 10
+  maxJugadorFuerza: 3
   maxPasoVida: 7
   maxPasoEstamina: 10
   maxPasoVelocidad: 3
@@ -5496,7 +5496,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -84, y: -82}
+  m_AnchoredPosition: {x: -117.98, y: -81.885}
   m_SizeDelta: {x: 235.95776, y: 134.6308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1536775869

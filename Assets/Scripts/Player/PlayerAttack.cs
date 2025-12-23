@@ -14,11 +14,13 @@ public class PlayerAttack : MonoBehaviour
     private bool canAttack = true;
     private SpriteRenderer sr;
     private Animator anim;
+    private PlayerController playerController;
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        playerController = GetComponent<PlayerController>();
     }
 
     public void TryAttack()

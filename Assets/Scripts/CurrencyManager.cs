@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 public class CurrencyManager : MonoBehaviour
@@ -8,13 +8,25 @@ public class CurrencyManager : MonoBehaviour
 
     public event Action<int> OnMoneyChanged;
 
+    [Header("Modo Presentación")]
+    public bool modoPresentacion = false;
+    public int dineroPresentacion = 99999;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
             SaveSystem.Load(gameData);  // Carga datos al iniciar
+
+            //ACTIVAR DINERO DE PRESENTACIÓN
+            if (modoPresentacion)
+            {
+                gameData.monedas = dineroPresentacion;
+                SaveSystem.Save(gameData);
+            }
         }
         else
         {
@@ -24,7 +36,7 @@ public class CurrencyManager : MonoBehaviour
 
     private void Start()
     {
-        // Llamamos a la UI al iniciar
+        // Actualizamos la UI al iniciar
         OnMoneyChanged?.Invoke(gameData.monedas);
     }
 
@@ -33,7 +45,6 @@ public class CurrencyManager : MonoBehaviour
         gameData.monedas += amount;
 
         OnMoneyChanged?.Invoke(gameData.monedas);
-
         SaveSystem.Save(gameData);
     }
 
@@ -44,7 +55,6 @@ public class CurrencyManager : MonoBehaviour
             gameData.monedas -= amount;
 
             OnMoneyChanged?.Invoke(gameData.monedas);
-
             SaveSystem.Save(gameData);
 
             return true;

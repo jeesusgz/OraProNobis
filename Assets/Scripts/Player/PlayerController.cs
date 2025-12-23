@@ -10,10 +10,15 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     [Header("Movimiento")]
-    public float speed = 5f;
+    public float velocidadBase = 5f;
+    public float speed;
     public float jumpForce = 10f;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
+
+    [Header("Combate")]
+    public int dañoBase = 1;
+    public int dañoActual;
 
     [Header("Audio de pasos")]
     public AudioClip pasoClip;
@@ -77,8 +82,10 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<Collider2D>();
 
-        int nivelVelocidad = CurrencyManager.Instance.gameData.jugadorVelocidadBotonNivel;
-        speed = 5f + (nivelVelocidad * 1f);
+        ActualizarVelocidad();
+
+        int nivelDaño = CurrencyManager.Instance.gameData.dañoJugadorNivel;
+        dañoActual = dañoBase + nivelDaño;
     }
 
     private void Update()
@@ -160,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveDirection.x * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveDirection.x * velocidadBase, rb.linearVelocity.y);
     }
 
     private void OnJump(InputAction.CallbackContext context)
@@ -185,10 +192,21 @@ public class PlayerController : MonoBehaviour
         GetComponent<PlayerAttack>()?.TryAttack();
     }
 
-    public void SubirVelocidad()
+    public void ActualizarVelocidad()
     {
-        // Sube +1 de speed por nivel
-        speed += 1f;
+        int nivel = CurrencyManager.Instance.gameData.jugadorVelocidadBotonNivel;
+        speed = velocidadBase + nivel;
+    }
+
+    public void ActualizarDaño()
+    {
+        int nivel = Mathf.Clamp(
+            CurrencyManager.Instance.gameData.dañoJugadorNivel,
+            0,
+            3
+        );
+
+        dañoActual = dañoBase + nivel;
     }
 
     public void RecogerMoneda()

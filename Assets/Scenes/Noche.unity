@@ -1166,7 +1166,7 @@ MonoBehaviour:
   jugador: {fileID: 1232959614}
   jugadorCerca: 0
   levantarAction: {fileID: -8005774671056306974, guid: 427d7ec160e19cf42853dde4f5981c94, type: 3}
-  moveSpeed: 30
+  moveSpeed: 1
   targetPoint: {fileID: 1408137000}
   arriveThreshold: 0.1
   groundCheck: {fileID: 225769997}
@@ -6820,7 +6820,7 @@ Transform:
   m_GameObject: {fileID: 1162010600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.0011788543, w: 0.99999934}
-  m_LocalPosition: {x: 406.10315, y: -3.606248, z: 0}
+  m_LocalPosition: {x: 406.53754, y: -3.606248, z: 0}
   m_LocalScale: {x: 0.8409, y: 0.8409, z: 0.8409}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13886,7 +13886,7 @@ Transform:
   m_GameObject: {fileID: 1918631892}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 931.1071, y: -4.393124, z: 0}
+  m_LocalPosition: {x: 932.1953, y: -4.393124, z: 0}
   m_LocalScale: {x: 1.2125, y: 3.0088654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -26,7 +26,7 @@ public class UpgradeButton : MonoBehaviour
     public UpgradeButtonUI buttonUI; // Asignar en el inspector
 
     public int maxJugadorVida = 42;
-    public int maxJugadorFuerza = 10;
+    public int maxJugadorFuerza = 3;
     public int maxPasoVida = 7;
     public int maxPasoEstamina = 10;
     public int maxPasoVelocidad = 3;
@@ -54,16 +54,14 @@ public class UpgradeButton : MonoBehaviour
     public bool EstaMaximo()
     {
         if (tipoUpgrade == UpgradeType.NazarenosCantidad)
-        {
-            // ✅ SIEMPRE usa GameData (funciona entre escenas)
             return CurrencyManager.Instance.gameData.cantidadNazarenos >= 4;
-        }
 
-        // Otros upgrades iguales...
+        if (tipoUpgrade == UpgradeType.JugadorFuerza)
+            return CurrencyManager.Instance.gameData.dañoJugadorNivel >= maxJugadorFuerza;
+
         return tipoUpgrade switch
         {
             UpgradeType.JugadorVida => nivelBoton >= maxJugadorVida,
-            UpgradeType.JugadorFuerza => nivelBoton >= maxJugadorFuerza,
             UpgradeType.PasoVida => nivelBoton >= maxPasoVida,
             UpgradeType.PasoEstamina => nivelBoton >= maxPasoEstamina,
             UpgradeType.PasoVelocidad => nivelBoton >= maxPasoVelocidad,
@@ -159,7 +157,12 @@ public class UpgradeButton : MonoBehaviour
                 break;
             case UpgradeType.JugadorFuerza:
                 CurrencyManager.Instance.gameData.dañoJugadorNivel++;
+                nivelBoton = CurrencyManager.Instance.gameData.dañoJugadorNivel;
                 CurrencyManager.Instance.gameData.jugadorFuerzaBotonNivel = nivelBoton;
+
+                PlayerController player = FindAnyObjectByType<PlayerController>();
+                if (player != null)
+                    player.ActualizarDaño();
                 break;
             case UpgradeType.PasoVida:
                 CurrencyManager.Instance.gameData.vidaPasoNivel++;
@@ -174,13 +177,12 @@ public class UpgradeButton : MonoBehaviour
                 CurrencyManager.Instance.gameData.pasoVelocidadBotonNivel = nivelBoton;
                 break;
             case UpgradeType.JugadorVelocidad:
-                PlayerController player = FindAnyObjectByType<PlayerController>();
-                if (player != null)
-                {
-                    player.SubirVelocidad();
-                }
-                CurrencyManager.Instance.gameData.jugadorVelocidadBotonNivel = nivelBoton;
-                break;
+    CurrencyManager.Instance.gameData.jugadorVelocidadBotonNivel = nivelBoton;
+
+    PlayerController playerVel = FindAnyObjectByType<PlayerController>();
+    if (playerVel != null)
+        playerVel.ActualizarVelocidad();
+    break;
             case UpgradeType.NazarenosVida:
                 CurrencyManager.Instance.gameData.vidaNazarenoNivel++;
                 CurrencyManager.Instance.gameData.nazarenosVidaBotonNivel = nivelBoton;

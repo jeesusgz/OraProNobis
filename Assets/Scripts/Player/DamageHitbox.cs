@@ -2,19 +2,24 @@
 
 public class PlayerAttackHitbox : MonoBehaviour
 {
-    public int damage = 1;
+    private PlayerController playerController;
+
+    private void Awake()
+    {
+        // Buscamos el PlayerController en el padre
+        playerController = GetComponentInParent<PlayerController>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Player HITBOX colisionó con: " + collision.name);
 
-        // Buscar EnemyHealth en el objeto impactado o en sus padres
         EnemyHealth enemy = collision.GetComponentInParent<EnemyHealth>();
-
-        if (enemy != null)
+        if (enemy != null && playerController != null)
         {
-            Debug.Log("ENEMIGO DETECTADO → Aplicando daño");
-            enemy.TakeDamage(damage, transform);
+            int currentDamage = playerController.dañoActual;
+            Debug.Log("ENEMIGO DETECTADO → Aplicando daño: " + currentDamage);
+            enemy.TakeDamage(currentDamage, transform);
         }
     }
 }
