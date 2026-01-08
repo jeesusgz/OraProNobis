@@ -1617,7 +1617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
-  precioBase: 100
+  precioBase: 50
   incrementoPrecio: 10
   tipoUpgrade: 4
   nivelBoton: 0
@@ -3041,7 +3041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
-  precioBase: 50
+  precioBase: 25
   incrementoPrecio: 5
   tipoUpgrade: 2
   nivelBoton: 0
@@ -4659,7 +4659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
-  precioBase: 50
+  precioBase: 25
   incrementoPrecio: 5
   tipoUpgrade: 0
   nivelBoton: 0
@@ -4839,7 +4839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
-  precioBase: 50
+  precioBase: 25
   incrementoPrecio: 5
   tipoUpgrade: 1
   nivelBoton: 0
@@ -5923,7 +5923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
-  precioBase: 100
+  precioBase: 50
   incrementoPrecio: 5
   tipoUpgrade: 5
   nivelBoton: 0
@@ -6604,7 +6604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
-  precioBase: 50
+  precioBase: 25
   incrementoPrecio: 5
   tipoUpgrade: 6
   nivelBoton: 0
@@ -6802,7 +6802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
-  precioBase: 100
+  precioBase: 50
   incrementoPrecio: 10
   tipoUpgrade: 7
   nivelBoton: 0
@@ -7587,7 +7587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   pasoController: {fileID: 0}
-  precioBase: 50
+  precioBase: 25
   incrementoPrecio: 5
   tipoUpgrade: 3
   nivelBoton: 0
