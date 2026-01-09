@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
 
+    [Header("Salto avanzado")]
+    public int maxSaltos = 1;
+    private int saltosRestantes;
+    private bool dobleSaltoActivo;
+
     [Header("Combate")]
     public int dañoBase = 1;
     public int dañoActual;
@@ -86,6 +91,10 @@ public class PlayerController : MonoBehaviour
 
         int nivelDaño = CurrencyManager.Instance.gameData.dañoJugadorNivel;
         dañoActual = dañoBase + nivelDaño;
+
+        dobleSaltoActivo = CurrencyManager.Instance.gameData.dobleSaltoComprado;
+        maxSaltos = dobleSaltoActivo ? 2 : 1;
+        saltosRestantes = maxSaltos;
     }
 
     private void Update()
@@ -119,18 +128,13 @@ public class PlayerController : MonoBehaviour
         if (!wasGrounded && isGrounded)
         {
             animator.SetBool("IsJumping", false);
+            saltosRestantes = maxSaltos; // ✅ SOLO al aterrizar
         }
         else if (wasGrounded && !isGrounded)
         {
             animator.SetBool("IsJumping", true);
         }
         wasGrounded = isGrounded;
-
-        if (isGrounded && jump.action.WasPerformedThisFrame())
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            animator.SetTrigger("Jump");
-        }
 
         if (paso != null)
         {
@@ -172,19 +176,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (isGrounded)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if (saltosRestantes <= 0)
+            return;
 
-            // Reproducir sonido de salto
-            if (audioSourceSalto != null && saltoClip != null)
-            {
-                audioSourceSalto.PlayOneShot(saltoClip);
-            }
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        saltosRestantes--;
 
-            animator.SetTrigger("Jump");
-        }
+        if (audioSourceSalto != null && saltoClip != null)
+            audioSourceSalto.PlayOneShot(saltoClip);
+
+        animator.SetTrigger("Jump");
+    }
+
+    public void ActivarDobleSalto()
+    {
+        maxSaltos = 2;
+        saltosRestantes = maxSaltos;
     }
 
     private void OnAttack(InputAction.CallbackContext context)

@@ -15,7 +15,8 @@ public class UpgradeButton : MonoBehaviour
         PasoVelocidad,
         NazarenosCantidad,
         NazarenosVida,
-        JugadorVelocidad
+        JugadorVelocidad,
+        JugadorDobleSalto
     }
 
     public UpgradeType tipoUpgrade;
@@ -48,6 +49,7 @@ public class UpgradeButton : MonoBehaviour
             case UpgradeType.NazarenosCantidad: /* No usamos nivelBoton */ break;
             case UpgradeType.NazarenosVida: nivelBoton = CurrencyManager.Instance.gameData.nazarenosVidaBotonNivel; break;
             case UpgradeType.JugadorVelocidad:nivelBoton = CurrencyManager.Instance.gameData.jugadorVelocidadBotonNivel;break;
+            case UpgradeType.JugadorDobleSalto:nivelBoton = CurrencyManager.Instance.gameData.dobleSaltoComprado ? 1 : 0;break;
         }
     }
 
@@ -58,6 +60,8 @@ public class UpgradeButton : MonoBehaviour
 
         if (tipoUpgrade == UpgradeType.JugadorFuerza)
             return CurrencyManager.Instance.gameData.dañoJugadorNivel >= maxJugadorFuerza;
+        if (tipoUpgrade == UpgradeType.JugadorDobleSalto)
+            return CurrencyManager.Instance.gameData.dobleSaltoComprado;
 
         return tipoUpgrade switch
         {
@@ -189,6 +193,16 @@ public class UpgradeButton : MonoBehaviour
                 NazarenoHealthSystem[] nazarenos = FindObjectsOfType<NazarenoHealthSystem>();
                 foreach (var n in nazarenos)
                     n.SubirNivelVida();
+                break;
+
+            case UpgradeType.JugadorDobleSalto:
+                CurrencyManager.Instance.gameData.dobleSaltoComprado = true;
+
+                PlayerController playerSalto = FindAnyObjectByType<PlayerController>();
+                if (playerSalto != null)
+                {
+                    playerSalto.ActivarDobleSalto();
+                }
                 break;
         }
 

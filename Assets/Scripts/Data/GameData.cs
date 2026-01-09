@@ -14,6 +14,7 @@ public class GameData : ScriptableObject
     [Header("Jugador")]
     public int vidaJugadorNivel = 0;
     public int dañoJugadorNivel = 0;
+    public bool dobleSaltoComprado = false;
 
     [Header("Nazarenos")]
     public int cantidadNazarenos = 0;

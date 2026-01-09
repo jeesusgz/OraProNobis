@@ -88,6 +88,7 @@ public class UpgradeButtonUI : MonoBehaviour
             UpgradeButton.UpgradeType.PasoVelocidad => "+0.5 Velocidad del Paso",
             UpgradeButton.UpgradeType.NazarenosCantidad => "+1 Nazareno (máx 4)",
             UpgradeButton.UpgradeType.NazarenosVida => "+1 Vida de los Nazarenos",
+            UpgradeButton.UpgradeType.JugadorDobleSalto => "Doble salto desbloqueado",
             _ => "Mejora aplicada"
         };
 
