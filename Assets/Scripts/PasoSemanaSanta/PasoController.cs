@@ -154,8 +154,10 @@ public class PasoController : MonoBehaviour
             if (penaltyTimer <= 0f) fullDrainPenaltyActive = false;
         }
 
-        if (!animado && !fullDrainPenaltyActive)
+        if (!EstaAndando() && !fullDrainPenaltyActive)
+        {
             RecoverStamina();
+        }
 
         if (!entrando && targetPoint != null)
         {
@@ -202,13 +204,18 @@ public class PasoController : MonoBehaviour
         }
     }
 
+    bool EstaAndando()
+    {
+        return levantado && puedeMoverse && !entrando;
+    }
+
     void RecoverStamina()
     {
         if (currentStamina < maxStamina)
         {
-            currentStamina += staminaRecoveryPerSecond * Time.deltaTime;
-            if (currentStamina > maxStamina)
-                currentStamina = maxStamina;
+            float recoveryPercentPerSecond = 0.15f;
+            currentStamina += maxStamina * recoveryPercentPerSecond * Time.deltaTime;
+            currentStamina = Mathf.Min(currentStamina, maxStamina);
         }
     }
 
