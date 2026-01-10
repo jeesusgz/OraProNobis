@@ -10,10 +10,17 @@ public class UpgradeButtonUI : MonoBehaviour
     public TMP_Text priceText;
     public GameObject mensajePrefab;
     public Transform canvasTransform;
+    public TMP_Text levelText;
 
     public UpgradeButton buttonScript;
 
     private static GameObject mensajeActivo;
+
+    private void Awake()
+    {
+        if (buttonScript == null)
+            buttonScript = GetComponent<UpgradeButton>();
+    }
 
     void Update()
     {
@@ -39,6 +46,24 @@ public class UpgradeButtonUI : MonoBehaviour
         {
             priceText.text = precioActual.ToString();
             priceText.color = monedas >= precioActual ? Color.green : Color.red;
+        }
+
+        if (levelText != null && buttonScript != null && CurrencyManager.Instance != null)
+        {
+            int nivel = buttonScript.GetNivelActual();
+
+            if (buttonScript.tipoUpgrade == UpgradeButton.UpgradeType.JugadorDobleSalto)
+            {
+                levelText.text = nivel == 1 ? "COMPRADO" : "NO COMPRADO";
+            }
+            else if (buttonScript.tipoUpgrade == UpgradeButton.UpgradeType.NazarenosCantidad)
+            {
+                levelText.text = $"{nivel} / 4";
+            }
+            else
+            {
+                levelText.text = $"Nivel {nivel}";
+            }
         }
     }
 

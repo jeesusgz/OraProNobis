@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class UpgradeButton : MonoBehaviour
 {
@@ -212,5 +213,24 @@ public class UpgradeButton : MonoBehaviour
 
         // 🔹 Reproducir sonido de level up
         UIAudioManager.Instance?.PlayLevelUp();
+    }
+
+    public int GetNivelActual()
+    {
+        var data = CurrencyManager.Instance.gameData;
+
+        return tipoUpgrade switch
+        {
+            UpgradeType.JugadorVida => data.jugadorVidaBotonNivel,
+            UpgradeType.JugadorFuerza => data.jugadorFuerzaBotonNivel,
+            UpgradeType.PasoVida => data.pasoVidaBotonNivel,
+            UpgradeType.PasoEstamina => data.pasoEstaminaBotonNivel,
+            UpgradeType.PasoVelocidad => data.pasoVelocidadBotonNivel,
+            UpgradeType.NazarenosVida => data.nazarenosVidaBotonNivel,
+            UpgradeType.JugadorVelocidad => data.jugadorVelocidadBotonNivel,
+            UpgradeType.NazarenosCantidad => data.cantidadNazarenos,
+            UpgradeType.JugadorDobleSalto => data.dobleSaltoComprado ? 1 : 0,
+            _ => 0
+        };
     }
 }
